@@ -627,71 +627,349 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 /* ==========================================================================
-   AUTHENTIC DEVICE MOCKUP HARDWARE STYLES (MacBook Pro & iPhone Pro)
+   AUTHENTIC DEVICE MOCKUP HARDWARE STYLES (MacBook Pro 16" & iPhone 16 Pro)
    ========================================================================== */
-.macbook-chassis {
-  background: linear-gradient(180deg, #2C3038 0%, #15181D 4%, #0D0F12 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.8);
+
+/* --- 1. MACBOOK PRO 16" HARDWARE --- */
+.macbook-lid {
+  background: linear-gradient(180deg, #3d434d 0%, #242830 18%, #16181e 100%);
+  border-radius: 20px 20px 0 0;
+  padding: 6px 6px 0 6px;
+  position: relative;
+  box-shadow: 
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.45),
+    inset 1px 0 1px rgba(255, 255, 255, 0.2),
+    inset -1px 0 1px rgba(255, 255, 255, 0.2),
+    0 25px 60px -15px rgba(0, 0, 0, 0.6);
 }
 
-.macbook-notch {
+@media (min-width: 640px) {
+  .macbook-lid {
+    border-radius: 24px 24px 0 0;
+    padding: 8px 8px 0 8px;
+  }
+}
+
+.macbook-screen-bezel {
   background: #000000;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 14px 14px 0 0;
+  padding: 2px 2px 0 2px;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Authentic Apple Camera Notch hanging inside display */
+.macbook-camera-notch {
+  width: 120px;
+  height: 20px;
+  background: #000000;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+@media (min-width: 640px) {
+  .macbook-camera-notch {
+    width: 136px;
+    height: 22px;
+  }
+}
+
+.macbook-camera-lens {
+  width: 8.5px;
+  height: 8.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #1e293b 0%, #0c1220 55%, #020617 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 2px #38bdf8;
+  position: relative;
+}
+
+.macbook-camera-lens::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1.5px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.macbook-led-indicator {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
 }
 
 .macbook-screen-glass {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.02) 100%);
+  background: linear-gradient(125deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.02) 22%, 
+    transparent 38%, 
+    rgba(255, 255, 255, 0.015) 68%, 
+    transparent 100%
+  );
   pointer-events: none;
 }
 
-.macbook-deck {
-  background: linear-gradient(90deg, #475569 0%, #94A3B8 15%, #CBD5E1 50%, #94A3B8 85%, #475569 100%);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.45);
+.macbook-hinge {
+  width: 80%;
+  height: 5px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #080a0d 0%, #161920 60%, #0c0e12 100%);
+  border-radius: 1px 1px 0 0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.85);
+  position: relative;
+  z-index: 5;
 }
 
-.iphone-pro-frame {
-  background: #14171C;
-  border: 3.5px solid #374151;
+.macbook-deck-base {
+  width: calc(100% + 28px);
+  margin-left: -14px;
+  height: 16px;
+  background: linear-gradient(180deg, #74808f 0%, #4b5563 20%, #303742 60%, #1a1e24 100%);
+  border-radius: 0 0 16px 16px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.55);
   box-shadow: 
-    0 0 0 1px rgba(255, 255, 255, 0.22),
-    0 25px 50px -12px rgba(0, 0, 0, 0.65),
-    0 10px 20px -5px rgba(15, 42, 67, 0.3);
+    0 14px 32px -4px rgba(0, 0, 0, 0.6),
+    0 28px 55px -12px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.7);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.iphone-pro-frame::before {
-  content: '';
-  position: absolute;
-  top: 70px;
-  left: -5.5px;
-  width: 2.5px;
-  height: 22px;
-  background: #4B5563;
-  border-radius: 2px 0 0 2px;
+@media (min-width: 640px) {
+  .macbook-deck-base {
+    width: calc(100% + 36px);
+    margin-left: -18px;
+    height: 18px;
+    border-radius: 0 0 20px 20px;
+  }
 }
 
-.iphone-pro-frame::after {
-  content: '';
-  position: absolute;
-  top: 105px;
-  left: -5.5px;
-  width: 2.5px;
-  height: 44px;
-  background: #4B5563;
-  border-radius: 2px 0 0 2px;
-  box-shadow: 0 54px 0 #4B5563;
+.macbook-thumb-groove {
+  width: 100px;
+  height: 5px;
+  background: linear-gradient(180deg, #0d121a 0%, #1a222f 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.iphone-power-button {
+@media (min-width: 640px) {
+  .macbook-thumb-groove {
+    width: 124px;
+    height: 6px;
+  }
+}
+
+/* --- 2. IPHONE 16 PRO HARDWARE (AEROSPACE GRADE 5 TITANIUM) --- */
+.iphone-pro-chassis {
+  background: linear-gradient(145deg, #444c57 0%, #232931 25%, #3c444f 55%, #15181d 100%);
+  border-radius: 48px;
+  padding: 7px;
+  position: relative;
+  box-shadow: 
+    0 0 0 1.2px rgba(255, 255, 255, 0.35),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12),
+    -24px 34px 65px -8px rgba(0, 0, 0, 0.85),
+    -8px 14px 28px -4px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 640px) {
+  .iphone-pro-chassis {
+    border-radius: 54px;
+    padding: 8px;
+    box-shadow: 
+      0 0 0 1.5px rgba(255, 255, 255, 0.38),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.9),
+      inset 0 0 0 2px rgba(255, 255, 255, 0.14),
+      -28px 40px 75px -8px rgba(0, 0, 0, 0.9),
+      -10px 18px 32px -4px rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* Action Button (Top Left) */
+.iphone-btn-action {
   position: absolute;
-  top: 110px;
-  right: -5.5px;
+  top: 56px;
+  left: -4px;
+  width: 4px;
+  height: 18px;
+  border-radius: 2.5px 0 0 2.5px;
+  background: linear-gradient(180deg, #525c68, #374151);
+  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Volume Up Button */
+.iphone-btn-volup {
+  position: absolute;
+  top: 86px;
+  left: -4px;
+  width: 4px;
+  height: 38px;
+  border-radius: 2.5px 0 0 2.5px;
+  background: linear-gradient(180deg, #525c68, #374151);
+  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Volume Down Button */
+.iphone-btn-voldown {
+  position: absolute;
+  top: 132px;
+  left: -4px;
+  width: 4px;
+  height: 38px;
+  border-radius: 2.5px 0 0 2.5px;
+  background: linear-gradient(180deg, #525c68, #374151);
+  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Side / Power Button (Right) */
+.iphone-btn-power {
+  position: absolute;
+  top: 92px;
+  right: -4px;
+  width: 4px;
+  height: 50px;
+  border-radius: 0 2.5px 2.5px 0;
+  background: linear-gradient(180deg, #525c68, #374151);
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Camera Control Button (iPhone 16 Pro New Signature - Lower Right) */
+.iphone-btn-camera-control {
+  position: absolute;
+  top: 195px;
+  right: -2.5px;
   width: 2.5px;
-  height: 52px;
-  background: #4B5563;
+  height: 42px;
   border-radius: 0 2px 2px 0;
+  background: #1e242c;
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Antenna Bands */
+.iphone-antenna-top-left {
+  position: absolute;
+  top: 36px;
+  left: -1px;
+  width: 2px;
+  height: 3px;
+  background: #0f141a;
+}
+
+.iphone-antenna-bottom-right {
+  position: absolute;
+  bottom: 42px;
+  right: -1px;
+  width: 2px;
+  height: 3px;
+  background: #0f141a;
+}
+
+/* Screen Display Bezel & Glass */
+.iphone-screen-bezel {
+  background: #000000;
+  border-radius: 41px;
+  padding: 2.5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .iphone-screen-bezel {
+    border-radius: 46px;
+    padding: 3px;
+  }
+}
+
+.iphone-screen-content {
+  border-radius: 39px;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(circle at 50% 20%, #1a324d 0%, #0d1b2a 45%, #050b12 100%);
+}
+
+@media (min-width: 640px) {
+  .iphone-screen-content {
+    border-radius: 44px;
+  }
+}
+
+/* Dynamic Island Floating Pill */
+.iphone-dynamic-island {
+  width: 78px;
+  height: 22px;
+  background: #000000;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  position: relative;
+  z-index: 30;
+  box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 640px) {
+  .iphone-dynamic-island {
+    width: 86px;
+    height: 24px;
+    padding: 0 7px;
+  }
+}
+
+.iphone-camera-glint {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #18283e 0%, #0a101b 60%, #010307 100%);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.iphone-camera-glint::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1.5px;
+  width: 1.5px;
+  height: 1.5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.iphone-glass-sheen {
+  background: linear-gradient(130deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.03) 26%, 
+    transparent 42%, 
+    rgba(255, 255, 255, 0.02) 75%, 
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
