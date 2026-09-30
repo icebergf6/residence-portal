@@ -334,30 +334,42 @@ function initInvestorContinuousMarquee() {
   function generateCardHTML(item, isDuplicate = false) {
     return `
       <div class="investor-card-box" ${isDuplicate ? 'aria-hidden="true"' : ''}>
-        <div>
+        <!-- Watermark Quote Mark -->
+        <div class="absolute top-3 right-5 text-[#C8A96A]/15 font-serif text-7xl select-none pointer-events-none leading-none">“</div>
+
+        <div class="relative z-10">
           <div class="flex items-center justify-between gap-2 mb-4">
-            <div class="flex items-center gap-1.5 text-xs font-semibold text-[#0F2A43] bg-[#F5EEDB] px-2.5 py-1 rounded-lg border border-[#C8A96A]/30">
-              <span>${item.flag || '🌐'}</span>
+            <div class="flex items-center gap-1.5 text-xs font-semibold text-[#0F2A43] bg-[#F5EEDB] px-3 py-1 rounded-full border border-[#C8A96A]/30">
+              <span class="text-sm">${item.flag || '🌐'}</span>
               <span>${item.country}</span>
             </div>
-            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               ${item.metric}
             </span>
           </div>
-          <div class="flex items-center gap-1 text-[#C8A96A] text-sm mb-3">
-            ★★★★★
-            <span class="text-[11px] text-[#64748B] ml-1 font-semibold">${item.tag}</span>
+
+          <div class="flex items-center gap-2 text-[#C8A96A] text-sm mb-3">
+            <span class="tracking-widest text-[#C8A96A]">★★★★★</span>
+            <span class="text-[11px] text-[#0F2A43] font-semibold bg-[#F7F5F0] px-2 py-0.5 rounded border border-[#E6E2DA]">${item.tag}</span>
           </div>
-          <blockquote class="font-serif italic text-sm text-[#1F2933] leading-relaxed mb-6">
+
+          <blockquote class="font-serif italic text-sm sm:text-[15px] text-[#1F2933] leading-relaxed mb-6 font-light">
             "${item.quote}"
           </blockquote>
         </div>
-        <div class="pt-4 border-t border-[#E6E2DA] flex items-center gap-3">
-          <img src="${item.avatar}" alt="${item.name}" class="w-12 h-12 rounded-full object-cover border-2 border-[#C8A96A] shrink-0" loading="lazy" />
-          <div class="min-w-0">
-            <h4 class="font-serif font-bold text-sm text-[#0F2A43] truncate">${item.name}</h4>
-            <p class="text-[11px] text-[#64748B] truncate">${item.title}</p>
-            <span class="inline-block text-[10px] text-[#C8A96A] font-semibold truncate mt-0.5">${item.property}</span>
+
+        <div class="pt-4 border-t border-[#E6E2DA] flex items-center justify-between gap-3 relative z-10">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="relative shrink-0">
+              <img src="${item.avatar}" alt="${item.name}" class="w-12 h-12 rounded-full object-cover border-2 border-[#C8A96A]" loading="lazy" />
+              <div class="w-4 h-4 rounded-full bg-[#0F2A43] text-[#C8A96A] border border-white text-[9px] font-bold flex items-center justify-center absolute -bottom-0.5 -right-0.5" title="Verified Homeowner">✓</div>
+            </div>
+            <div class="min-w-0">
+              <h4 class="font-serif font-bold text-sm text-[#0F2A43] truncate">${item.name}</h4>
+              <p class="text-[11px] text-[#64748B] truncate">${item.title}</p>
+              <span class="inline-block text-[11px] text-[#C8A96A] font-semibold truncate mt-0.5">${item.property}</span>
+            </div>
           </div>
         </div>
       </div>

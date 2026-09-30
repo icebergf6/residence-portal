@@ -533,21 +533,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   stroke: #EF4444 !important;
 }
 
-/* INFINITE SMOOTH CONTINUOUS MARQUEE CAROUSEL */
+/* INFINITE SMOOTH CONTINUOUS MARQUEE CAROUSEL (FULL SCREEN EDGE-TO-EDGE) */
 .marquee-container {
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: 100vw;
+  max-width: 100%;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   padding: 1.5rem 0;
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%);
 }
 
 .marquee-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.75rem;
   width: max-content;
-  animation: marqueeContinuous 38s linear infinite;
+  animation: marqueeContinuous 40s linear infinite;
   will-change: transform;
 }
 
@@ -556,11 +561,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .marquee-track.is-slow {
-  animation-duration: 55s;
+  animation-duration: 60s;
 }
 
 .marquee-track.is-fast {
-  animation-duration: 24s;
+  animation-duration: 25s;
 }
 
 .marquee-track.is-paused {
@@ -577,23 +582,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .investor-card-box {
-  width: 380px;
+  width: clamp(320px, 85vw, 440px);
   flex-shrink: 0;
-  border-radius: 16px;
+  border-radius: 20px;
   background: #FFFFFF;
   border: 1px solid #E6E2DA;
-  padding: 1.75rem;
-  box-shadow: 0 4px 18px rgba(15, 42, 67, 0.05);
+  padding: 2rem;
+  box-shadow: 0 4px 22px rgba(15, 42, 67, 0.06);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 .investor-card-box:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   border-color: #C8A96A;
-  box-shadow: 0 14px 34px rgba(200, 169, 106, 0.22);
+  box-shadow: 0 18px 45px rgba(200, 169, 106, 0.22);
 }
 
 /* PROPERTY LIST VIEW (HORIZONTAL CARDS) */
