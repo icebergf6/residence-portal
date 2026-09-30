@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-navy: #0F2A43;
+  --color-brand-navyDark: #091928;
+  --color-brand-navyLight: #183C5E;
+  --color-brand-gold: #C8A96A;
+  --color-brand-goldHover: #B59555;
+  --color-brand-ivory: #F7F5F0;
+  --color-brand-ivoryAlt: #EFECE4;
+  --color-brand-charcoal: #1F2933;
+  --color-brand-border: #E6E2DA;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@import "../assets/css/custom.css";

@@ -1209,3 +1209,21 @@ const MASTERPLAN_UNITS = [
   { id: "cypress-ridge-villa", name: "Cypress Ridge", x: 38, y: 42, type: "Courtyard Villa", status: "Available", price: 1980000 },
   { id: "palm-quarter-townhome", name: "Palm Quarter", x: 60, y: 80, type: "Townhouse", status: "Available", price: 890000 }
 ];
+
+// Attach all core objects to global window object
+if (typeof window !== 'undefined') {
+  window.BRAND_CONFIG = BRAND_CONFIG;
+  window.DEFAULT_PROPERTIES = DEFAULT_PROPERTIES;
+  window.PROPERTIES = PROPERTIES;
+  window.AzureDB = AzureDB;
+  window.INVESTOR_TESTIMONIALS = INVESTOR_TESTIMONIALS;
+  window.FAQS = FAQS;
+  window.TEAM_MEMBERS = TEAM_MEMBERS;
+  window.CURRENCIES = CURRENCIES;
+  window.currentCurrency = currentCurrency;
+  window.setAppCurrency = setAppCurrency;
+  window.formatCurrency = formatCurrency;
+  window.formatUSD = formatUSD;
+  window.MASTERPLAN_UNITS = MASTERPLAN_UNITS;
+}
+
