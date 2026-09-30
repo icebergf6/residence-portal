@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Management Portal | Azure Bay Residences</title>
+  <title>Admin Executive CMS | Azure Bay Residences</title>
   <meta name="description" content="Azure Bay Residences Executive Real Estate CMS & Property Management Portal.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C8A96A'><path d='M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z'/></svg>">
 
@@ -19,187 +19,541 @@
   <!-- Compiled High-Performance Stylesheet -->
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="bg-[#0B1E30] text-[#1F2933] min-h-screen flex flex-col font-sans antialiased selection:bg-[#C8A96A] selection:text-[#0F2A43]">
+<body class="bg-[#0B1E30] text-[#1F2933] min-h-screen flex font-sans antialiased selection:bg-[#C8A96A] selection:text-[#0F2A43]">
 
-  <!-- Top Admin Bar -->
-  <header class="bg-[#0F2A43] border-b border-[#C8A96A]/30 sticky top-0 z-40 backdrop-blur-md shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[72px] py-2 flex items-center justify-between">
-      
-      <!-- Brand & Admin Indicator -->
-      <div class="flex items-center gap-3 sm:gap-4">
-        <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group">
-          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#C8A96A] to-[#a38343] flex items-center justify-center text-[#0F2A43] font-serif font-black text-lg sm:text-xl shadow-md group-hover:scale-105 transition-transform">
+  <!-- =========================================================================
+       EXECUTIVE SIDEBAR (DESKTOP & COLLAPSIBLE MOBILE)
+       ========================================================================= -->
+  <aside id="admin-sidebar" class="w-72 shrink-0 bg-[#091928] border-r border-[#C8A96A]/20 min-h-screen p-5 flex flex-col justify-between fixed lg:sticky top-0 z-50 transition-all duration-300 -translate-x-full lg:translate-x-0 h-screen overflow-y-auto">
+    <div class="space-y-6">
+      <!-- Brand & CMS Indicator -->
+      <div class="flex items-center justify-between pb-5 border-b border-white/10">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C8A96A] to-[#a38343] flex items-center justify-center text-[#0F2A43] font-serif font-black text-xl shadow-md group-hover:scale-105 transition-transform">
             AB
           </div>
           <div>
-            <div class="font-serif text-base sm:text-lg font-bold tracking-wider text-white flex items-center gap-1.5 sm:gap-2">
+            <div class="font-serif text-lg font-bold tracking-wider text-white flex items-center gap-2">
               <span>Azure Bay</span>
-              <span class="text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-widest bg-[#C8A96A] text-[#0F2A43] px-1.5 sm:px-2 py-0.5 rounded">CMS</span>
+              <span class="text-[9px] font-sans font-bold uppercase tracking-widest bg-[#C8A96A] text-[#0F2A43] px-1.5 py-0.5 rounded">CMS</span>
             </div>
-            <p class="hidden sm:block text-[11px] text-white/60 tracking-wider">Executive Real Estate Management System</p>
+            <p class="text-[10px] text-white/60 tracking-wider">Executive Management Portal</p>
           </div>
         </a>
+        <button type="button" id="sidebar-close-btn" class="lg:hidden p-2 text-white/60 hover:text-white" aria-label="Close sidebar">&times;</button>
       </div>
 
-      <!-- Header Actions -->
-      <div class="flex items-center gap-3 sm:gap-4">
-        <a href="properties.html" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
-          <span>View Live Catalog</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </a>
+      <!-- Admin Profile Chip -->
+      <div class="bg-white/5 rounded-xl p-3 border border-white/10 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-[#C8A96A]/20 border border-[#C8A96A] flex items-center justify-center text-[#C8A96A] font-bold text-sm">
+          JD
+        </div>
+        <div class="min-w-0 flex-1">
+          <h4 class="text-xs font-bold text-white truncate">Julian De La Torre</h4>
+          <p class="text-[10px] text-[#C8A96A] truncate">Master Broker & Admin</p>
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" title="System Online"></span>
+      </div>
 
-        <button type="button" id="admin-add-prop-btn" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
-          <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-          <span>Add Residence</span>
+      <!-- Navigation Tabs -->
+      <nav class="space-y-1.5" id="admin-nav-tabs">
+        <button type="button" data-tab-target="tab-dashboard" class="admin-tab-btn active w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:text-white hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span>Executive Dashboard</span>
+          </div>
+          <span class="text-[10px] bg-white/10 px-2 py-0.5 rounded text-white/70">Overview</span>
         </button>
 
-        <a href="index.html" class="p-2 text-white/70 hover:text-white rounded-lg hover:bg-white/5" title="Exit to Website">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-        </a>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- Main Management Body -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-    
-    <!-- Top KPI Stats Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Total Portfolio Units</span>
-          <h3 id="stat-total-props" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">21</h3>
-          <p class="text-[11px] text-emerald-600 font-semibold mt-1">Full Master Catalog</p>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center">
-          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Portfolio Value</span>
-          <h3 id="stat-total-value" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">$54.2M</h3>
-          <p class="text-[11px] text-[#64748B] mt-1">Deeded Assets Valuation</p>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Active Available</span>
-          <h3 id="stat-active-available" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">16</h3>
-          <p class="text-[11px] text-emerald-600 font-semibold mt-1">Ready for Acquisition</p>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Reserved / Sold</span>
-          <h3 id="stat-reserved-sold" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">5</h3>
-          <p class="text-[11px] text-amber-600 font-semibold mt-1">Contracts Under Closing</p>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Management Controls Bar -->
-    <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-      
-      <!-- Search & Filters -->
-      <div class="flex flex-wrap items-center gap-3 flex-1">
-        <div class="relative min-w-[240px] flex-1 sm:flex-initial">
-          <input type="text" id="admin-search-input" placeholder="Search by name, location, specs..." class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl pl-9 pr-4 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:outline-none" />
-          <svg class="w-4 h-4 text-[#64748B] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        </div>
-
-        <select id="admin-filter-status" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
-          <option value="">All Statuses</option>
-          <option value="Available">Available Only</option>
-          <option value="Reserved">Reserved</option>
-          <option value="Sold">Sold</option>
-        </select>
-
-        <select id="admin-filter-type" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
-          <option value="">All Property Types</option>
-          <option value="Villa">Villa / Compound</option>
-          <option value="Apartment">Apartment & Penthouse</option>
-          <option value="Townhouse">Townhouse</option>
-          <option value="Land">Land Parcel</option>
-        </select>
-      </div>
-
-      <!-- Database Actions (Reset / Export / Import) -->
-      <div class="flex items-center gap-2">
-        <button type="button" id="admin-export-btn" class="px-3 py-2 rounded-xl text-xs font-semibold text-[#0F2A43] bg-[#F7F5F0] hover:bg-[#E6E2DA] border border-[#E6E2DA] transition-colors flex items-center gap-1.5" title="Export Backup JSON">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span class="hidden sm:inline">Export</span>
+        <button type="button" data-tab-target="tab-properties" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:text-white hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            <span>Residences Catalog</span>
+          </div>
+          <span id="sidebar-props-count" class="text-[10px] bg-[#C8A96A] text-[#0F2A43] font-bold px-2 py-0.5 rounded">21</span>
         </button>
 
-        <label class="px-3 py-2 rounded-xl text-xs font-semibold text-[#0F2A43] bg-[#F7F5F0] hover:bg-[#E6E2DA] border border-[#E6E2DA] transition-colors flex items-center gap-1.5 cursor-pointer" title="Import JSON Database">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-          <span class="hidden sm:inline">Import</span>
-          <input type="file" id="admin-import-file" accept=".json" class="hidden" />
-        </label>
-
-        <button type="button" id="admin-reset-btn" class="px-3 py-2 rounded-xl text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-colors flex items-center gap-1.5" title="Reset all changes to default 21 residences">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          <span class="hidden sm:inline">Reset Master</span>
+        <button type="button" data-tab-target="tab-leads" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:text-white hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span>Investor Leads & CRM</span>
+          </div>
+          <span id="sidebar-leads-count" class="text-[10px] bg-emerald-500 text-white font-bold px-2 py-0.5 rounded">4 New</span>
         </button>
-      </div>
 
+        <button type="button" data-tab-target="tab-yields" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:text-white hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <span>Asset & Yield Analytics</span>
+          </div>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded">10.4%</span>
+        </button>
+
+        <button type="button" data-tab-target="tab-settings" class="admin-tab-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:text-white hover:bg-white/5 transition-all">
+          <div class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Brand & Rates Config</span>
+          </div>
+          <span class="text-[10px] text-white/50">Edit</span>
+        </button>
+      </nav>
     </div>
 
-    <!-- Properties Management Table Container -->
-    <div class="bg-white rounded-2xl border border-[#E6E2DA] shadow-sm overflow-hidden">
-      <div class="p-5 border-b border-[#E6E2DA] flex items-center justify-between">
-        <div>
-          <h2 class="font-serif text-lg font-bold text-[#0F2A43]">Residences Inventory</h2>
-          <p id="admin-table-count" class="text-xs text-[#64748B] mt-0.5">Showing all residences</p>
-        </div>
-        <span class="text-xs font-semibold text-[#C8A96A] bg-[#F5EEDB] px-3 py-1 rounded-full border border-[#C8A96A]/30">
-          Live Client Sync Active
+    <!-- Bottom Actions & Live Site Link -->
+    <div class="pt-6 border-t border-white/10 space-y-3">
+      <a href="index.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/90 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          <span>View Live Website</span>
         </span>
-      </div>
+        <span class="text-[10px] text-white/50">↗</span>
+      </a>
 
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-[#F7F5F0] border-b border-[#E6E2DA] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
-              <th class="py-3.5 px-4">Residence</th>
-              <th class="py-3.5 px-4">Location & Type</th>
-              <th class="py-3.5 px-4">Price (USD)</th>
-              <th class="py-3.5 px-4 text-center">Beds / Baths</th>
-              <th class="py-3.5 px-4 text-center">Built Area</th>
-              <th class="py-3.5 px-4 text-center">Status</th>
-              <th class="py-3.5 px-4 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="admin-properties-tbody" class="divide-y divide-[#E6E2DA] text-xs">
-            <!-- Dynamically populated via admin.js -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Empty Table State -->
-      <div id="admin-table-empty" class="hidden text-center py-16">
-        <div class="w-12 h-12 rounded-full bg-[#F7F5F0] text-[#64748B] flex items-center justify-center mx-auto mb-3">
-          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        </div>
-        <h4 class="font-serif text-base font-bold text-[#0F2A43]">No residences match criteria</h4>
-        <p class="text-xs text-[#64748B] mt-1">Try clearing your search query or status filter.</p>
+      <div class="flex items-center justify-between text-[11px] text-white/40 px-1 pt-1">
+        <span>AzureDB v2.4 (Active)</span>
+        <span class="text-emerald-400 font-semibold">● LocalSync</span>
       </div>
     </div>
+  </aside>
 
-  </main>
+  <!-- Backdrop for mobile sidebar drawer -->
+  <div id="admin-sidebar-backdrop" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <div class="flex-1 flex flex-col min-w-0">
+    
+    <!-- Top Header Bar -->
+    <header class="bg-[#0F2A43] border-b border-[#C8A96A]/30 sticky top-0 z-30 backdrop-blur-md shadow-md">
+      <div class="px-4 sm:px-6 lg:px-8 min-h-[68px] py-2 flex items-center justify-between gap-4">
+        
+        <div class="flex items-center gap-3">
+          <!-- Mobile Sidebar Toggle Button -->
+          <button type="button" id="sidebar-open-btn" class="lg:hidden p-2 text-white hover:text-[#C8A96A] rounded-lg border border-white/10" aria-label="Open sidebar">
+            <svg class="w-5 h-5 stroke-current stroke-2" fill="none" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          
+          <div>
+            <h1 id="admin-page-header-title" class="font-serif text-lg sm:text-xl font-bold text-white tracking-wide">Executive Management Portal</h1>
+            <p id="admin-page-header-subtitle" class="text-[11px] text-white/60 hidden sm:block">Real-time luxury residence inventory, investor leads, and yield metrics</p>
+          </div>
+        </div>
+
+        <!-- Global Header Action Buttons -->
+        <div class="flex items-center gap-3">
+          <button type="button" id="admin-add-prop-btn" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+            <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            <span>Add Residence</span>
+          </button>
+          
+          <button type="button" id="admin-export-btn" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-white/90 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors" title="Export Backup JSON">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Backup</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl w-full mx-auto">
+
+      <!-- =====================================================================
+           PANEL 1: DASHBOARD OVERVIEW TAB
+           ===================================================================== -->
+      <section id="tab-dashboard" class="admin-panel space-y-8">
+        
+        <!-- Top KPI Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Total Portfolio Units</span>
+              <h3 id="stat-total-props" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">21</h3>
+              <p class="text-[11px] text-emerald-600 font-semibold mt-1">Full Master Catalog</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center">
+              <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Portfolio Valuation</span>
+              <h3 id="stat-total-value" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">$54.2M</h3>
+              <p class="text-[11px] text-[#64748B] mt-1">Deeded Prime Assets</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Active Available</span>
+              <h3 id="stat-active-available" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">16</h3>
+              <p class="text-[11px] text-blue-600 font-semibold mt-1">Ready for Acquisition</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+              <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Contracts in Escrow</span>
+              <h3 id="stat-reserved-sold" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">5</h3>
+              <p class="text-[11px] text-amber-600 font-semibold mt-1">Reserved / Closed</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+              <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Section: Portfolio Breakdown & Quick Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Portfolio Asset Distribution -->
+          <div class="bg-white rounded-2xl p-6 border border-[#E6E2DA] shadow-sm">
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mb-4">Portfolio Asset Mix</h3>
+            <div class="space-y-4 text-xs">
+              <div>
+                <div class="flex justify-between font-semibold mb-1">
+                  <span>Clifftop Villas & Sanctuaries</span>
+                  <span class="text-[#0F2A43]">45% ($24.4M)</span>
+                </div>
+                <div class="h-2 rounded-full bg-[#F7F5F0] overflow-hidden">
+                  <div class="h-full bg-[#C8A96A] rounded-full" style="width: 45%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between font-semibold mb-1">
+                  <span>Marina Penthouses & Lofts</span>
+                  <span class="text-[#0F2A43]">30% ($16.2M)</span>
+                </div>
+                <div class="h-2 rounded-full bg-[#F7F5F0] overflow-hidden">
+                  <div class="h-full bg-[#0F2A43] rounded-full" style="width: 30%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between font-semibold mb-1">
+                  <span>Botanical Townhomes</span>
+                  <span class="text-[#0F2A43]">15% ($8.1M)</span>
+                </div>
+                <div class="h-2 rounded-full bg-[#F7F5F0] overflow-hidden">
+                  <div class="h-full bg-emerald-600 rounded-full" style="width: 15%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between font-semibold mb-1">
+                  <span>Prime Land Parcels</span>
+                  <span class="text-[#0F2A43]">10% ($5.5M)</span>
+                </div>
+                <div class="h-2 rounded-full bg-[#F7F5F0] overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 10%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-[#E6E2DA] flex items-center justify-between text-xs text-[#64748B]">
+              <span>Average Cap Rate: <strong class="text-emerald-700">10.4% Net</strong></span>
+              <span class="text-[11px] text-[#C8A96A] font-semibold">100% Freehold Foreign</span>
+            </div>
+          </div>
+
+          <!-- Recent Leads & Inquiry Highlights -->
+          <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-[#E6E2DA] shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Recent High-Intent Investor Leads</h3>
+                  <p class="text-xs text-[#64748B]">Latest prospective owner inquiries captured from landing pages</p>
+                </div>
+                <button type="button" data-switch-tab="tab-leads" class="text-xs text-[#C8A96A] hover:underline font-semibold">View All Leads &rarr;</button>
+              </div>
+
+              <div class="space-y-3" id="dashboard-recent-leads-list">
+                <!-- Dynamically populated via admin.js -->
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-[#E6E2DA] flex items-center justify-between text-xs">
+              <span class="text-[#64748B]">Average Lead Response Time: <strong class="text-[#0F2A43]">&lt; 15 Minutes</strong></span>
+              <button type="button" data-switch-tab="tab-properties" class="btn-outline-navy !py-1.5 !px-3 text-xs font-semibold">Manage Inventory</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           PANEL 2: RESIDENCES CATALOG TAB (MASTER CRUD TABLE)
+           ===================================================================== -->
+      <section id="tab-properties" class="admin-panel hidden space-y-6">
+        
+        <!-- Controls Bar -->
+        <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-3 flex-1">
+            <div class="relative min-w-[240px] flex-1 sm:flex-initial">
+              <input type="text" id="admin-search-input" placeholder="Search by name, location, specs..." class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl pl-9 pr-4 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:outline-none" />
+              <svg class="w-4 h-4 text-[#64748B] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+
+            <select id="admin-filter-status" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+              <option value="">All Statuses</option>
+              <option value="Available">Available Only</option>
+              <option value="Reserved">Reserved</option>
+              <option value="Sold">Sold</option>
+            </select>
+
+            <select id="admin-filter-type" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+              <option value="">All Property Types</option>
+              <option value="Villa">Villa / Sanctuary</option>
+              <option value="Apartment">Apartment & Penthouse</option>
+              <option value="Townhouse">Townhouse</option>
+              <option value="Land">Land Parcel</option>
+            </select>
+          </div>
+
+          <!-- Reset / Import -->
+          <div class="flex items-center gap-2">
+            <label class="px-3 py-2 rounded-xl text-xs font-semibold text-[#0F2A43] bg-[#F7F5F0] hover:bg-[#E6E2DA] border border-[#E6E2DA] transition-colors flex items-center gap-1.5 cursor-pointer" title="Import JSON Database">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              <span>Import JSON</span>
+              <input type="file" id="admin-import-file" accept=".json" class="hidden" />
+            </label>
+
+            <button type="button" id="admin-reset-btn" class="px-3 py-2 rounded-xl text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-colors flex items-center gap-1.5" title="Reset all changes to default 21 residences">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Reset Master</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="bg-white rounded-2xl border border-[#E6E2DA] shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-[#E6E2DA] flex items-center justify-between">
+            <div>
+              <h2 class="font-serif text-lg font-bold text-[#0F2A43]">Master Residences Catalog</h2>
+              <p id="admin-table-count" class="text-xs text-[#64748B] mt-0.5">Showing all residences</p>
+            </div>
+            <span class="text-xs font-semibold text-[#C8A96A] bg-[#F5EEDB] px-3 py-1 rounded-full border border-[#C8A96A]/30">
+              Live Client Sync Active
+            </span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-[#F7F5F0] border-b border-[#E6E2DA] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+                  <th class="py-3.5 px-4">Residence</th>
+                  <th class="py-3.5 px-4">Location & Type</th>
+                  <th class="py-3.5 px-4">Price (USD)</th>
+                  <th class="py-3.5 px-4 text-center">Beds / Baths</th>
+                  <th class="py-3.5 px-4 text-center">Built Area</th>
+                  <th class="py-3.5 px-4 text-center">Status</th>
+                  <th class="py-3.5 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-properties-tbody" class="divide-y divide-[#E6E2DA] text-xs">
+                <!-- Dynamically populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty Table State -->
+          <div id="admin-table-empty" class="hidden text-center py-16">
+            <div class="w-12 h-12 rounded-full bg-[#F7F5F0] text-[#64748B] flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <h4 class="font-serif text-base font-bold text-[#0F2A43]">No residences match criteria</h4>
+            <p class="text-xs text-[#64748B] mt-1">Try clearing your search query or status filter.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           PANEL 3: INVESTOR LEADS & CRM TAB
+           ===================================================================== -->
+      <section id="tab-leads" class="admin-panel hidden space-y-6">
+        
+        <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-xl font-bold text-[#0F2A43]">Prospective Owner & Investor Leads</h2>
+            <p class="text-xs text-[#64748B] mt-0.5">High-intent client inquiries submitted through landing page forms and concierge requests</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="admin-leads-filter-status" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+              <option value="">All Lead Statuses</option>
+              <option value="New Lead">New Lead</option>
+              <option value="VIP Qualified">VIP Qualified</option>
+              <option value="Viewing Scheduled">Viewing Scheduled</option>
+              <option value="Escrow Negotiation">Escrow Negotiation</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Leads Table -->
+        <div class="bg-white rounded-2xl border border-[#E6E2DA] shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-[#F7F5F0] border-b border-[#E6E2DA] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+                  <th class="py-3.5 px-4">Client / Investor</th>
+                  <th class="py-3.5 px-4">Target Residence / Type</th>
+                  <th class="py-3.5 px-4">Budget & Goals</th>
+                  <th class="py-3.5 px-4">Source / Date</th>
+                  <th class="py-3.5 px-4 text-center">Status</th>
+                  <th class="py-3.5 px-4 text-right">Quick Contact</th>
+                </tr>
+              </thead>
+              <tbody id="admin-leads-tbody" class="divide-y divide-[#E6E2DA] text-xs">
+                <!-- Dynamically populated via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           PANEL 4: ASSET & YIELD MANAGEMENT TAB
+           ===================================================================== -->
+      <section id="tab-yields" class="admin-panel hidden space-y-6">
+        
+        <div class="bg-white rounded-2xl p-6 border border-[#E6E2DA] shadow-sm">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A]">Asset Portfolio Services</span>
+          <h2 class="font-serif text-2xl font-bold text-[#0F2A43] mt-1">Turnkey Asset Management & Yield Tracker</h2>
+          <p class="text-xs sm:text-sm text-[#64748B] mt-1 max-w-2xl font-light">
+            Comprehensive oversight for international buyers: short-term luxury vacation rentals, verified long-term corporate tenancies, and quarterly yield dividend payouts.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm">
+            <span class="text-xs text-[#64748B] uppercase font-semibold">Active Managed Assets</span>
+            <h3 class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">14 Estates</h3>
+            <p class="text-xs text-emerald-600 font-semibold mt-1">92.4% Occupancy (Last 90 Days)</p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm">
+            <span class="text-xs text-[#64748B] uppercase font-semibold">Average Net Rental Yield</span>
+            <h3 class="font-serif text-3xl font-bold text-emerald-700 mt-1">10.8% p.a.</h3>
+            <p class="text-xs text-[#64748B] mt-1">After 20% concierge operating fee</p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm">
+            <span class="text-xs text-[#64748B] uppercase font-semibold">Next Dividend Distribution</span>
+            <h3 class="font-serif text-3xl font-bold text-[#C8A96A] mt-1">Nov 15, 2026</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-1">Direct SWIFT/IBAN Wire</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-[#E6E2DA] shadow-sm">
+          <h3 class="font-serif text-lg font-bold text-[#0F2A43] mb-4">Live Rental Asset Schedule</h3>
+          <div class="divide-y divide-[#E6E2DA] text-xs">
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <strong class="font-serif text-sm text-[#0F2A43]">Villa Solis Clifftop Sanctuary</strong>
+                <span class="block text-[11px] text-[#64748B]">Occupied · High-Net-Worth International Family (Sweden)</span>
+              </div>
+              <div class="text-right">
+                <span class="font-bold text-[#0F2A43]">$18,500 / month</span>
+                <span class="block text-[10px] text-emerald-600 font-semibold">Yield: 11.2% Net</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <strong class="font-serif text-sm text-[#0F2A43]">The Horizon Marina Penthouse</strong>
+                <span class="block text-[11px] text-[#64748B]">Booked VIP Discovery Stay · Superyacht Principal</span>
+              </div>
+              <div class="text-right">
+                <span class="font-bold text-[#0F2A43]">$1,450 / night</span>
+                <span class="block text-[10px] text-emerald-600 font-semibold">Yield: 9.8% Net</span>
+              </div>
+            </div>
+
+            <div class="py-3 flex items-center justify-between">
+              <div>
+                <strong class="font-serif text-sm text-[#0F2A43]">Pine Ridge Estate</strong>
+                <span class="block text-[11px] text-[#64748B]">Leased 12-Month Corporate Agreement</span>
+              </div>
+              <div class="text-right">
+                <span class="font-bold text-[#0F2A43]">$12,800 / month</span>
+                <span class="block text-[10px] text-emerald-600 font-semibold">Yield: 10.4% Net</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- =====================================================================
+           PANEL 5: BRAND & GLOBAL CONFIGURATION TAB
+           ===================================================================== -->
+      <section id="tab-settings" class="admin-panel hidden space-y-6">
+        
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-[#E6E2DA] shadow-sm">
+          <div class="mb-6 pb-4 border-b border-[#E6E2DA]">
+            <span class="text-xs uppercase font-bold tracking-wider text-[#C8A96A] block">Global Setup</span>
+            <h2 class="font-serif text-2xl font-bold text-[#0F2A43] mt-0.5">Brand & Portal Configuration</h2>
+            <p class="text-xs text-[#64748B]">Updating these settings dynamically rebrands and adjusts contact channels across all website pages immediately.</p>
+          </div>
+
+          <form id="brand-settings-form" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Company Master Name</label>
+                <input type="text" id="setting-brand-name" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Short Brand Name</label>
+                <input type="text" id="setting-brand-short" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Direct Phone Number</label>
+                <input type="text" id="setting-brand-phone" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#0F2A43] mb-1">WhatsApp Concierge Raw Number</label>
+                <input type="text" id="setting-brand-whatsapp" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Inquiry Email Address</label>
+                <input type="email" id="setting-brand-email" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Physical Private Office Address</label>
+              <input type="text" id="setting-brand-address" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Brokerage License & Regulatory Registration</label>
+              <input type="text" id="setting-brand-license" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+            </div>
+
+            <div class="pt-4 border-t border-[#E6E2DA] flex justify-end">
+              <button type="submit" class="btn-gold !py-2.5 !px-6 text-xs uppercase tracking-wider font-bold shadow-md">
+                Save Global Brand Settings
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
 
   <!-- =========================================================================
        MODAL 1: ADD / EDIT RESIDENCE FORM (FULL CRUD)

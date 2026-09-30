@@ -4,7 +4,7 @@
  * Rebranding the entire site only requires updating BRAND_CONFIG below.
  */
 
-const BRAND_CONFIG = {
+const DEFAULT_BRAND_CONFIG = {
   name: "Azure Bay Residences",
   shortName: "Azure Bay",
   tagline: "Exclusive Coastal & Hillside Residences",
@@ -40,6 +40,21 @@ const BRAND_CONFIG = {
     facebook: "https://facebook.com"
   }
 };
+
+function getStoredBrandConfig() {
+  try {
+    const raw = localStorage.getItem('azure_brand_settings');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        return { ...DEFAULT_BRAND_CONFIG, ...parsed };
+      }
+    }
+  } catch (e) {}
+  return DEFAULT_BRAND_CONFIG;
+}
+
+let BRAND_CONFIG = getStoredBrandConfig();
 
 // Master Curated Luxury Properties Collection (21 Estates)
 const DEFAULT_PROPERTIES = [
@@ -848,16 +863,147 @@ const AzureDB = {
     this.saveProperties(filtered);
     return true;
   },
+  getLeads() {
+    return getStoredLeads();
+  },
+  saveLeads(list) {
+    try {
+      localStorage.setItem('azure_custom_leads', JSON.stringify(list));
+      return true;
+    } catch (e) {
+      console.error("Leads storage error:", e);
+      return false;
+    }
+  },
+  addLead(lead) {
+    const list = this.getLeads();
+    if (!lead.id) lead.id = 'lead-' + Date.now();
+    if (!lead.date) lead.date = new Date().toISOString().split('T')[0];
+    if (!lead.status) lead.status = 'New Lead';
+    list.unshift(lead);
+    this.saveLeads(list);
+    return lead;
+  },
+  updateLeadStatus(id, newStatus) {
+    const list = this.getLeads();
+    const item = list.find(l => l.id === id);
+    if (item) {
+      item.status = newStatus;
+      this.saveLeads(list);
+      return item;
+    }
+    return null;
+  },
+  deleteLead(id) {
+    const list = this.getLeads();
+    const filtered = list.filter(l => l.id !== id);
+    this.saveLeads(filtered);
+    return true;
+  },
+  getSettings() {
+    return getStoredBrandConfig();
+  },
+  saveSettings(newSettings) {
+    try {
+      const merged = { ...DEFAULT_BRAND_CONFIG, ...newSettings };
+      localStorage.setItem('azure_brand_settings', JSON.stringify(merged));
+      BRAND_CONFIG = merged;
+      if (typeof window !== 'undefined') {
+        window.BRAND_CONFIG = BRAND_CONFIG;
+      }
+      return merged;
+    } catch (e) {
+      console.error("Settings save error:", e);
+      return null;
+    }
+  },
   resetToDefault() {
     try {
       localStorage.removeItem('azure_custom_properties');
+      localStorage.removeItem('azure_custom_leads');
+      localStorage.removeItem('azure_brand_settings');
       PROPERTIES = DEFAULT_PROPERTIES;
+      BRAND_CONFIG = DEFAULT_BRAND_CONFIG;
+      if (typeof window !== 'undefined') {
+        window.BRAND_CONFIG = BRAND_CONFIG;
+        window.PROPERTIES = PROPERTIES;
+      }
       return true;
     } catch (e) {
       return false;
     }
   }
 };
+
+const DEFAULT_LEADS = [
+  {
+    id: "lead-101",
+    name: "Lord Arthur Pendelton",
+    email: "a.pendelton@mayfairholdings.co.uk",
+    phone: "+44 7911 123456",
+    property: "Villa Solis Clifftop Sanctuary",
+    type: "Villa",
+    budget: "$2,500,000",
+    goal: "Hands-off Luxury Rental Yield & Escrow",
+    source: "Owner Lead Landing Page",
+    status: "VIP Qualified",
+    date: "2026-09-28",
+    notes: "Requires private helicopter transfer. Interested in quarterly net yield repatriation to London Barclays."
+  },
+  {
+    id: "lead-102",
+    name: "Dr. Elena Rostova",
+    email: "elena.rostova@genevabiotech.ch",
+    phone: "+41 22 789 0123",
+    property: "The Horizon Marina Penthouse",
+    type: "Apartment",
+    budget: "$1,850,000",
+    goal: "Tax-Advantaged Offshore Holding",
+    source: "Private Viewing Request",
+    status: "Viewing Scheduled",
+    date: "2026-09-29",
+    notes: "4K live virtual tour completed with Camille Moreau. In-person notary contract review scheduled."
+  },
+  {
+    id: "lead-103",
+    name: "Daisuke & Mei Tanaka",
+    email: "tanaka@tokyocapital.jp",
+    phone: "+81 90 1234 5678",
+    property: "Villa Botanica Sanctuary",
+    type: "Villa",
+    budget: "$2,200,000",
+    goal: "Vacation Residence + Turnkey Management",
+    source: "Owner Prospectus Form",
+    status: "New Lead",
+    date: "2026-09-30",
+    notes: "Downloaded architectural dossiers. Wants 3 months personal stay + 9 months high-end asset rental management."
+  },
+  {
+    id: "lead-104",
+    name: "Sheikh Tariq Al-Qasimi",
+    email: "t.alqasimi@alnahda-group.ae",
+    phone: "+971 50 123 4567",
+    property: "The Sanctuary Trophy Penthouse",
+    type: "Apartment",
+    budget: "$3,850,000",
+    goal: "Superyacht Berth + Portfolio Anchor",
+    source: "WhatsApp Concierge Direct",
+    status: "Escrow Negotiation",
+    date: "2026-09-30",
+    notes: "Title deed escrow draft shared with family office legal counsel in DIFC Dubai. 100% foreign freehold ownership."
+  }
+];
+
+function getStoredLeads() {
+  try {
+    const raw = localStorage.getItem('azure_custom_leads');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {}
+  return DEFAULT_LEADS;
+}
 
 // 8 Curated Global Investors (For Smooth Non-Stop Marquee)
 const INVESTOR_TESTIMONIALS = [

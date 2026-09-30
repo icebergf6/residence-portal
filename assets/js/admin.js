@@ -1,12 +1,28 @@
 /**
- * Azure Bay Residences - Executive Admin CMS & CRUD Management Engine
- * Connects directly to AzureDB in data.js and persists state in localStorage
+ * Azure Bay Residences - Executive Admin CMS & Full Portfolio Engine
+ * Connects directly to AzureDB in data.js, managing Residences, Leads CRM, and Brand Settings with localStorage
  */
 
 (function () {
   'use strict';
 
-  // Elements
+  // =========================================================================
+  // DOM ELEMENT SELECTION
+  // =========================================================================
+
+  // Sidebar & Navigation
+  const sidebar = document.getElementById('admin-sidebar');
+  const sidebarBackdrop = document.getElementById('admin-sidebar-backdrop');
+  const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
+  const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+  const tabButtons = document.querySelectorAll('.admin-tab-btn');
+  const panels = document.querySelectorAll('.admin-panel');
+  const pageHeaderTitle = document.getElementById('admin-page-header-title');
+  const pageHeaderSubtitle = document.getElementById('admin-page-header-subtitle');
+  const sidebarPropsCount = document.getElementById('sidebar-props-count');
+  const sidebarLeadsCount = document.getElementById('sidebar-leads-count');
+
+  // Properties Catalog Elements
   const tbody = document.getElementById('admin-properties-tbody');
   const tableCount = document.getElementById('admin-table-count');
   const tableEmpty = document.getElementById('admin-table-empty');
@@ -20,7 +36,7 @@
   const statAvailable = document.getElementById('stat-active-available');
   const statReserved = document.getElementById('stat-reserved-sold');
 
-  // Modals
+  // Property Modals & Forms
   const propModal = document.getElementById('property-modal');
   const propModalTitle = document.getElementById('property-modal-title');
   const propModalClose = document.getElementById('property-modal-close');
@@ -33,7 +49,7 @@
   const deleteModalConfirm = document.getElementById('delete-modal-confirm');
   const deletePropNameEl = document.getElementById('delete-prop-name');
 
-  // Form Fields
+  // Property Form Fields
   const formId = document.getElementById('form-prop-id');
   const formName = document.getElementById('form-prop-name');
   const formLocation = document.getElementById('form-prop-location');
@@ -52,6 +68,21 @@
   const previewBox = document.getElementById('form-image-preview-box');
   const previewImg = document.getElementById('form-image-preview-img');
   const quickPhotoBtn = document.getElementById('btn-quick-photo-preset');
+
+  // Leads CRM Elements
+  const leadsTbody = document.getElementById('admin-leads-tbody');
+  const leadsFilterStatus = document.getElementById('admin-leads-filter-status');
+  const recentLeadsList = document.getElementById('dashboard-recent-leads-list');
+
+  // Brand Settings Form Elements
+  const brandSettingsForm = document.getElementById('brand-settings-form');
+  const settingBrandName = document.getElementById('setting-brand-name');
+  const settingBrandShort = document.getElementById('setting-brand-short');
+  const settingBrandPhone = document.getElementById('setting-brand-phone');
+  const settingBrandWhatsapp = document.getElementById('setting-brand-whatsapp');
+  const settingBrandEmail = document.getElementById('setting-brand-email');
+  const settingBrandAddress = document.getElementById('setting-brand-address');
+  const settingBrandLicense = document.getElementById('setting-brand-license');
 
   // Extra Database Buttons
   const resetBtn = document.getElementById('admin-reset-btn');
@@ -76,6 +107,9 @@
   ];
   let photoPresetIdx = 0;
 
+  // =========================================================================
+  // TOAST NOTIFICATION
+  // =========================================================================
   function showToast(message, isSuccess = true) {
     if (!toast) return;
     if (toastTimer) clearTimeout(toastTimer);
@@ -86,6 +120,110 @@
     }, 3500);
   }
 
+  // =========================================================================
+  // TAB NAVIGATION & SIDEBAR CONTROLS
+  // =========================================================================
+  const TAB_METADATA = {
+    'tab-dashboard': {
+      title: "Executive Management Portal",
+      subtitle: "Real-time luxury residence inventory, investor leads, and yield metrics"
+    },
+    'tab-properties': {
+      title: "Residences Catalog CMS",
+      subtitle: "Manage architectural listings, pricing, specs, and status"
+    },
+    'tab-leads': {
+      title: "Investor Leads & CRM",
+      subtitle: "High-net-worth owner leads, private viewing reservations, and consulting inquiries"
+    },
+    'tab-yields': {
+      title: "Asset & Yield Analytics",
+      subtitle: "Track rental income, holiday occupancy rates, and international wire dividends"
+    },
+    'tab-settings': {
+      title: "Brand & Portal Settings",
+      subtitle: "Configure global contact information, agency registration, and messaging"
+    }
+  };
+
+  function switchTab(targetTabId) {
+    if (!targetTabId) return;
+
+    // Switch panels
+    panels.forEach(panel => {
+      if (panel.id === targetTabId) {
+        panel.classList.remove('hidden');
+      } else {
+        panel.classList.add('hidden');
+      }
+    });
+
+    // Update Tab Buttons
+    tabButtons.forEach(btn => {
+      const target = btn.getAttribute('data-tab-target');
+      if (target === targetTabId) {
+        btn.classList.add('bg-white/15', 'text-white', 'shadow-sm', 'border', 'border-white/20');
+        btn.classList.remove('text-white/80', 'hover:bg-white/5', 'border-transparent');
+      } else {
+        btn.classList.remove('bg-white/15', 'text-white', 'shadow-sm', 'border', 'border-white/20');
+        btn.classList.add('text-white/80', 'hover:bg-white/5', 'border-transparent');
+      }
+    });
+
+    // Update Header
+    if (TAB_METADATA[targetTabId]) {
+      if (pageHeaderTitle) pageHeaderTitle.textContent = TAB_METADATA[targetTabId].title;
+      if (pageHeaderSubtitle) pageHeaderSubtitle.textContent = TAB_METADATA[targetTabId].subtitle;
+    }
+
+    // Close mobile sidebar if open
+    closeMobileSidebar();
+
+    // Trigger tab-specific refresh
+    if (targetTabId === 'tab-leads') {
+      renderLeadsTable();
+    } else if (targetTabId === 'tab-properties') {
+      renderTable();
+    } else if (targetTabId === 'tab-settings') {
+      initBrandSettings();
+    }
+  }
+
+  function openMobileSidebar() {
+    if (sidebar) sidebar.classList.remove('-translate-x-full');
+    if (sidebarBackdrop) sidebarBackdrop.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileSidebar() {
+    if (sidebar) sidebar.classList.add('-translate-x-full');
+    if (sidebarBackdrop) sidebarBackdrop.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Bind Sidebar Events
+  if (sidebarOpenBtn) sidebarOpenBtn.addEventListener('click', openMobileSidebar);
+  if (sidebarCloseBtn) sidebarCloseBtn.addEventListener('click', closeMobileSidebar);
+  if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-tab-target');
+      switchTab(target);
+    });
+  });
+
+  // Cross-panel tab links (e.g. data-switch-tab="tab-leads")
+  document.querySelectorAll('[data-switch-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-switch-tab');
+      switchTab(target);
+    });
+  });
+
+  // =========================================================================
+  // PROPERTIES CRUD & TABLE
+  // =========================================================================
   function getProperties() {
     if (window.AzureDB && typeof window.AzureDB.getProperties === 'function') {
       return window.AzureDB.getProperties();
@@ -103,6 +241,8 @@
     if (statTotal) statTotal.textContent = total;
     if (statAvailable) statAvailable.textContent = available;
     if (statReserved) statReserved.textContent = reservedSold;
+    if (sidebarPropsCount) sidebarPropsCount.textContent = total;
+
     if (statValuation) {
       if (totalVal >= 1000000) {
         statValuation.textContent = `$${(totalVal / 1000000).toFixed(1)}M`;
@@ -110,6 +250,13 @@
         statValuation.textContent = `$${(totalVal / 1000).toFixed(0)}K`;
       }
     }
+  }
+
+  function formatCurrency(price) {
+    if (window.formatUSD && typeof window.formatUSD === 'function') {
+      return window.formatUSD(price);
+    }
+    return `$${Number(price || 0).toLocaleString()}`;
   }
 
   function renderTable() {
@@ -124,8 +271,8 @@
       if (statusVal && p.status !== statusVal) return false;
       if (typeVal && p.type !== typeVal) return false;
       if (query) {
-        const matchesName = p.name.toLowerCase().includes(query);
-        const matchesLoc = p.location.toLowerCase().includes(query);
+        const matchesName = p.name ? p.name.toLowerCase().includes(query) : false;
+        const matchesLoc = p.location ? p.location.toLowerCase().includes(query) : false;
         const matchesTag = p.tagline ? p.tagline.toLowerCase().includes(query) : false;
         if (!matchesName && !matchesLoc && !matchesTag) return false;
       }
@@ -406,12 +553,14 @@
   // Reset to default
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      if (confirm("Reset the entire real estate portfolio to the master 21 residences? Custom changes will be restored.")) {
+      if (confirm("Reset the entire real estate portfolio and leads to master defaults? Custom changes will be restored.")) {
         if (window.AzureDB) {
           window.AzureDB.resetToDefault();
         }
-        showToast("Restored 21 master residences successfully!");
+        showToast("Master database and leads restored successfully!");
         renderTable();
+        renderLeadsTable();
+        initBrandSettings();
       }
     });
   }
@@ -419,14 +568,20 @@
   // Export JSON
   if (exportBtn) {
     exportBtn.addEventListener('click', () => {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(getProperties(), null, 2));
+      const backupData = {
+        exportedAt: new Date().toISOString(),
+        properties: getProperties(),
+        leads: (window.AzureDB && window.AzureDB.getLeads()) || [],
+        settings: (window.AzureDB && window.AzureDB.getSettings()) || {}
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `azure_bay_portfolio_${new Date().toISOString().slice(0, 10)}.json`);
+      downloadAnchor.setAttribute("download", `azure_bay_full_cms_backup_${new Date().toISOString().slice(0, 10)}.json`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
-      showToast("Portfolio database exported!");
+      showToast("Full CMS backup exported successfully!");
     });
   }
 
@@ -441,14 +596,29 @@
         try {
           const parsed = JSON.parse(event.target.result);
           if (Array.isArray(parsed) && parsed.length > 0) {
+            // Direct array of properties
             if (window.AzureDB) {
               window.AzureDB.saveProperties(parsed);
             }
             showToast(`Imported ${parsed.length} residences successfully!`);
-            renderTable();
+          } else if (parsed && typeof parsed === 'object') {
+            // Full backup format
+            if (Array.isArray(parsed.properties) && window.AzureDB) {
+              window.AzureDB.saveProperties(parsed.properties);
+            }
+            if (Array.isArray(parsed.leads) && window.AzureDB) {
+              window.AzureDB.saveLeads(parsed.leads);
+            }
+            if (parsed.settings && window.AzureDB) {
+              window.AzureDB.saveSettings(parsed.settings);
+            }
+            showToast("Imported complete CMS database successfully!");
           } else {
-            alert("Invalid JSON format: expected an array of properties.");
+            alert("Invalid JSON format.");
           }
+          renderTable();
+          renderLeadsTable();
+          initBrandSettings();
         } catch (err) {
           alert("Error parsing JSON file: " + err.message);
         }
@@ -458,7 +628,7 @@
     });
   }
 
-  // Listeners for Modal controls
+  // Modal event controls
   if (addPropBtn) addPropBtn.addEventListener('click', openCreateModal);
   if (propModalClose) propModalClose.addEventListener('click', closePropModal);
   if (propModalCancel) propModalCancel.addEventListener('click', closePropModal);
@@ -469,8 +639,248 @@
   if (filterStatus) filterStatus.addEventListener('change', renderTable);
   if (filterType) filterType.addEventListener('change', renderTable);
 
-  // Initial render on load
-  document.addEventListener('DOMContentLoaded', renderTable);
-  renderTable();
+  // =========================================================================
+  // LEADS CRM ENGINE
+  // =========================================================================
+  function getLeads() {
+    if (window.AzureDB && typeof window.AzureDB.getLeads === 'function') {
+      return window.AzureDB.getLeads();
+    }
+    return [];
+  }
+
+  function renderLeadsTable() {
+    const allLeads = getLeads();
+    const newLeadsCount = allLeads.filter(l => l.status === 'New Lead').length;
+    if (sidebarLeadsCount) {
+      sidebarLeadsCount.textContent = `${newLeadsCount} New`;
+      sidebarLeadsCount.className = newLeadsCount > 0 
+        ? "text-[10px] bg-emerald-500 text-white font-bold px-2 py-0.5 rounded animate-pulse" 
+        : "text-[10px] bg-white/10 text-white/70 px-2 py-0.5 rounded";
+    }
+
+    // Render Recent Leads on Dashboard tab
+    if (recentLeadsList) {
+      const topRecent = allLeads.slice(0, 4);
+      if (topRecent.length === 0) {
+        recentLeadsList.innerHTML = `<p class="text-xs text-[#64748B] py-3 text-center">No leads registered yet.</p>`;
+      } else {
+        recentLeadsList.innerHTML = topRecent.map(lead => {
+          const statusBadge = getStatusBadge(lead.status);
+          const rawPhone = lead.phone ? lead.phone.replace(/[^0-9]/g, '') : '';
+          return `
+            <div class="p-3 rounded-xl bg-[#F7F5F0] border border-[#E6E2DA] flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <h4 class="font-serif font-bold text-sm text-[#0F2A43] truncate">${lead.name}</h4>
+                  ${statusBadge}
+                </div>
+                <p class="text-[11px] text-[#64748B] truncate mt-0.5">${lead.property || 'General Portfolio'} &bull; ${lead.budget || 'Custom Allocation'}</p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] text-[#64748B] hidden sm:inline">${lead.date || ''}</span>
+                ${rawPhone ? `
+                  <a href="https://wa.me/${rawPhone}?text=${encodeURIComponent(`Hello ${lead.name}, regarding your inquiry with Azure Bay Residences...`)}" target="_blank" class="p-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors" title="Message via WhatsApp">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    // Render Full Leads Table on Leads tab
+    if (!leadsTbody) return;
+
+    const filterVal = leadsFilterStatus ? leadsFilterStatus.value : '';
+    const filteredLeads = allLeads.filter(l => {
+      if (filterVal && l.status !== filterVal) return false;
+      return true;
+    });
+
+    if (filteredLeads.length === 0) {
+      leadsTbody.innerHTML = `
+        <tr>
+          <td colspan="6" class="text-center py-12 text-[#64748B]">
+            <p class="font-serif text-sm font-bold text-[#0F2A43]">No leads matching selected criteria</p>
+            <p class="text-xs mt-1">New leads submitted from landing pages will appear here immediately.</p>
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    leadsTbody.innerHTML = filteredLeads.map(lead => {
+      const rawPhone = lead.phone ? lead.phone.replace(/[^0-9]/g, '') : '';
+      return `
+        <tr class="hover:bg-[#F7F5F0]/80 transition-colors">
+          <!-- Client Info -->
+          <td class="py-3.5 px-4">
+            <strong class="font-serif font-bold text-sm text-[#0F2A43] block">${lead.name}</strong>
+            <div class="text-[11px] text-[#64748B] space-y-0.5 mt-0.5">
+              ${lead.email ? `<a href="mailto:${lead.email}" class="hover:text-[#C8A96A] block truncate max-w-[200px]">${lead.email}</a>` : ''}
+              ${lead.phone ? `<a href="tel:${lead.phone}" class="hover:text-[#C8A96A] block">${lead.phone}</a>` : ''}
+            </div>
+          </td>
+
+          <!-- Target Residence -->
+          <td class="py-3.5 px-4 whitespace-nowrap">
+            <span class="block font-semibold text-[#0F2A43] truncate max-w-[220px]">${lead.property || 'Portfolio Consultation'}</span>
+            <span class="inline-block text-[10px] px-2 py-0.5 rounded bg-[#F5EEDB] text-[#C8A96A] font-semibold mt-0.5">${lead.type || 'Residence'}</span>
+          </td>
+
+          <!-- Budget & Goal -->
+          <td class="py-3.5 px-4">
+            <span class="font-bold text-[#0F2A43] block">${lead.budget || 'Custom Allocation'}</span>
+            <p class="text-[11px] text-[#64748B] max-w-xs truncate" title="${(lead.notes || lead.goal || '').replace(/"/g, '&quot;')}">
+              ${lead.goal || lead.notes || 'Asset acquisition consultation'}
+            </p>
+          </td>
+
+          <!-- Source & Date -->
+          <td class="py-3.5 px-4 whitespace-nowrap">
+            <span class="text-xs text-[#0F2A43] block font-medium">${lead.source || 'Website Form'}</span>
+            <span class="text-[11px] text-[#64748B]">${lead.date || 'Recent'}</span>
+          </td>
+
+          <!-- Status Dropdown -->
+          <td class="py-3.5 px-4 text-center whitespace-nowrap">
+            <select class="lead-status-select bg-white border border-[#E6E2DA] rounded-lg px-2.5 py-1 text-xs font-semibold text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer" data-id="${lead.id}">
+              <option value="New Lead" ${lead.status === 'New Lead' ? 'selected' : ''}>🔵 New Lead</option>
+              <option value="VIP Qualified" ${lead.status === 'VIP Qualified' ? 'selected' : ''}>⭐ VIP Qualified</option>
+              <option value="Viewing Scheduled" ${lead.status === 'Viewing Scheduled' ? 'selected' : ''}>📅 Viewing Scheduled</option>
+              <option value="Escrow Negotiation" ${lead.status === 'Escrow Negotiation' ? 'selected' : ''}>💼 Escrow Negotiation</option>
+              <option value="Closed / In Escrow" ${lead.status === 'Closed / In Escrow' ? 'selected' : ''}>✅ Closed / Escrow</option>
+            </select>
+          </td>
+
+          <!-- Quick Contact -->
+          <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1.5">
+            ${rawPhone ? `
+              <a href="https://wa.me/${rawPhone}?text=${encodeURIComponent(`Hello ${lead.name}, thank you for contacting Azure Bay Residences regarding ${lead.property || 'our luxury residences'}. How may our private office assist you?`)}" target="_blank" class="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 inline-block transition-colors" title="Message via WhatsApp">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              </a>
+            ` : ''}
+            ${lead.email ? `
+              <a href="mailto:${lead.email}?subject=${encodeURIComponent(`Azure Bay Residences — Consultation Follow-up`)}" class="p-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 inline-block transition-colors" title="Send Email">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </a>
+            ` : ''}
+            <button type="button" class="lead-del-btn p-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 inline-block transition-colors" data-id="${lead.id}" title="Remove Lead">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    // Attach status update event handlers
+    leadsTbody.querySelectorAll('.lead-status-select').forEach(select => {
+      select.addEventListener('change', (e) => {
+        const id = select.getAttribute('data-id');
+        const newStatus = select.value;
+        if (window.AzureDB && window.AzureDB.updateLeadStatus) {
+          window.AzureDB.updateLeadStatus(id, newStatus);
+          showToast(`Lead status updated to "${newStatus}"!`);
+          renderLeadsTable();
+        }
+      });
+    });
+
+    // Attach delete event handlers
+    leadsTbody.querySelectorAll('.lead-del-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        if (confirm("Remove this investor lead record from the CRM?")) {
+          if (window.AzureDB && window.AzureDB.deleteLead) {
+            window.AzureDB.deleteLead(id);
+            showToast("Lead record removed.");
+            renderLeadsTable();
+          }
+        }
+      });
+    });
+  }
+
+  function getStatusBadge(status) {
+    if (status === 'VIP Qualified') {
+      return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">⭐ VIP Qualified</span>';
+    }
+    if (status === 'Viewing Scheduled') {
+      return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">📅 Viewing</span>';
+    }
+    if (status === 'Escrow Negotiation') {
+      return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200">💼 In Escrow</span>';
+    }
+    return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">🔵 New Lead</span>';
+  }
+
+  if (leadsFilterStatus) {
+    leadsFilterStatus.addEventListener('change', renderLeadsTable);
+  }
+
+  // =========================================================================
+  // BRAND SETTINGS ENGINE
+  // =========================================================================
+  function initBrandSettings() {
+    let settings = {};
+    if (window.AzureDB && typeof window.AzureDB.getSettings === 'function') {
+      settings = window.AzureDB.getSettings();
+    } else if (typeof BRAND_CONFIG !== 'undefined') {
+      settings = BRAND_CONFIG;
+    }
+
+    if (settingBrandName) settingBrandName.value = settings.name || '';
+    if (settingBrandShort) settingBrandShort.value = settings.shortName || '';
+    if (settingBrandPhone) settingBrandPhone.value = settings.phone || '';
+    if (settingBrandWhatsapp) settingBrandWhatsapp.value = settings.whatsappRaw || '';
+    if (settingBrandEmail) settingBrandEmail.value = settings.email || '';
+    if (settingBrandAddress) settingBrandAddress.value = settings.address || '';
+    if (settingBrandLicense) settingBrandLicense.value = settings.license || '';
+  }
+
+  if (brandSettingsForm) {
+    brandSettingsForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const updated = {
+        name: settingBrandName ? settingBrandName.value.trim() : '',
+        shortName: settingBrandShort ? settingBrandShort.value.trim() : '',
+        phone: settingBrandPhone ? settingBrandPhone.value.trim() : '',
+        phoneRaw: settingBrandPhone ? settingBrandPhone.value.replace(/[^0-9+]/g, '') : '',
+        whatsapp: settingBrandWhatsapp ? settingBrandWhatsapp.value.trim() : '',
+        whatsappRaw: settingBrandWhatsapp ? settingBrandWhatsapp.value.replace(/[^0-9]/g, '') : '',
+        email: settingBrandEmail ? settingBrandEmail.value.trim() : '',
+        conciergeEmail: settingBrandEmail ? settingBrandEmail.value.trim() : '',
+        address: settingBrandAddress ? settingBrandAddress.value.trim() : '',
+        license: settingBrandLicense ? settingBrandLicense.value.trim() : ''
+      };
+
+      if (window.AzureDB && window.AzureDB.saveSettings) {
+        window.AzureDB.saveSettings(updated);
+        showToast("Global brand & portal configuration saved successfully!");
+      }
+    });
+  }
+
+  // =========================================================================
+  // INITIALIZATION ON PAGE LOAD
+  // =========================================================================
+  function initAdmin() {
+    renderTable();
+    renderLeadsTable();
+    initBrandSettings();
+
+    // Default to Dashboard tab
+    switchTab('tab-dashboard');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAdmin);
+  } else {
+    initAdmin();
+  }
 
 })();
