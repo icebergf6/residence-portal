@@ -534,7 +534,14 @@ function initInvestmentCalculator() {
    PROPERTIES LISTING PAGE (properties.html) - DYNAMIC FILTERING ENGINE
    -------------------------------------------------------------------------- */
 function initPropertiesPage() {
-  if (typeof PROPERTIES === 'undefined') return;
+  function getSourceProperties() {
+    if (window.AzureDB && typeof window.AzureDB.getProperties === 'function') {
+      return window.AzureDB.getProperties();
+    }
+    return typeof PROPERTIES !== 'undefined' ? PROPERTIES : [];
+  }
+
+  if (getSourceProperties().length === 0 && typeof PROPERTIES === 'undefined') return;
 
   const urlParams = new URLSearchParams(window.location.search);
   const grid = document.getElementById('properties-grid');
@@ -647,11 +654,24 @@ function initPropertiesPage() {
     window.history.replaceState({}, '', newQuery);
   }
 
+  function syncPillButtons(selectedType) {
+    quickCategoryPills.forEach(pill => {
+      const pType = pill.getAttribute('data-quick-type');
+      if (pType === selectedType || (!pType && !selectedType)) {
+        pill.className = "quick-category-pill active px-3.5 py-1.5 rounded-full font-semibold bg-[#0F2A43] text-white transition-all shrink-0 shadow-xs";
+      } else {
+        pill.className = "quick-category-pill px-3.5 py-1.5 rounded-full font-semibold bg-white hover:bg-[#F5EEDB] text-[#0F2A43] border border-[#E6E2DA] transition-all shrink-0";
+      }
+    });
+  }
+
   function render() {
+    const allProps = getSourceProperties();
     const filters = getActiveFilters();
     syncURL(filters);
+    syncPillButtons(filters.type);
 
-    let filtered = PROPERTIES.filter(item => {
+    let filtered = allProps.filter(item => {
       // Keyword search
       if (filters.keyword) {
         const query = filters.keyword;
@@ -706,9 +726,19 @@ function initPropertiesPage() {
       filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     }
 
-    // Results count
+    // Results count & header stats
     if (countDisplay) {
-      countDisplay.textContent = `Showing ${filtered.length} of ${PROPERTIES.length} residences`;
+      countDisplay.innerHTML = `Showing <strong class="text-[#0F2A43] font-bold">${filtered.length}</strong> of <strong class="text-[#0F2A43] font-bold">${allProps.length}</strong> residences`;
+    }
+
+    // Update top header badges dynamically
+    const headerCountBadge = document.querySelector('[data-portfolio-count]');
+    if (headerCountBadge) {
+      headerCountBadge.textContent = `${allProps.length}+ Master Residences`;
+    }
+    const allPill = document.querySelector('[data-quick-type=""]');
+    if (allPill) {
+      allPill.textContent = `All Residences (${allProps.length})`;
     }
 
     // Empty state
@@ -721,10 +751,10 @@ function initPropertiesPage() {
       const visibleItems = filtered.slice(0, itemsToShow);
       if (grid) {
         if (currentViewMode === 'list') {
-          grid.className = "flex flex-col gap-6";
+          grid.className = "flex flex-col gap-6 animate-fadeIn";
           grid.innerHTML = visibleItems.map(p => createPropertyListCardHTML(p)).join('');
         } else {
-          grid.className = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6";
+          grid.className = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 animate-fadeIn";
           grid.innerHTML = visibleItems.map(p => createPropertyCardHTML(p)).join('');
         }
       }
@@ -750,8 +780,8 @@ function initPropertiesPage() {
     if (filters.location) chips.push({ key: 'location', label: `Location: ${filters.location}` });
     if (filters.type) chips.push({ key: 'type', label: `Type: ${filters.type}` });
     if (filters.status) chips.push({ key: 'status', label: `Status: ${filters.status}` });
-    if (filters.minPrice) chips.push({ key: 'minPrice', label: `Min: ${formatUSD(filters.minPrice)}` });
-    if (filters.maxPrice) chips.push({ key: 'maxPrice', label: `Max: ${formatUSD(filters.maxPrice)}` });
+    if (filters.minPrice) chips.push({ key: 'minPrice', label: `Min: ${typeof formatCurrency === 'function' ? formatCurrency(filters.minPrice) : formatUSD(filters.minPrice)}` });
+    if (filters.maxPrice) chips.push({ key: 'maxPrice', label: `Max: ${typeof formatCurrency === 'function' ? formatCurrency(filters.maxPrice) : formatUSD(filters.maxPrice)}` });
     if (filters.bedrooms && filters.bedrooms !== 'any') chips.push({ key: 'bedrooms', label: `${filters.bedrooms}+ Beds` });
     if (filters.bathrooms && filters.bathrooms !== 'any') chips.push({ key: 'bathrooms', label: `${filters.bathrooms}+ Baths` });
 
@@ -783,8 +813,14 @@ function initPropertiesPage() {
           if (key === 'location' && locationSelect) locationSelect.value = '';
           if (key === 'type' && typeSelect) typeSelect.value = '';
           if (key === 'status' && statusSelect) statusSelect.value = '';
-          if (key === 'minPrice' && minPriceInput) minPriceInput.value = '';
-          if (key === 'maxPrice' && maxPriceInput) maxPriceInput.value = '';
+          if (key === 'minPrice' && minPriceInput) {
+            minPriceInput.value = '';
+            pricePresetBtns.forEach(b => b.classList.remove('bg-[#F5EEDB]', 'text-[#0F2A43]', 'border-[#C8A96A]'));
+          }
+          if (key === 'maxPrice' && maxPriceInput) {
+            maxPriceInput.value = '';
+            pricePresetBtns.forEach(b => b.classList.remove('bg-[#F5EEDB]', 'text-[#0F2A43]', 'border-[#C8A96A]'));
+          }
           if (key === 'bedrooms' && bedsSelect) bedsSelect.value = '';
           if (key === 'bathrooms' && bathsSelect) bathsSelect.value = '';
           itemsToShow = 9;
@@ -819,8 +855,14 @@ function initPropertiesPage() {
     if (count > 0) {
       mobileFilterBadge.textContent = count;
       mobileFilterBadge.classList.remove('hidden');
+      if (mobileFiltersToggle) {
+        mobileFiltersToggle.classList.add('border-[#C8A96A]', 'text-[#C8A96A]');
+      }
     } else {
       mobileFilterBadge.classList.add('hidden');
+      if (mobileFiltersToggle) {
+        mobileFiltersToggle.classList.remove('border-[#C8A96A]', 'text-[#C8A96A]');
+      }
     }
   }
 
@@ -864,6 +906,15 @@ function initPropertiesPage() {
     });
   });
 
+  // Manual Price Input clearing active presets
+  [minPriceInput, maxPriceInput].forEach(inp => {
+    if (inp) {
+      inp.addEventListener('input', () => {
+        pricePresetBtns.forEach(b => b.classList.remove('bg-[#F5EEDB]', 'text-[#0F2A43]', 'border-[#C8A96A]'));
+      });
+    }
+  });
+
   // Event Listeners for filter inputs
   const allInputs = [keywordInput, locationSelect, typeSelect, minPriceInput, maxPriceInput, bedsSelect, bathsSelect, statusSelect, sortSelect];
   allInputs.forEach(input => {
@@ -883,6 +934,10 @@ function initPropertiesPage() {
 
   if (clearAllBtn) {
     clearAllBtn.addEventListener('click', clearAll);
+  }
+  const emptyStateResetBtn = document.getElementById('empty-state-reset-btn');
+  if (emptyStateResetBtn) {
+    emptyStateResetBtn.addEventListener('click', clearAll);
   }
 
   // View Mode Switcher Listeners
@@ -906,11 +961,6 @@ function initPropertiesPage() {
   quickCategoryPills.forEach(pill => {
     pill.addEventListener('click', (e) => {
       const selectedType = e.currentTarget.getAttribute('data-quick-type');
-      quickCategoryPills.forEach(p => {
-        p.className = "quick-category-pill px-3.5 py-1.5 rounded-full font-semibold bg-white hover:bg-[#F5EEDB] text-[#0F2A43] border border-[#E6E2DA] transition-all shrink-0";
-      });
-      e.currentTarget.className = "quick-category-pill active px-3.5 py-1.5 rounded-full font-semibold bg-[#0F2A43] text-white transition-all shrink-0";
-
       if (typeSelect) {
         typeSelect.value = selectedType || '';
       }
@@ -961,12 +1011,26 @@ function initPropertiesPage() {
     mobileSidebarApply.addEventListener('click', () => {
       render();
       closeMobileDrawer();
+      const gridEl = document.getElementById('properties-grid');
+      if (gridEl) {
+        window.scrollTo({ top: gridEl.offsetTop - 120, behavior: 'smooth' });
+      }
     });
   }
 
   if (sidebarOverlay) {
     sidebarOverlay.addEventListener('click', closeMobileDrawer);
   }
+
+  // Listen for external updates from Admin CMS (same window or storage event)
+  window.addEventListener('azure:properties-updated', () => {
+    render();
+  });
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'azure_custom_properties') {
+      render();
+    }
+  });
 
   // Initial render
   render();
@@ -1494,7 +1558,7 @@ function createPropertyCardHTML(property) {
             <div>
               <span class="text-[11px] uppercase tracking-wider text-[#64748B] font-semibold block">Asking Price</span>
               <span class="property-price-display font-serif text-lg font-bold text-[#0F2A43]" data-raw-price="${property.price}">
-                ${formatUSD(property.price)}
+                ${typeof formatCurrency === 'function' ? formatCurrency(property.price) : formatUSD(property.price)}
               </span>
             </div>
             <a href="property.html?id=${property.id}" class="text-xs font-semibold text-[#0F2A43] hover:text-[#C8A96A] flex items-center gap-1 group-hover:translate-x-1 transition-all">
@@ -1582,7 +1646,7 @@ function createPropertyListCardHTML(property) {
             <div>
               <span class="text-[10px] uppercase tracking-wider text-[#64748B] font-semibold block">Asking Price</span>
               <span class="property-price-display font-serif text-2xl font-bold text-[#0F2A43]" data-raw-price="${property.price}">
-                ${formatUSD(property.price)}
+                ${typeof formatCurrency === 'function' ? formatCurrency(property.price) : formatUSD(property.price)}
               </span>
             </div>
             <div class="flex items-center gap-2">
@@ -2187,7 +2251,8 @@ function updateComparisonUI() {
     if (countVal) countVal.textContent = activeComparison.length;
 
     if (thumbs) {
-      const selectedProps = PROPERTIES.filter(p => activeComparison.includes(p.id));
+      const allProps = (window.AzureDB && typeof window.AzureDB.getProperties === 'function') ? window.AzureDB.getProperties() : (typeof PROPERTIES !== 'undefined' ? PROPERTIES : []);
+      const selectedProps = allProps.filter(p => activeComparison.includes(p.id));
       thumbs.innerHTML = selectedProps.map(p => `
         <img src="${p.images[0]}" alt="${p.name}" class="w-8 h-8 rounded-full object-cover border-2 border-[#C8A96A]" />
       `).join('');
@@ -2219,7 +2284,8 @@ function openCompareModal() {
   const content = document.getElementById('compare-modal-content');
   if (!modal || !content) return;
 
-  const selected = PROPERTIES.filter(p => activeComparison.includes(p.id));
+  const allProps = (window.AzureDB && typeof window.AzureDB.getProperties === 'function') ? window.AzureDB.getProperties() : (typeof PROPERTIES !== 'undefined' ? PROPERTIES : []);
+  const selected = allProps.filter(p => activeComparison.includes(p.id));
   if (selected.length === 0) return;
 
   content.innerHTML = `

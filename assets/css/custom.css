@@ -626,6 +626,74 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   box-shadow: 0 12px 30px rgba(15, 42, 67, 0.1);
 }
 
+/* ==========================================================================
+   AUTHENTIC DEVICE MOCKUP HARDWARE STYLES (MacBook Pro & iPhone Pro)
+   ========================================================================== */
+.macbook-chassis {
+  background: linear-gradient(180deg, #2C3038 0%, #15181D 4%, #0D0F12 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.8);
+}
+
+.macbook-notch {
+  background: #000000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.macbook-screen-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.02) 100%);
+  pointer-events: none;
+}
+
+.macbook-deck {
+  background: linear-gradient(90deg, #475569 0%, #94A3B8 15%, #CBD5E1 50%, #94A3B8 85%, #475569 100%);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.45);
+}
+
+.iphone-pro-frame {
+  background: #14171C;
+  border: 3.5px solid #374151;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 25px 50px -12px rgba(0, 0, 0, 0.65),
+    0 10px 20px -5px rgba(15, 42, 67, 0.3);
+}
+
+.iphone-pro-frame::before {
+  content: '';
+  position: absolute;
+  top: 70px;
+  left: -5.5px;
+  width: 2.5px;
+  height: 22px;
+  background: #4B5563;
+  border-radius: 2px 0 0 2px;
+}
+
+.iphone-pro-frame::after {
+  content: '';
+  position: absolute;
+  top: 105px;
+  left: -5.5px;
+  width: 2.5px;
+  height: 44px;
+  background: #4B5563;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 54px 0 #4B5563;
+}
+
+.iphone-power-button {
+  position: absolute;
+  top: 110px;
+  right: -5.5px;
+  width: 2.5px;
+  height: 52px;
+  background: #4B5563;
+  border-radius: 0 2px 2px 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -638,3 +706,4 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     transform: none !important;
   }
 }
+
