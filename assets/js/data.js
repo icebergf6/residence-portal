@@ -789,17 +789,39 @@ const DEFAULT_PROPERTIES = [
   }
 ];
 
-// Clean formatted price for property 12 in master array
-DEFAULT_PROPERTIES[11].price = 195000;
+// BUG FIX: Typo — nilai $195,000 seharusnya $1,950,000 (10x lebih murah dari seharusnya)
+DEFAULT_PROPERTIES[11].price = 1950000;
 
-// Load properties from localStorage if available (Admin CMS persistence)
+// SECURITY: Whitelist field yang diizinkan untuk mencegah prototype pollution dari localStorage
+const PROPERTY_ALLOWED_FIELDS = [
+  'id','slug','name','location','type','status','price','bedrooms','bathrooms',
+  'landArea','buildingArea','yearBuilt','featured','tagline','images','floorPlan',
+  'description','amenities','coordinates'
+];
+
+function sanitizeProperty(p) {
+  if (!p || typeof p !== 'object' || Array.isArray(p)) return null;
+  const safe = {};
+  PROPERTY_ALLOWED_FIELDS.forEach(key => {
+    if (Object.prototype.hasOwnProperty.call(p, key)) {
+      safe[key] = p[key];
+    }
+  });
+  if (typeof safe.id !== 'string' || !safe.id) return null;
+  if (typeof safe.name !== 'string' || !safe.name) return null;
+  if (typeof safe.price !== 'number') safe.price = 0;
+  return safe;
+}
+
 function getStoredProperties() {
   try {
     const raw = localStorage.getItem('azure_custom_properties');
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        // SECURITY FIX: sanitize tiap properti sebelum digunakan
+        const sanitized = parsed.map(sanitizeProperty).filter(Boolean);
+        if (sanitized.length > 0) return sanitized;
       }
     }
   } catch (e) {

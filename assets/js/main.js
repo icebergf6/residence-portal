@@ -253,6 +253,9 @@ function initFAQAccordion() {
         }
       });
 
+      // BUG FIX: null-guard content sebelum akses .scrollHeight
+      if (!content) return;
+
       if (!isExpanded) {
         btn.setAttribute('aria-expanded', 'true');
         content.style.maxHeight = content.scrollHeight + 'px';
@@ -1129,13 +1132,17 @@ function initPropertyDetailPage() {
   setSpec('prop-year', property.yearBuilt);
   setSpec('prop-type', property.type);
 
-  // Description
+  // Description — BUG FIX: gunakan textContent (bukan innerHTML) untuk mencegah XSS
   const descEl = document.getElementById('prop-description');
   if (descEl) {
-    descEl.innerHTML = property.description
-      .split('\n\n')
-      .map(para => `<p class="mb-4 text-base text-[#1F2933]/85 leading-relaxed">${para}</p>`)
-      .join('');
+    descEl.innerHTML = '';
+    const paragraphs = (property.description || '').split('\n\n');
+    paragraphs.forEach(para => {
+      const p = document.createElement('p');
+      p.className = 'mb-4 text-base text-[#1F2933]/85 leading-relaxed';
+      p.textContent = para;
+      descEl.appendChild(p);
+    });
   }
 
   // Amenities
@@ -1220,6 +1227,9 @@ function initPropertyDetailPage() {
       }, 700);
     });
   }
+
+  // BUG FIX: init360TourViewer tidak pernah dipanggil — fitur virtual tour tidak aktif
+  init360TourViewer(property);
 
   // Inject Structured Data (JSON-LD)
   injectPropertyStructuredData(property);
@@ -1317,13 +1327,15 @@ function setupGallery(images, propertyName) {
   if (lightboxPrev) lightboxPrev.addEventListener('click', prevImage);
   if (lightboxNext) lightboxNext.addEventListener('click', nextImage);
 
-  // Keyboard navigation
+  // Keyboard navigation — BUG FIX: AbortController mencegah listener leak
+  // saat gallery di-init ulang (menghindari duplikasi handler)
+  const keyController = new AbortController();
   window.addEventListener('keydown', (e) => {
     if (!lightbox || !lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'Escape') { closeLightbox(); keyController.abort(); }
     if (e.key === 'ArrowLeft') prevImage();
     if (e.key === 'ArrowRight') nextImage();
-  });
+  }, { signal: keyController.signal });
 }
 
 function injectPropertyStructuredData(property) {
@@ -1461,8 +1473,11 @@ function initContactPage() {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         form.classList.add('hidden');
-        if (successBox) successBox.classList.remove('hidden');
-        window.scrollTo({ top: successBox.offsetTop - 120, behavior: 'smooth' });
+        if (successBox) {
+          successBox.classList.remove('hidden');
+          // BUG FIX: null-guard mencegah crash saat successBox tidak ada di halaman
+          window.scrollTo({ top: successBox.offsetTop - 120, behavior: 'smooth' });
+        }
       }, 850);
     });
   }
