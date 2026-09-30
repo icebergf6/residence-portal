@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Our Heritage & Team | Azure Bay Residences</title>
+  <meta name="description" content="Discover the vision, architectural philosophy, leadership team, and development milestones behind Azure Bay Residences." />
+  <link rel="canonical" href="https://azurebayresidences.com/about.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About Azure Bay Residences | Luxury Real Estate Developer" />
+  <meta property="og:description" content="Sculpting timeless coastal architecture and fiduciary security for international property investors." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0F2A43',
+              navyDark: '#091928',
+              navyLight: '#183C5E',
+              gold: '#C8A96A',
+              goldHover: '#B59555',
+              ivory: '#F7F5F0',
+              ivoryAlt: '#EFECE4',
+              charcoal: '#1F2933',
+              border: '#E6E2DA'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-[#F7F5F0] text-[#1F2933] antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- =========================================================================
+       GLOBAL HEADER / STICKY NAVBAR
+       ========================================================================= -->
+  <header id="main-header" data-transparent="false" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 bg-[#0F2A43] shadow-lg">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-white group">
+          <div class="w-9 h-9 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A] group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white leading-none">
+              Azure Bay
+            </span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#C8A96A] font-semibold mt-1">
+              Residences
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="index.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Home</a>
+          <a href="properties.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Properties</a>
+          <a href="about.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">About</a>
+          <a href="contact.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Contact</a>
+        </nav>
+
+        <!-- Currency Switcher, Favorites & CTA (Desktop) -->
+        <div class="hidden lg:flex items-center gap-4">
+          <!-- Currency Dropdown -->
+          <div class="relative">
+            <select id="currency-switcher" class="bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white/90 border border-white/20 rounded-lg text-xs py-1.5 px-2.5 focus:border-[#C8A96A] focus:outline-none cursor-pointer transition-colors" title="Select Display Currency" aria-label="Select Currency">
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="AED">AED (د.إ)</option>
+              <option value="SGD">SGD (S$)</option>
+              <option value="IDR">IDR (Rp)</option>
+            </select>
+          </div>
+
+          <!-- Favorites Trigger -->
+          <button id="header-favorites-btn" type="button" class="relative text-white/90 hover:text-[#C8A96A] transition-colors py-1 px-2.5 rounded-lg border border-white/20 hover:border-[#C8A96A]/50 bg-white/5 flex items-center gap-1.5 text-xs font-semibold" title="View Saved Residences" aria-label="View Saved Residences">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span>Saved</span>
+            <span id="favorites-count-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[10px] w-4 h-4 rounded-full inline-flex items-center justify-center">0</span>
+          </button>
+
+          <button type="button" data-open-modal="viewing-calendar" class="btn-gold !py-2 !px-4 !text-xs !tracking-wider uppercase">
+            Book a Viewing
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger Button & Quick Actions -->
+        <div class="flex items-center gap-2 md:hidden">
+          <select id="currency-switcher-mobile" class="bg-[#0F2A43]/80 text-white text-[11px] border border-white/20 rounded py-1 px-1.5" aria-label="Select Currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="AED">AED</option>
+            <option value="SGD">SGD</option>
+            <option value="IDR">IDR</option>
+          </select>
+          <button id="mobile-favorites-btn" type="button" class="p-1.5 text-white/90 hover:text-[#C8A96A] relative" aria-label="Saved residences">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span id="mobile-favorites-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[9px] w-3.5 h-3.5 rounded-full absolute -top-1 -right-1 flex items-center justify-center">0</span>
+          </button>
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Toggle navigation menu" class="p-2 text-white hover:text-[#C8A96A] focus:outline-none focus:ring-2 focus:ring-[#C8A96A] rounded-lg">
+            <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Slide-down Panel -->
+    <div id="mobile-nav" class="hidden md:hidden bg-[#0F2A43] border-b border-[#C8A96A]/20 shadow-2xl px-6 py-8 mt-3">
+      <nav class="flex flex-col gap-4">
+        <a href="index.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Home</a>
+        <a href="properties.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Properties</a>
+        <a href="about.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">About</a>
+        <a href="contact.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Contact</a>
+        <a href="admin.html" class="text-base uppercase tracking-wider text-[#C8A96A] hover:text-white py-2 border-b border-white/10 font-bold flex items-center justify-between">
+          <span>Admin CMS Portal</span>
+          <span class="text-[11px] bg-[#C8A96A] text-[#0F2A43] px-2 py-0.5 rounded font-sans font-bold">Manage</span>
+        </a>
+      </nav>
+      <div class="mt-6 pt-6 border-t border-white/10 flex flex-col gap-3">
+        <a href="contact.html" class="btn-gold w-full text-center">
+          Schedule Private Viewing
+        </a>
+        <a href="#" data-brand="whatsapp-link" class="btn-secondary w-full text-center text-xs">
+          Direct WhatsApp Concierge
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-24">
+    
+    <!-- Hero Banner -->
+    <section class="relative bg-[#0F2A43] text-white py-20 sm:py-28 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80" 
+          alt="Azure Bay Heritage & Development" 
+          class="w-full h-full object-cover opacity-20"
+          width="1920" 
+          height="600"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0F2A43] via-[#0F2A43]/90 to-[#0F2A43]/80"></div>
+      </div>
+
+      <div class="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <span class="section-eyebrow text-[#C8A96A]">Our Heritage & Vision</span>
+          <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
+            Sculpting Coastal Legacies
+          </h1>
+          <p class="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+            Founded on the principle that luxury is defined by harmony between human habitation and untouched natural sanctuaries, Azure Bay Residences develops world-class coastal enclaves designed to endure generations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Story Section -->
+    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <span class="section-eyebrow">The Origin</span>
+          <h2 class="section-title">An Unwavering Pursuit of Perfection</h2>
+          <div class="space-y-5 text-sm sm:text-base text-[#1F2933]/85 leading-relaxed">
+            <p>
+              Azure Bay Residences was established in 2018 by an international consortium of European master architects, structural engineers, and private wealth managers. Having observed how conventional resort developments sacrificed the delicate topography of coastal bluffs, our founders envisioned a restorative model: architecture that bends reverently to the coastline rather than flattening it.
+            </p>
+            <p>
+              Over the past eight years, we have brought over 120 custom residences from preliminary sketch to deeded title across our four distinguished enclaves. Every villa is individually engineered to maximize natural cross-ventilation, utilize locally sourced limestone and sustainable hardwoods, and offer foreign investors guaranteed title transparency with turnkey fiduciary management.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-6 pt-8 mt-8 border-t border-[#E6E2DA]">
+            <div>
+              <span class="block font-serif text-3xl font-bold text-[#0F2A43]">120+</span>
+              <span class="text-xs text-[#64748B] uppercase tracking-wider">Villas Delivered</span>
+            </div>
+            <div>
+              <span class="block font-serif text-3xl font-bold text-[#0F2A43]">$140M+</span>
+              <span class="text-xs text-[#64748B] uppercase tracking-wider">Portfolio Assets</span>
+            </div>
+            <div>
+              <span class="block font-serif text-3xl font-bold text-[#0F2A43]">100%</span>
+              <span class="text-xs text-[#64748B] uppercase tracking-wider">Freehold Security</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-[#E6E2DA]">
+            <img 
+              src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" 
+              alt="Architectural Blueprint Review at Azure Bay" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+              width="800" 
+              height="600"
+            />
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-[#0F2A43] text-white p-6 rounded-xl shadow-xl max-w-xs border border-[#C8A96A]/40 hidden sm:block">
+            <p class="font-serif italic text-sm text-[#C8A96A] mb-2">
+              "We do not simply build structures; we curate lifelong personal sanctuaries."
+            </p>
+            <span class="text-[11px] uppercase tracking-wider text-white/70 block">— Julian De La Torre, Founder</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Values Section -->
+    <section class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA]">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="section-eyebrow section-eyebrow-center justify-center">Guiding Principles</span>
+          <h2 class="section-title">Our Triad of Commitment</h2>
+          <p class="section-subtitle mx-auto">
+            The non-negotiable foundations that guide every land acquisition, blueprint, and client interaction.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div class="bg-white p-8 rounded-xl border border-[#E6E2DA] shadow-sm">
+            <div class="w-12 h-12 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-lg font-bold mb-6">
+              01
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Uncompromising Quality</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              We partner exclusively with certified master builders, sourcing grade-A Italian marble, thermal double-glazing, and commercial-grade structural steel resistant to coastal salinity.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl border border-[#E6E2DA] shadow-sm">
+            <div class="w-12 h-12 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-lg font-bold mb-6">
+              02
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Environmental Stewardship</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              We preserve at least 65% of native flora on every estate parcel, integrating microgrid solar arrays, graywater irrigation, and zero-runoff rainwater retention reservoirs.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl border border-[#E6E2DA] shadow-sm">
+            <div class="w-12 h-12 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-lg font-bold mb-6">
+              03
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Fiduciary Integrity</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              Full transparency with zero hidden brokerage markups. Direct government notary escrow accounts safeguard capital, while our legal division handles deed registration seamlessly.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Team Section -->
+    <section id="team" class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-eyebrow section-eyebrow-center justify-center">Executive Leadership</span>
+        <h2 class="section-title">The Curators Behind Azure Bay</h2>
+        <p class="section-subtitle mx-auto">
+          Seasoned developers, visionary architects, and international wealth advisors with decades of prime market expertise.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Member 1 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+            <img 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" 
+              alt="Julian De La Torre - CEO" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="300"
+              height="375"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Julian De La Torre</h3>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Founder & CEO</span>
+            <p class="text-xs text-[#64748B] leading-relaxed">
+              Over 22 years spearheading ultra-prime coastal developments across Southern Europe, the Caribbean, and Central America.
+            </p>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+            <img 
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=750&q=80" 
+              alt="Camille Moreau - Architectural Director" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="300"
+              height="375"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Camille Moreau</h3>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Principal Architect</span>
+            <p class="text-xs text-[#64748B] leading-relaxed">
+              Renowned French architect specializing in passive bioclimatic villa design, sustainable luxury materials, and cantilevered infinity structures.
+            </p>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+            <img 
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=750&q=80" 
+              alt="Tariq Al-Mansoor - Managing Director Investments" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="300"
+              height="375"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Tariq Al-Mansoor</h3>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Director, Investments</span>
+            <p class="text-xs text-[#64748B] leading-relaxed">
+              Advises sovereign wealth funds, family offices, and high-net-worth individuals on offshore property portfolios and tax-advantaged structures.
+            </p>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+            <img 
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=750&q=80" 
+              alt="Isabella Rossi - Concierge Director" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="300"
+              height="375"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Isabella Rossi</h3>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Head of Concierge</span>
+            <p class="text-xs text-[#64748B] leading-relaxed">
+              Directs client onboarding, bespoke viewings, and VIP discovery stays with impeccable attention to detail and discretion.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Milestones Timeline Section -->
+    <section id="milestones" class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA]">
+      <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16">
+          <span class="section-eyebrow section-eyebrow-center justify-center">Chronology</span>
+          <h2 class="section-title">Key Milestones of Excellence</h2>
+        </div>
+
+        <div class="space-y-8 relative before:absolute before:inset-0 before:left-5 sm:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-[#C8A96A]/40">
+          
+          <!-- Milestone 1 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div class="sm:w-1/2 sm:text-right pr-6">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2018</span>
+              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Foundation & Land Master-Planning</h3>
+              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Acquisition of the 450-acre Azure Bay Coastal Reserve and inaugural ecological master plan.</p>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+              ✓
+            </div>
+            <div class="sm:w-1/2 pl-6 hidden sm:block"></div>
+          </div>
+
+          <!-- Milestone 2 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div class="sm:w-1/2 pr-6 hidden sm:block"></div>
+            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+              ✓
+            </div>
+            <div class="sm:w-1/2 sm:text-left pl-6">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2020</span>
+              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Villa Phase 1 Completion</h3>
+              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Handover of the first 35 clifftop villas with 100% foreign title registrations completed in record time.</p>
+            </div>
+          </div>
+
+          <!-- Milestone 3 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div class="sm:w-1/2 sm:text-right pr-6">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2022</span>
+              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Azure Marina & Yacht Basin Launch</h3>
+              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Inauguration of the deepwater harbor capable of berthing vessels up to 120 feet alongside promenade dining.</p>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+              ✓
+            </div>
+            <div class="sm:w-1/2 pl-6 hidden sm:block"></div>
+          </div>
+
+          <!-- Milestone 4 -->
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div class="sm:w-1/2 pr-6 hidden sm:block"></div>
+            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+              ✓
+            </div>
+            <div class="sm:w-1/2 sm:text-left pl-6">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2024–2026</span>
+              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Sustainable Microgrid & Global Expansion</h3>
+              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Deployment of independent community solar power, private helipad terminal, and premier rental asset program.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners & Certifications Strip -->
+    <section class="py-12 bg-white border-b border-[#E6E2DA]">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-xs uppercase tracking-widest text-[#64748B] font-semibold mb-8">
+          Recognized by Leading Global Real Estate & Architecture Institutions
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-70">
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
+            LEED PLATINUM
+          </div>
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
+            FIABCI LUXURY
+          </div>
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
+            WORLD REALTY
+          </div>
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
+            ARCHITECTURAL '24
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Completed Projects Showcase -->
+    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="section-eyebrow">Proven Track Record</span>
+          <h2 class="section-title">Completed Developments</h2>
+          <p class="section-subtitle">
+            A testament to our design execution, construction integrity, and punctual milestone delivery.
+          </p>
+        </div>
+        <div class="mt-4 md:mt-0">
+          <a href="properties.html" class="btn-outline-navy text-xs">
+            Explore Active Listings
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div class="rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm bg-white">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Solis Point Sanctuaries" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <span class="text-[11px] uppercase font-semibold text-[#C8A96A] tracking-wider">Completed 2024 • 100% Sold</span>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mt-1">Solis Point Sanctuaries</h3>
+            <p class="text-xs text-[#64748B] mt-2">18 oceanfront clifftop villas featuring cantilevered glass pools and private beach elevator.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm bg-white">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=800&q=80" alt="The Marina Pier Towers" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <span class="text-[11px] uppercase font-semibold text-[#C8A96A] tracking-wider">Completed 2023 • 100% Sold</span>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mt-1">The Marina Pier Towers</h3>
+            <p class="text-xs text-[#64748B] mt-2">32 bespoke waterfront residences overlooking the yacht basin with private berths.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm bg-white">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Palma Garden Courts" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <span class="text-[11px] uppercase font-semibold text-[#C8A96A] tracking-wider">Completed 2023 • 100% Sold</span>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mt-1">Palma Garden Courts</h3>
+            <p class="text-xs text-[#64748B] mt-2">24 pedestrian courtyard townhomes nestled along private shaded citrus boulevards.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-[#0F2A43] text-white py-20 text-center border-t border-[#C8A96A]/20">
+      <div class="max-w-[700px] mx-auto px-4">
+        <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Private Inquiries</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4">Partner with Azure Bay</h2>
+        <p class="text-sm sm:text-base text-white/80 mb-8 leading-relaxed">
+          Connect directly with our executive leadership team to discuss custom commissions, private land holdings, or upcoming off-market releases.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="contact.html" class="btn-gold !py-3.5 !px-8 text-xs uppercase tracking-wider">
+            Contact Executive Office
+          </a>
+          <a href="properties.html" class="btn-secondary !py-3.5 !px-8 text-xs uppercase tracking-wider">
+            View Current Inventory
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="bg-[#091928] text-white pt-16 pb-12 border-t border-white/10">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A]">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span class="font-serif text-xl font-bold tracking-tight text-white" data-brand="name">Azure Bay Residences</span>
+          </div>
+          <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-6 max-w-sm">
+            Curator of exceptional coastal real estate, offering bespoke villas, marina residences, and strategic international land investments in premier sanctuaries.
+          </p>
+          <p class="text-[11px] text-white/50 leading-relaxed" data-brand="license">
+            Licensed Luxury Brokerage & Master Developer #RE-98442-AZ
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Portfolio</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="properties.html?type=Villa" class="hover:text-[#C8A96A] transition-colors">Villas & Sanctuaries</a></li>
+            <li><a href="properties.html?type=Apartment" class="hover:text-[#C8A96A] transition-colors">Marina Penthouses</a></li>
+            <li><a href="properties.html?type=Townhouse" class="hover:text-[#C8A96A] transition-colors">Garden Townhomes</a></li>
+            <li><a href="properties.html?type=Land" class="hover:text-[#C8A96A] transition-colors">Estate Land Parcels</a></li>
+            <li><a href="properties.html" class="hover:text-[#C8A96A] transition-colors">Full Inventory (21+ Master Collection)</a></li>
+            <li><a href="admin.html" class="text-[#C8A96A] font-semibold hover:underline flex items-center gap-1">Executive CMS Portal &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Company</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="about.html" class="hover:text-[#C8A96A] transition-colors">Our Philosophy</a></li>
+            <li><a href="about.html#team" class="hover:text-[#C8A96A] transition-colors">Executive Leadership</a></li>
+            <li><a href="about.html#milestones" class="hover:text-[#C8A96A] transition-colors">Company Milestones</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Sales Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Investor Concierge</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Private Office</h4>
+          <address class="not-italic space-y-2.5 text-xs text-white/80">
+            <p data-brand="address">1400 Ocean Boulevard, Suite 500, Azure Bay Coastal Reserve</p>
+            <p>
+              <a href="tel:+18004289988" data-brand="phone-link" class="hover:text-[#C8A96A] transition-colors flex items-center gap-1.5">
+                <span data-brand="phone">+1 (800) 428-9988</span>
+              </a>
+            </p>
+            <p>
+              <a href="mailto:inquiries@azurebayresidences.com" data-brand="email-link" class="hover:text-[#C8A96A] transition-colors">
+                <span data-brand="email">inquiries@azurebayresidences.com</span>
+              </a>
+            </p>
+            <p class="text-[11px] text-white/50 pt-1" data-brand="officeHours">
+              Mon – Sat: 9:00 AM – 7:00 PM EST
+            </p>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-white/50">
+        <div>
+          &copy; <span data-brand="year">2026</span> <span data-brand="name">Azure Bay Residences</span>. All rights reserved. Equal Housing Opportunity.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Terms of Representation</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

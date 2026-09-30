@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Residence Details | Azure Bay Residences</title>
+  <meta name="description" content="View specifications, architectural floor plans, high-resolution imagery, and private inquiry details for this luxury coastal residence." />
+  <link rel="canonical" href="https://azurebayresidences.com/property.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Exclusive Residence Details | Azure Bay Residences" />
+  <meta property="og:description" content="Architectural floor plans, high-resolution imagery, and private inquiry details for this luxury residence." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0F2A43',
+              navyDark: '#091928',
+              navyLight: '#183C5E',
+              gold: '#C8A96A',
+              goldHover: '#B59555',
+              ivory: '#F7F5F0',
+              ivoryAlt: '#EFECE4',
+              charcoal: '#1F2933',
+              border: '#E6E2DA'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-[#F7F5F0] text-[#1F2933] antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- =========================================================================
+       GLOBAL HEADER / STICKY NAVBAR
+       ========================================================================= -->
+  <header id="main-header" data-transparent="false" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 bg-[#0F2A43] shadow-lg">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-white group">
+          <div class="w-9 h-9 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A] group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white leading-none">
+              Azure Bay
+            </span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#C8A96A] font-semibold mt-1">
+              Residences
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-7">
+          <a href="index.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Home</a>
+          <a href="properties.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Properties</a>
+          <a href="about.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">About</a>
+          <a href="contact.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Contact</a>
+        </nav>
+
+        <!-- Currency Switcher, Favorites & CTA -->
+        <div class="hidden lg:flex items-center gap-4">
+          <!-- Currency Dropdown -->
+          <div class="relative">
+            <select id="currency-switcher" class="bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white/90 border border-white/20 rounded-lg text-xs py-1.5 px-2.5 focus:border-[#C8A96A] focus:outline-none cursor-pointer transition-colors" title="Select Display Currency" aria-label="Select Currency">
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="AED">AED (د.إ)</option>
+              <option value="SGD">SGD (S$)</option>
+              <option value="IDR">IDR (Rp)</option>
+            </select>
+          </div>
+
+          <!-- Favorites Trigger -->
+          <button id="header-favorites-btn" type="button" class="relative text-white/90 hover:text-[#C8A96A] transition-colors py-1 px-2.5 rounded-lg border border-white/20 hover:border-[#C8A96A]/50 bg-white/5 flex items-center gap-1.5 text-xs font-semibold" title="View Saved Residences" aria-label="View Saved Residences">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span>Saved</span>
+            <span id="favorites-count-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[10px] w-4 h-4 rounded-full inline-flex items-center justify-center">0</span>
+          </button>
+
+          <button type="button" data-open-modal="viewing-calendar" class="btn-gold !py-2 !px-4 !text-xs !tracking-wider uppercase">
+            Book a Viewing
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger Button & Quick Actions -->
+        <div class="flex items-center gap-2 md:hidden">
+          <select id="currency-switcher-mobile" class="bg-[#0F2A43]/80 text-white text-[11px] border border-white/20 rounded py-1 px-1.5" aria-label="Select Currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="AED">AED</option>
+            <option value="SGD">SGD</option>
+            <option value="IDR">IDR</option>
+          </select>
+          <button id="mobile-favorites-btn" type="button" class="p-1.5 text-white/90 hover:text-[#C8A96A] relative" aria-label="Saved residences">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span id="mobile-favorites-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[9px] w-3.5 h-3.5 rounded-full absolute -top-1 -right-1 flex items-center justify-center">0</span>
+          </button>
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Toggle navigation menu" class="p-2 text-white hover:text-[#C8A96A] focus:outline-none focus:ring-2 focus:ring-[#C8A96A] rounded-lg">
+            <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Slide-down Panel -->
+    <div id="mobile-nav" class="hidden md:hidden bg-[#0F2A43] border-b border-[#C8A96A]/20 shadow-2xl px-6 py-8 mt-3">
+      <nav class="flex flex-col gap-4">
+        <a href="index.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Home</a>
+        <a href="properties.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Properties</a>
+        <a href="about.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">About</a>
+        <a href="contact.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Contact</a>
+        <a href="admin.html" class="text-base uppercase tracking-wider text-[#C8A96A] hover:text-white py-2 border-b border-white/10 font-bold flex items-center justify-between">
+          <span>Admin CMS Portal</span>
+          <span class="text-[11px] bg-[#C8A96A] text-[#0F2A43] px-2 py-0.5 rounded font-sans font-bold">Manage</span>
+        </a>
+      </nav>
+      <div class="mt-6 pt-6 border-t border-white/10 flex flex-col gap-3">
+        <a href="contact.html" class="btn-gold w-full text-center">
+          Schedule Private Viewing
+        </a>
+        <a href="#" data-brand="whatsapp-link" class="btn-secondary w-full text-center text-xs">
+          Direct WhatsApp Concierge
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-28 pb-20">
+    
+    <!-- Property Not Found State -->
+    <section id="property-not-found" class="hidden max-w-[700px] mx-auto px-4 py-20 text-center">
+      <div class="w-16 h-16 rounded-full bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      </div>
+      <h1 class="font-serif text-3xl font-bold text-[#0F2A43] mb-3">Residence Not Found</h1>
+      <p class="text-sm text-[#64748B] mb-8 leading-relaxed">
+        The property you are looking for may have been recently reserved, archived, or the reference ID in the address is incorrect.
+      </p>
+      <a href="properties.html" class="btn-gold uppercase tracking-wider text-xs !py-3 !px-6">
+        Browse Available Portfolio
+      </a>
+    </section>
+
+    <!-- Main Property Detail Container -->
+    <div id="property-detail-container" class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex items-center gap-2 text-xs text-[#64748B] mb-6" aria-label="Breadcrumb">
+        <a href="index.html" class="hover:text-[#0F2A43]">Home</a>
+        <span>/</span>
+        <a href="properties.html" class="hover:text-[#0F2A43]">Properties</a>
+        <span>/</span>
+        <span id="breadcrumb-prop-title" class="text-[#0F2A43] font-semibold truncate max-w-xs">Loading...</span>
+      </nav>
+
+      <!-- Title, Location & Price Row -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#E6E2DA] mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-2.5">
+            <span id="prop-status" class="badge-status badge-available">Available</span>
+            <span class="text-xs text-[#64748B] flex items-center gap-1 font-medium">
+              <svg class="w-3.5 h-3.5 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span id="prop-location">Location</span>
+            </span>
+          </div>
+          <h1 id="prop-title" class="font-serif text-3xl sm:text-5xl font-bold text-[#0F2A43] tracking-tight mb-2">
+            Property Title
+          </h1>
+          <p id="prop-tagline" class="text-sm sm:text-base text-[#64748B] font-light">
+            Tagline
+          </p>
+        </div>
+
+        <div class="lg:text-right shrink-0 flex flex-col lg:items-end gap-3">
+          <div>
+            <span class="block text-xs uppercase tracking-wider text-[#64748B] font-semibold mb-1">Offered At</span>
+            <span id="prop-price" class="font-serif text-3xl sm:text-4xl font-bold text-[#0F2A43]">
+              $0,000,000
+            </span>
+            <span class="block text-[11px] text-[#64748B] mt-0.5">Freehold Title Eligible &bull; No Transfer Friction</span>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex items-center gap-2 pt-1">
+            <button id="prop-detail-fav-btn" type="button" class="btn-fav px-3 py-1.5 rounded-lg border border-[#E6E2DA] hover:border-[#C8A96A] bg-white text-xs font-semibold text-[#0F2A43] flex items-center gap-1.5 transition-all shadow-sm">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              <span id="prop-detail-fav-text">Save to Wishlist</span>
+            </button>
+            <button id="prop-detail-compare-btn" type="button" class="px-3 py-1.5 rounded-lg border border-[#E6E2DA] hover:border-[#C8A96A] bg-white text-xs font-semibold text-[#0F2A43] flex items-center gap-1.5 transition-all shadow-sm">
+              <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              <span>Compare</span>
+            </button>
+            <button id="prop-detail-share-btn" type="button" class="px-3 py-1.5 rounded-lg border border-[#E6E2DA] hover:border-[#C8A96A] bg-white text-xs font-semibold text-[#0F2A43] flex items-center gap-1.5 transition-all shadow-sm" title="Share via WhatsApp">
+              <svg class="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              <span>Share</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE GALLERY -->
+      <section class="mb-12">
+        <!-- Main Large Image Container -->
+        <div class="relative aspect-[16/9] md:aspect-[21/10] rounded-2xl overflow-hidden shadow-xl bg-[#E2E8F0] cursor-pointer group">
+          <img id="gallery-main-img" src="" alt="Property Main Photograph" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-6 text-white">
+            <span class="text-xs bg-[#0F2A43]/80 px-3 py-1.5 rounded backdrop-blur-md flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+              Click to open fullscreen gallery
+            </span>
+          </div>
+        </div>
+
+        <!-- Thumbnails Strip -->
+        <div id="gallery-thumbnails" class="grid grid-cols-4 sm:grid-cols-6 gap-3 mt-4">
+          <!-- Dynamically populated thumbnail buttons -->
+        </div>
+      </section>
+
+      <!-- TWO COLUMN LAYOUT: Specs & Details (Left) + Sticky Inquiry Card (Right) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- LEFT COLUMN: Key Specs, Description, Amenities, Floor Plan, Map -->
+        <div class="lg:col-span-8 space-y-10">
+          
+          <!-- Key Specs Grid -->
+          <div class="bg-white rounded-xl p-6 border border-[#E6E2DA] shadow-sm">
+            <h2 class="text-xs uppercase font-semibold tracking-wider text-[#64748B] mb-4">Architectural Specifications</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+              
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                </div>
+                <div>
+                  <span class="block text-[11px] text-[#64748B] uppercase">Type</span>
+                  <span id="prop-type" class="text-sm font-bold text-[#0F2A43]">-</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <div>
+                  <span class="block text-[11px] text-[#64748B] uppercase">Bedrooms</span>
+                  <span id="prop-beds" class="text-sm font-bold text-[#0F2A43]">-</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <div>
+                  <span class="block text-[11px] text-[#64748B] uppercase">Bathrooms</span>
+                  <span id="prop-baths" class="text-sm font-bold text-[#0F2A43]">-</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <div>
+                  <span class="block text-[11px] text-[#64748B] uppercase">Interior Area</span>
+                  <span id="prop-build" class="text-sm font-bold text-[#0F2A43]">-</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                </div>
+                <div>
+                  <span class="block text-[11px] text-[#64748B] uppercase">Plot / Land</span>
+                  <span id="prop-land" class="text-sm font-bold text-[#0F2A43]">-</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                  <span class="block text-[11px] text-[#64748B] uppercase">Year Delivered</span>
+                  <span id="prop-year" class="text-sm font-bold text-[#0F2A43]">-</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Description Section -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm">
+            <h2 class="font-serif text-2xl font-bold text-[#0F2A43] mb-6">About The Residence</h2>
+            <div id="prop-description" class="prose max-w-none text-[#1F2933]/85 text-base leading-relaxed">
+              <!-- Dynamically populated paragraphs -->
+            </div>
+          </div>
+
+          <!-- Amenities Section -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm">
+            <h2 class="font-serif text-2xl font-bold text-[#0F2A43] mb-6">Curated Amenities & Finishes</h2>
+            <div id="prop-amenities-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Dynamically populated with gold icons -->
+            </div>
+          </div>
+
+          <!-- Architectural Floor Plan Section -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-serif text-2xl font-bold text-[#0F2A43]">Architectural Blueprint</h2>
+              <button type="button" data-open-modal="brochure-download" class="text-xs text-[#C8A96A] hover:underline font-semibold flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Download High-Res PDF</span>
+              </button>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#E6E2DA] bg-[#F7F5F0]">
+              <img id="prop-floorplan-img" src="" alt="Architectural Floor Plan" class="w-full h-auto object-cover max-h-[500px]" loading="lazy" />
+            </div>
+            <p class="text-xs text-[#64748B] mt-4 italic">
+              *Full scale architectural CAD blueprints and structural engineering packages available upon private NDA execution.
+            </p>
+          </div>
+
+          <!-- NEW: 360° VIRTUAL PANORAMIC TOUR SECTION -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm" id="virtual-tour-section">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] block mb-1">Immersive Exploration</span>
+                <h2 class="font-serif text-2xl font-bold text-[#0F2A43]">360° Virtual Walkthrough</h2>
+              </div>
+              <!-- Room View Switcher Pills -->
+              <div class="flex items-center gap-1.5 bg-[#F7F5F0] p-1 rounded-xl border border-[#E6E2DA] text-xs">
+                <button type="button" class="tour-room-btn px-3 py-1.5 rounded-lg font-semibold bg-[#0F2A43] text-white shadow-sm transition-all" data-tour-room="terrace">
+                  Infinity Terrace
+                </button>
+                <button type="button" class="tour-room-btn px-3 py-1.5 rounded-lg font-semibold text-[#64748B] hover:text-[#0F2A43] transition-all" data-tour-room="living">
+                  Living Pavilion
+                </button>
+                <button type="button" class="tour-room-btn px-3 py-1.5 rounded-lg font-semibold text-[#64748B] hover:text-[#0F2A43] transition-all" data-tour-room="suite">
+                  Master Suite
+                </button>
+              </div>
+            </div>
+
+            <!-- 360 Interactive Viewport Container -->
+            <div class="relative aspect-[16/9] rounded-xl overflow-hidden border border-[#E6E2DA] bg-[#091928] shadow-inner select-none cursor-grab active:cursor-grabbing panorama-viewport" id="tour-viewport" tabindex="0" aria-label="Interactive 360 panoramic viewer. Click and drag to look around.">
+              <img id="tour-panorama-img" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2400&q=85" alt="360 Panoramic View" class="panorama-canvas" />
+              
+              <!-- Compass and Orientation Overlay -->
+              <div class="absolute top-4 left-4 z-20 bg-[#0F2A43]/85 text-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-[11px] font-mono flex items-center gap-2 border border-white/15">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>PANORAMA 360° &bull; PACIFIC VIEW</span>
+              </div>
+
+              <!-- Interactive Hotspot Pins inside the 360 scene -->
+              <div class="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20 group">
+                <div class="w-8 h-8 rounded-full bg-[#C8A96A] text-[#0F2A43] flex items-center justify-center font-bold text-xs shadow-lg animate-bounce cursor-pointer">
+                  +
+                </div>
+                <div class="hidden group-hover:block absolute bottom-10 left-1/2 -translate-x-1/2 bg-[#0F2A43] text-white text-[11px] font-medium py-1 px-2.5 rounded shadow-xl whitespace-nowrap border border-[#C8A96A]">
+                  Heated Salt-water Infinity Edge (22m)
+                </div>
+              </div>
+
+              <div class="absolute top-1/3 right-1/4 transform -translate-x-1/2 -translate-y-1/2 z-20 group">
+                <div class="w-8 h-8 rounded-full bg-[#C8A96A] text-[#0F2A43] flex items-center justify-center font-bold text-xs shadow-lg cursor-pointer">
+                  +
+                </div>
+                <div class="hidden group-hover:block absolute bottom-10 left-1/2 -translate-x-1/2 bg-[#0F2A43] text-white text-[11px] font-medium py-1 px-2.5 rounded shadow-xl whitespace-nowrap border border-[#C8A96A]">
+                  Motorized Frameless Glass Curtain
+                </div>
+              </div>
+
+              <!-- Viewport Controls (Bottom Right) -->
+              <div class="absolute bottom-4 right-4 z-20 flex items-center gap-2">
+                <button type="button" id="tour-zoom-in" class="w-8 h-8 rounded-lg bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors" title="Zoom in">
+                  +
+                </button>
+                <button type="button" id="tour-zoom-out" class="w-8 h-8 rounded-lg bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors" title="Zoom out">
+                  &minus;
+                </button>
+                <button type="button" id="tour-reset" class="px-2.5 py-1 rounded-lg bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white text-xs backdrop-blur-md border border-white/20 transition-colors" title="Reset view">
+                  Reset
+                </button>
+              </div>
+
+              <!-- Interactive Drag Instruction Toast -->
+              <div class="absolute bottom-4 left-4 z-20 bg-black/60 backdrop-blur-md text-white text-[11px] py-1 px-3 rounded-full pointer-events-none hidden sm:flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
+                <span>Click & drag horizontally to rotate 360°</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Embedded Location Map Section -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm">
+            <h2 class="font-serif text-2xl font-bold text-[#0F2A43] mb-6">Geographic Setting</h2>
+            <div class="rounded-xl overflow-hidden border border-[#E6E2DA] aspect-[16/9] relative">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114964.38943899479!2d-80.24421600000001!3d25.761681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sMiami%2C%20FL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Property Surroundings Map"
+                class="w-full h-full grayscale"
+              ></iframe>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: STICKY INQUIRY CARD -->
+        <div class="lg:col-span-4 sticky top-24">
+          <div class="bg-white rounded-2xl p-6 sm:p-7 border border-[#E6E2DA] shadow-xl">
+            <div class="text-center pb-5 border-b border-[#E6E2DA] mb-6">
+              <span class="text-xs uppercase tracking-wider text-[#C8A96A] font-semibold block mb-1">Direct Developer Inquiry</span>
+              <h3 class="font-serif text-xl font-bold text-[#0F2A43]">Schedule Private Consultation</h3>
+              <p class="text-xs text-[#64748B] mt-1">Receive full investment prospectus and floor plans.</p>
+            </div>
+
+            <!-- Primary CTA Actions -->
+            <button type="button" data-open-modal="viewing-calendar" class="w-full py-3 px-4 mb-2.5 btn-gold text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <span>Book a Private Viewing</span>
+            </button>
+
+            <button type="button" data-open-modal="brochure-download" class="w-full py-2.5 px-4 mb-3 btn-outline-navy !text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer">
+              <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>Download Floor Plans & Brochure</span>
+            </button>
+
+            <!-- WhatsApp Direct Action -->
+            <a id="prop-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 mb-4 bg-[#25D366] hover:bg-[#20ba59] text-white font-semibold rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              Chat on WhatsApp Immediately
+            </a>
+
+            <div class="relative flex py-2 items-center">
+              <div class="flex-grow border-t border-[#E6E2DA]"></div>
+              <span class="flex-shrink mx-3 text-[11px] text-[#64748B] uppercase tracking-wider font-semibold">Or Inquire by Form</span>
+              <div class="flex-grow border-t border-[#E6E2DA]"></div>
+            </div>
+
+            <!-- Mini Inquiry Form -->
+            <form id="property-inquiry-form" class="space-y-4 mt-2">
+              <input type="hidden" id="inquiry-property-name" name="propertyName" value="" />
+
+              <div>
+                <label for="inquiry-name" class="block text-xs font-semibold text-[#64748B] mb-1">Your Full Name</label>
+                <input type="text" id="inquiry-name" required placeholder="e.g. Lord Harrington" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2.5 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white" />
+              </div>
+
+              <div>
+                <label for="inquiry-email" class="block text-xs font-semibold text-[#64748B] mb-1">Email Address</label>
+                <input type="email" id="inquiry-email" required placeholder="name@domain.com" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2.5 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white" />
+              </div>
+
+              <div>
+                <label for="inquiry-phone" class="block text-xs font-semibold text-[#64748B] mb-1">Phone / WhatsApp</label>
+                <input type="tel" id="inquiry-phone" required placeholder="+1 (555) 000-0000" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2.5 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white" />
+              </div>
+
+              <div>
+                <label for="inquiry-message" class="block text-xs font-semibold text-[#64748B] mb-1">Message</label>
+                <textarea id="inquiry-message" rows="3" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white"></textarea>
+              </div>
+
+              <button type="submit" class="btn-gold w-full !py-3 text-xs uppercase tracking-wider font-semibold">
+                Submit Confidential Inquiry
+              </button>
+            </form>
+
+            <!-- Success Box (Hidden initially) -->
+            <div id="inquiry-form-success" class="hidden p-5 bg-[#F5EEDB] border border-[#C8A96A] rounded-xl text-center">
+              <div class="w-10 h-10 rounded-full bg-[#C8A96A] text-[#0F2A43] flex items-center justify-center mx-auto mb-2 font-bold">✓</div>
+              <h4 class="font-serif font-bold text-sm text-[#0F2A43] mb-1">Inquiry Transmitted</h4>
+              <p class="text-xs text-[#0F2A43]/80">Our senior property partner will contact you directly within 2 hours with the full architectural dossier.</p>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="pt-5 mt-5 border-t border-[#E6E2DA] flex items-center justify-center gap-4 text-[11px] text-[#64748B]">
+              <span class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Strict Confidentiality
+              </span>
+              <span>•</span>
+              <span>Direct Developer Terms</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIMILAR PROPERTIES SECTION -->
+      <section class="mt-20 pt-16 border-t border-[#E6E2DA]">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <span class="section-eyebrow">Recommendations</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#0F2A43]">Similar Residences You May Admire</h2>
+          </div>
+          <a href="properties.html" class="btn-outline-navy text-xs hidden sm:inline-flex">
+            All Listings
+          </a>
+        </div>
+        <div id="similar-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Dynamically populated 3 cards -->
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       FULLSCREEN LIGHTBOX MODAL
+       ========================================================================= -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox Gallery">
+    <!-- Close button -->
+    <button id="lightbox-close" type="button" aria-label="Close Lightbox (Esc)" class="absolute top-6 right-6 z-50 text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all">
+      <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <!-- Prev button -->
+    <button id="lightbox-prev" type="button" aria-label="Previous Photo" class="absolute left-4 sm:left-8 z-50 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all">
+      <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+
+    <!-- Next button -->
+    <button id="lightbox-next" type="button" aria-label="Next Photo" class="absolute right-4 sm:right-8 z-50 text-white/80 hover:text-white p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-all">
+      <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <!-- Image Viewport -->
+    <div class="max-w-[90vw] max-h-[85vh] relative flex flex-col items-center">
+      <img id="lightbox-img" src="" alt="Expanded Property View" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" />
+      <div id="lightbox-counter" class="text-white/80 text-xs mt-3 tracking-widest uppercase font-semibold">
+        1 / 1
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="bg-[#091928] text-white pt-16 pb-12 border-t border-white/10">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A]">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span class="font-serif text-xl font-bold tracking-tight text-white" data-brand="name">Azure Bay Residences</span>
+          </div>
+          <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-6 max-w-sm">
+            Curator of exceptional coastal real estate, offering bespoke villas, marina residences, and strategic international land investments in premier sanctuaries.
+          </p>
+          <p class="text-[11px] text-white/50 leading-relaxed" data-brand="license">
+            Licensed Luxury Brokerage & Master Developer #RE-98442-AZ
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Portfolio</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="properties.html?type=Villa" class="hover:text-[#C8A96A] transition-colors">Villas & Sanctuaries</a></li>
+            <li><a href="properties.html?type=Apartment" class="hover:text-[#C8A96A] transition-colors">Marina Penthouses</a></li>
+            <li><a href="properties.html?type=Townhouse" class="hover:text-[#C8A96A] transition-colors">Garden Townhomes</a></li>
+            <li><a href="properties.html?type=Land" class="hover:text-[#C8A96A] transition-colors">Estate Land Parcels</a></li>
+            <li><a href="properties.html" class="hover:text-[#C8A96A] transition-colors">Full Inventory (21+ Master Collection)</a></li>
+            <li><a href="admin.html" class="text-[#C8A96A] font-semibold hover:underline flex items-center gap-1">Executive CMS Portal &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Company</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="about.html" class="hover:text-[#C8A96A] transition-colors">Our Philosophy</a></li>
+            <li><a href="about.html#team" class="hover:text-[#C8A96A] transition-colors">Executive Leadership</a></li>
+            <li><a href="about.html#milestones" class="hover:text-[#C8A96A] transition-colors">Company Milestones</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Sales Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Investor Concierge</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Private Office</h4>
+          <address class="not-italic space-y-2.5 text-xs text-white/80">
+            <p data-brand="address">1400 Ocean Boulevard, Suite 500, Azure Bay Coastal Reserve</p>
+            <p>
+              <a href="tel:+18004289988" data-brand="phone-link" class="hover:text-[#C8A96A] transition-colors flex items-center gap-1.5">
+                <span data-brand="phone">+1 (800) 428-9988</span>
+              </a>
+            </p>
+            <p>
+              <a href="mailto:inquiries@azurebayresidences.com" data-brand="email-link" class="hover:text-[#C8A96A] transition-colors">
+                <span data-brand="email">inquiries@azurebayresidences.com</span>
+              </a>
+            </p>
+            <p class="text-[11px] text-white/50 pt-1" data-brand="officeHours">
+              Mon – Sat: 9:00 AM – 7:00 PM EST
+            </p>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-white/50">
+        <div>
+          &copy; <span data-brand="year">2026</span> <span data-brand="name">Azure Bay Residences</span>. All rights reserved. Equal Housing Opportunity.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Terms of Representation</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

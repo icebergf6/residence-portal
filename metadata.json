@@ -1,0 +1,7 @@
+{
+  "name": "Azure Bay Residences",
+  "description": "Azure Bay Residences - Luxury villa and property developer offering prime real estate, private viewings, and bespoke international investment opportunities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

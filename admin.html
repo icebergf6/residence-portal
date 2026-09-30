@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Management Portal | Azure Bay Residences</title>
+  <meta name="description" content="Azure Bay Residences Executive Real Estate CMS & Property Management Portal.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C8A96A'><path d='M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z'/></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body class="bg-[#0B1E30] text-[#1F2933] min-h-screen flex flex-col font-sans antialiased selection:bg-[#C8A96A] selection:text-[#0F2A43]">
+
+  <!-- Top Admin Bar -->
+  <header class="bg-[#0F2A43] border-b border-[#C8A96A]/30 sticky top-0 z-40 backdrop-blur-md shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[72px] py-2 flex items-center justify-between">
+      
+      <!-- Brand & Admin Indicator -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#C8A96A] to-[#a38343] flex items-center justify-center text-[#0F2A43] font-serif font-black text-lg sm:text-xl shadow-md group-hover:scale-105 transition-transform">
+            AB
+          </div>
+          <div>
+            <div class="font-serif text-base sm:text-lg font-bold tracking-wider text-white flex items-center gap-1.5 sm:gap-2">
+              <span>Azure Bay</span>
+              <span class="text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-widest bg-[#C8A96A] text-[#0F2A43] px-1.5 sm:px-2 py-0.5 rounded">CMS</span>
+            </div>
+            <p class="hidden sm:block text-[11px] text-white/60 tracking-wider">Executive Real Estate Management System</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="properties.html" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
+          <span>View Live Catalog</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+
+        <button type="button" id="admin-add-prop-btn" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+          <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          <span>Add Residence</span>
+        </button>
+
+        <a href="index.html" class="p-2 text-white/70 hover:text-white rounded-lg hover:bg-white/5" title="Exit to Website">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Management Body -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    
+    <!-- Top KPI Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Total Portfolio Units</span>
+          <h3 id="stat-total-props" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">21</h3>
+          <p class="text-[11px] text-emerald-600 font-semibold mt-1">Full Master Catalog</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center">
+          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Portfolio Value</span>
+          <h3 id="stat-total-value" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">$54.2M</h3>
+          <p class="text-[11px] text-[#64748B] mt-1">Deeded Assets Valuation</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Active Available</span>
+          <h3 id="stat-active-available" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">16</h3>
+          <p class="text-[11px] text-emerald-600 font-semibold mt-1">Ready for Acquisition</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Reserved / Sold</span>
+          <h3 id="stat-reserved-sold" class="font-serif text-3xl font-bold text-[#0F2A43] mt-1">5</h3>
+          <p class="text-[11px] text-amber-600 font-semibold mt-1">Contracts Under Closing</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management Controls Bar -->
+    <div class="bg-white rounded-2xl p-5 border border-[#E6E2DA] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <!-- Search & Filters -->
+      <div class="flex flex-wrap items-center gap-3 flex-1">
+        <div class="relative min-w-[240px] flex-1 sm:flex-initial">
+          <input type="text" id="admin-search-input" placeholder="Search by name, location, specs..." class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl pl-9 pr-4 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:outline-none" />
+          <svg class="w-4 h-4 text-[#64748B] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+
+        <select id="admin-filter-status" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+          <option value="">All Statuses</option>
+          <option value="Available">Available Only</option>
+          <option value="Reserved">Reserved</option>
+          <option value="Sold">Sold</option>
+        </select>
+
+        <select id="admin-filter-type" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-xl px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+          <option value="">All Property Types</option>
+          <option value="Villa">Villa / Compound</option>
+          <option value="Apartment">Apartment & Penthouse</option>
+          <option value="Townhouse">Townhouse</option>
+          <option value="Land">Land Parcel</option>
+        </select>
+      </div>
+
+      <!-- Database Actions (Reset / Export / Import) -->
+      <div class="flex items-center gap-2">
+        <button type="button" id="admin-export-btn" class="px-3 py-2 rounded-xl text-xs font-semibold text-[#0F2A43] bg-[#F7F5F0] hover:bg-[#E6E2DA] border border-[#E6E2DA] transition-colors flex items-center gap-1.5" title="Export Backup JSON">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span class="hidden sm:inline">Export</span>
+        </button>
+
+        <label class="px-3 py-2 rounded-xl text-xs font-semibold text-[#0F2A43] bg-[#F7F5F0] hover:bg-[#E6E2DA] border border-[#E6E2DA] transition-colors flex items-center gap-1.5 cursor-pointer" title="Import JSON Database">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          <span class="hidden sm:inline">Import</span>
+          <input type="file" id="admin-import-file" accept=".json" class="hidden" />
+        </label>
+
+        <button type="button" id="admin-reset-btn" class="px-3 py-2 rounded-xl text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-colors flex items-center gap-1.5" title="Reset all changes to default 21 residences">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span class="hidden sm:inline">Reset Master</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Properties Management Table Container -->
+    <div class="bg-white rounded-2xl border border-[#E6E2DA] shadow-sm overflow-hidden">
+      <div class="p-5 border-b border-[#E6E2DA] flex items-center justify-between">
+        <div>
+          <h2 class="font-serif text-lg font-bold text-[#0F2A43]">Residences Inventory</h2>
+          <p id="admin-table-count" class="text-xs text-[#64748B] mt-0.5">Showing all residences</p>
+        </div>
+        <span class="text-xs font-semibold text-[#C8A96A] bg-[#F5EEDB] px-3 py-1 rounded-full border border-[#C8A96A]/30">
+          Live Client Sync Active
+        </span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-[#F7F5F0] border-b border-[#E6E2DA] text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
+              <th class="py-3.5 px-4">Residence</th>
+              <th class="py-3.5 px-4">Location & Type</th>
+              <th class="py-3.5 px-4">Price (USD)</th>
+              <th class="py-3.5 px-4 text-center">Beds / Baths</th>
+              <th class="py-3.5 px-4 text-center">Built Area</th>
+              <th class="py-3.5 px-4 text-center">Status</th>
+              <th class="py-3.5 px-4 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-properties-tbody" class="divide-y divide-[#E6E2DA] text-xs">
+            <!-- Dynamically populated via admin.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty Table State -->
+      <div id="admin-table-empty" class="hidden text-center py-16">
+        <div class="w-12 h-12 rounded-full bg-[#F7F5F0] text-[#64748B] flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <h4 class="font-serif text-base font-bold text-[#0F2A43]">No residences match criteria</h4>
+        <p class="text-xs text-[#64748B] mt-1">Try clearing your search query or status filter.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL 1: ADD / EDIT RESIDENCE FORM (FULL CRUD)
+       ========================================================================= -->
+  <div id="property-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="bg-white rounded-2xl p-4 sm:p-8 max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-[#E6E2DA] relative">
+      <button id="property-modal-close" type="button" class="absolute top-3 right-3 sm:top-5 sm:right-5 p-2 text-[#64748B] hover:text-[#0F2A43] text-xl font-bold" aria-label="Close form">&times;</button>
+      
+      <div class="mb-6 pb-4 border-b border-[#E6E2DA]">
+        <span class="text-xs uppercase font-bold tracking-wider text-[#C8A96A] block">Management System</span>
+        <h3 id="property-modal-title" class="font-serif text-2xl font-bold text-[#0F2A43] mt-0.5">Add New Residence</h3>
+        <p class="text-xs text-[#64748B]">Fill in the architectural and commercial details. Changes sync immediately to the live client portal.</p>
+      </div>
+
+      <form id="property-form" class="space-y-5">
+        <input type="hidden" id="form-prop-id" value="" />
+
+        <!-- Row 1: Title & Location -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Residence Name *</label>
+            <input type="text" id="form-prop-name" required placeholder="e.g. Villa Mirador Coastal Sanctuary" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Location Enclave *</label>
+            <select id="form-prop-location" required class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+              <option value="Azure Bay Coast">Azure Bay Coast (Clifftop)</option>
+              <option value="Azure Marina">Azure Marina (Waterfront)</option>
+              <option value="Pine Ridge Highlands">Pine Ridge Highlands (Mountain)</option>
+              <option value="Palm Gardens Quarter">Palm Gardens Quarter (Botanical)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 2: Type, Status, Price -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Property Type *</label>
+            <select id="form-prop-type" required class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+              <option value="Villa">Villa / Sanctuary</option>
+              <option value="Apartment">Apartment & Penthouse</option>
+              <option value="Townhouse">Townhouse</option>
+              <option value="Land">Land Parcel</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Availability Status *</label>
+            <select id="form-prop-status" required class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]">
+              <option value="Available">Available</option>
+              <option value="Reserved">Reserved</option>
+              <option value="Sold">Sold</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Asking Price (USD $) *</label>
+            <input type="number" id="form-prop-price" required min="100000" step="10000" placeholder="e.g. 2450000" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+        </div>
+
+        <!-- Row 3: Bedrooms, Bathrooms, Building Area, Land Area -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Bedrooms</label>
+            <input type="number" id="form-prop-bedrooms" min="0" max="20" placeholder="4" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Bathrooms</label>
+            <input type="number" id="form-prop-bathrooms" min="0" max="20" placeholder="5" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Built Area (m²)</label>
+            <input type="number" id="form-prop-building" min="0" placeholder="520" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Land Area (m²)</label>
+            <input type="number" id="form-prop-land" min="0" placeholder="1200" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+        </div>
+
+        <!-- Row 4: Tagline & Featured Flag -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-center">
+          <div class="sm:col-span-3">
+            <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Architectural Tagline *</label>
+            <input type="text" id="form-prop-tagline" required placeholder="e.g. Panoramic Oceanfront Sanctuary with Heated Obsidian Pool" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+          </div>
+          <div class="sm:col-span-1 pt-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="form-prop-featured" class="w-4 h-4 text-[#C8A96A] rounded border-[#E6E2DA] focus:ring-[#C8A96A]" />
+              <span class="text-xs font-bold text-[#0F2A43]">Featured Listing</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Row 5: Primary Image URL & Gallery URLs -->
+        <div>
+          <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Primary Cover Photo URL *</label>
+          <div class="flex items-center gap-2">
+            <input type="url" id="form-prop-image" required placeholder="https://images.unsplash.com/photo-..." class="flex-1 bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+            <button type="button" id="btn-quick-photo-preset" class="px-3 py-2 text-xs font-semibold bg-[#F5EEDB] text-[#0F2A43] rounded-lg border border-[#C8A96A]/40 hover:bg-[#C8A96A] hover:text-[#0F2A43] transition-colors whitespace-nowrap">
+              Luxury Presets
+            </button>
+          </div>
+          <!-- Preview Box -->
+          <div id="form-image-preview-box" class="mt-2 h-32 w-full rounded-lg overflow-hidden border border-[#E6E2DA] bg-[#F7F5F0] relative hidden">
+            <img id="form-image-preview-img" src="" alt="Property Preview" class="w-full h-full object-cover" />
+            <span class="absolute bottom-2 left-2 text-[10px] font-bold bg-[#0F2A43]/80 text-white px-2 py-0.5 rounded">Preview</span>
+          </div>
+        </div>
+
+        <!-- Row 6: Description -->
+        <div>
+          <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Full Architectural Dossier & Description *</label>
+          <textarea id="form-prop-description" rows="4" required placeholder="Describe the spatial flow, materials, views, and exclusivity..." class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg p-3 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]"></textarea>
+        </div>
+
+        <!-- Row 7: Amenities (Comma separated) -->
+        <div>
+          <label class="block text-xs font-semibold text-[#0F2A43] mb-1">Key Amenities (comma separated)</label>
+          <input type="text" id="form-prop-amenities" placeholder="Infinity Edge Pool, Wine Cellar, Private Helipad, Smart Home Automation, Spa Pavilion" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+        </div>
+
+        <!-- Form Submit & Cancel Buttons -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-[#E6E2DA]">
+          <button type="button" id="property-modal-cancel" class="btn-outline-navy !py-2.5 !px-5 text-xs font-semibold">
+            Cancel
+          </button>
+          <button type="submit" class="btn-gold !py-2.5 !px-6 text-xs uppercase tracking-wider font-bold shadow-md">
+            Save Residence
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: DELETE CONFIRMATION DIALOG
+       ========================================================================= -->
+  <div id="delete-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-[#E6E2DA] text-center">
+      <div class="w-14 h-14 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-7 h-7 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-2">Delete Residence?</h3>
+      <p class="text-xs text-[#64748B] mb-6">Are you sure you want to remove <strong id="delete-prop-name" class="text-[#0F2A43]"></strong>? This action will remove the listing from the live website immediately.</p>
+      <div class="flex items-center justify-center gap-3">
+        <button type="button" id="delete-modal-cancel" class="btn-outline-navy !py-2 !px-4 text-xs font-semibold">Cancel</button>
+        <button type="button" id="delete-modal-confirm" class="py-2 px-5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs shadow-md transition-all">Confirm Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="admin-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-[#0F2A43] text-white px-5 py-3 rounded-xl border border-[#C8A96A] shadow-2xl flex items-center gap-3">
+      <span id="toast-icon" class="text-[#C8A96A]">✓</span>
+      <span id="toast-message" class="text-xs font-semibold">Operation completed successfully</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

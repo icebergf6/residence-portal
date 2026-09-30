@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Properties Portfolio | Azure Bay Residences</title>
+  <meta name="description" content="Explore luxury coastal villas, penthouses, and prime real estate estates at Azure Bay Residences. Filter by price, location, bedrooms, and property type." />
+  <link rel="canonical" href="https://azurebayresidences.com/properties.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Luxury Properties Portfolio | Azure Bay Residences" />
+  <meta property="og:description" content="Explore coastal villas, marina penthouses, and bespoke estate parcels. 100% freehold foreign ownership eligible." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0F2A43',
+              navyDark: '#091928',
+              navyLight: '#183C5E',
+              gold: '#C8A96A',
+              goldHover: '#B59555',
+              ivory: '#F7F5F0',
+              ivoryAlt: '#EFECE4',
+              charcoal: '#1F2933',
+              border: '#E6E2DA'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-[#F7F5F0] text-[#1F2933] antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- =========================================================================
+       GLOBAL HEADER / STICKY NAVBAR
+       ========================================================================= -->
+  <header id="main-header" data-transparent="false" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3.5 bg-[#0F2A43] shadow-lg">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-white group">
+          <div class="w-9 h-9 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A] group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white leading-none">
+              Azure Bay
+            </span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#C8A96A] font-semibold mt-1">
+              Residences
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-7">
+          <a href="index.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Home</a>
+          <a href="properties.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Properties</a>
+          <a href="about.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">About</a>
+          <a href="contact.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Contact</a>
+        </nav>
+
+        <!-- Currency Switcher, Favorites & CTA -->
+        <div class="hidden lg:flex items-center gap-4">
+          <!-- Currency Dropdown -->
+          <div class="relative">
+            <select id="currency-switcher" class="bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white/90 border border-white/20 rounded-lg text-xs py-1.5 px-2.5 focus:border-[#C8A96A] focus:outline-none cursor-pointer transition-colors" title="Select Display Currency" aria-label="Select Currency">
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="AED">AED (د.إ)</option>
+              <option value="SGD">SGD (S$)</option>
+              <option value="IDR">IDR (Rp)</option>
+            </select>
+          </div>
+
+          <!-- Favorites Trigger -->
+          <button id="header-favorites-btn" type="button" class="relative text-white/90 hover:text-[#C8A96A] transition-colors py-1 px-2.5 rounded-lg border border-white/20 hover:border-[#C8A96A]/50 bg-white/5 flex items-center gap-1.5 text-xs font-semibold" title="View Saved Residences" aria-label="View Saved Residences">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span>Saved</span>
+            <span id="favorites-count-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[10px] w-4 h-4 rounded-full inline-flex items-center justify-center">0</span>
+          </button>
+
+          <button type="button" data-open-modal="viewing-calendar" class="btn-gold !py-2 !px-4 !text-xs !tracking-wider uppercase">
+            Book a Viewing
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger Button & Quick Actions -->
+        <div class="flex items-center gap-2 md:hidden">
+          <select id="currency-switcher-mobile" class="bg-[#0F2A43]/80 text-white text-[11px] border border-white/20 rounded py-1 px-1.5" aria-label="Select Currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="AED">AED</option>
+            <option value="SGD">SGD</option>
+            <option value="IDR">IDR</option>
+          </select>
+          <button id="mobile-favorites-btn" type="button" class="p-1.5 text-white/90 hover:text-[#C8A96A] relative" aria-label="Saved residences">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span id="mobile-favorites-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[9px] w-3.5 h-3.5 rounded-full absolute -top-1 -right-1 flex items-center justify-center">0</span>
+          </button>
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Toggle navigation menu" class="p-2 text-white hover:text-[#C8A96A] focus:outline-none focus:ring-2 focus:ring-[#C8A96A] rounded-lg">
+            <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Slide-down Panel -->
+    <div id="mobile-nav" class="hidden md:hidden bg-[#0F2A43] border-b border-[#C8A96A]/20 shadow-2xl px-6 py-8 mt-3">
+      <nav class="flex flex-col gap-4">
+        <a href="index.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Home</a>
+        <a href="properties.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Properties</a>
+        <a href="about.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">About</a>
+        <a href="contact.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Contact</a>
+        <a href="admin.html" class="text-base uppercase tracking-wider text-[#C8A96A] hover:text-white py-2 border-b border-white/10 font-bold flex items-center justify-between">
+          <span>Admin CMS Portal</span>
+          <span class="text-[11px] bg-[#C8A96A] text-[#0F2A43] px-2 py-0.5 rounded font-sans font-bold">Manage</span>
+        </a>
+      </nav>
+      <div class="mt-6 pt-6 border-t border-white/10 flex flex-col gap-3">
+        <a href="contact.html" class="btn-gold w-full text-center">
+          Schedule Private Viewing
+        </a>
+        <a href="#" data-brand="whatsapp-link" class="btn-secondary w-full text-center text-xs">
+          Direct WhatsApp Concierge
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow pt-28 pb-20">
+    
+    <!-- Page Header & Breadcrumbs -->
+    <section class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <nav class="flex items-center gap-2 text-xs text-[#64748B] mb-4" aria-label="Breadcrumb">
+        <a href="index.html" class="hover:text-[#0F2A43]">Home</a>
+        <span>/</span>
+        <span class="text-[#0F2A43] font-semibold">Properties</span>
+      </nav>
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#E6E2DA]">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="section-eyebrow !mb-0">Real Estate Portfolio</span>
+            <span class="bg-[#C8A96A]/20 text-[#0F2A43] text-[10px] font-bold px-2 py-0.5 rounded border border-[#C8A96A]/30">21+ Master Residences</span>
+          </div>
+          <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#0F2A43] tracking-tight">
+            Exclusive Residences
+          </h1>
+          <p class="text-sm sm:text-base text-[#64748B] mt-2 max-w-xl">
+            Explore our curated collection of oceanfront cliff villas, trophy penthouses, and bespoke estates across Azure Bay.
+          </p>
+        </div>
+
+        <!-- Desktop & Mobile Header Actions -->
+        <div class="flex items-center gap-3">
+          <a href="admin.html" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-[#0F2A43] bg-[#F5EEDB] hover:bg-[#C8A96A] border border-[#C8A96A]/40 shadow-sm transition-all">
+            <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Admin CMS</span>
+          </a>
+
+          <!-- Mobile Filter Button Toggle -->
+          <button id="mobile-filters-toggle" type="button" class="btn-outline-navy !py-2.5 !px-4 text-xs font-semibold flex items-center gap-2 lg:hidden">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+            <span>Filter Residences</span>
+            <span id="mobile-filter-badge" class="hidden bg-[#C8A96A] text-[#0F2A43] font-bold text-[10px] px-1.5 py-0.5 rounded-full">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Category Pills Strip -->
+      <div class="flex items-center gap-2 overflow-x-auto py-4 border-b border-[#E6E2DA] no-scrollbar text-xs">
+        <span class="text-[#64748B] font-semibold text-[11px] uppercase tracking-wider shrink-0 mr-1">Quick Select:</span>
+        <button type="button" data-quick-type="" class="quick-category-pill active px-3.5 py-1.5 rounded-full font-semibold bg-[#0F2A43] text-white transition-all shrink-0">
+          All Residences (21+)
+        </button>
+        <button type="button" data-quick-type="Villa" class="quick-category-pill px-3.5 py-1.5 rounded-full font-semibold bg-white hover:bg-[#F5EEDB] text-[#0F2A43] border border-[#E6E2DA] transition-all shrink-0">
+          Villas & Compounds
+        </button>
+        <button type="button" data-quick-type="Apartment" class="quick-category-pill px-3.5 py-1.5 rounded-full font-semibold bg-white hover:bg-[#F5EEDB] text-[#0F2A43] border border-[#E6E2DA] transition-all shrink-0">
+          Sky Penthouses
+        </button>
+        <button type="button" data-quick-type="Townhouse" class="quick-category-pill px-3.5 py-1.5 rounded-full font-semibold bg-white hover:bg-[#F5EEDB] text-[#0F2A43] border border-[#E6E2DA] transition-all shrink-0">
+          Townhomes
+        </button>
+        <button type="button" data-quick-type="Land" class="quick-category-pill px-3.5 py-1.5 rounded-full font-semibold bg-white hover:bg-[#F5EEDB] text-[#0F2A43] border border-[#E6E2DA] transition-all shrink-0">
+          Land & Parcels
+        </button>
+      </div>
+    </section>
+
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div id="sidebar-drawer-overlay" class="sidebar-drawer-overlay" aria-hidden="true"></div>
+
+    <!-- Main Content Area: Sidebar + Grid -->
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-8 items-start">
+        
+        <!-- SIDEBAR FILTERS (Sticky on Desktop, Slide Drawer on Mobile) -->
+        <aside id="filters-sidebar" class="fixed inset-y-0 left-0 z-50 w-full sm:w-88 bg-white p-6 shadow-2xl overflow-y-auto transform -translate-x-full transition-transform duration-300 ease-in-out lg:transform-none lg:static lg:block lg:w-80 lg:shrink-0 lg:p-6 lg:rounded-xl lg:border lg:border-[#E6E2DA] lg:shadow-sm lg:sticky lg:top-24">
+          
+          <!-- Sidebar Header -->
+          <div class="flex items-center justify-between pb-4 border-b border-[#E6E2DA] mb-5">
+            <h2 class="font-serif font-bold text-base text-[#0F2A43] flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+              <span>Filter Residences</span>
+            </h2>
+            <div class="flex items-center gap-3">
+              <button id="clear-all-filters-btn" type="button" class="text-xs text-[#C8A96A] hover:underline font-semibold hidden">
+                Clear All
+              </button>
+              <!-- Mobile Close Button -->
+              <button id="mobile-sidebar-close" type="button" class="lg:hidden p-1.5 rounded-lg text-[#64748B] hover:text-[#0F2A43] hover:bg-[#F7F5F0]" aria-label="Close filters">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-5">
+
+            <!-- Keyword Search -->
+            <div>
+              <label for="filter-keyword" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Search Residences</label>
+              <div class="relative">
+                <input type="text" id="filter-keyword" placeholder="Search by name, feature, pool..." class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg pl-8 pr-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:outline-none" />
+                <svg class="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+            </div>
+            
+            <!-- Location Filter -->
+            <div>
+              <label for="filter-location" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Location</label>
+              <select id="filter-location" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer">
+                <option value="">All Locations</option>
+                <option value="Azure Bay Coast">Azure Bay Coast (Clifftop)</option>
+                <option value="Azure Marina">Azure Marina (Waterfront)</option>
+                <option value="Pine Ridge Highlands">Pine Ridge Highlands (Mountain)</option>
+                <option value="Palm Gardens Quarter">Palm Gardens Quarter (Botanical)</option>
+              </select>
+            </div>
+
+            <!-- Property Type Filter -->
+            <div>
+              <label for="filter-type" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Property Type</label>
+              <select id="filter-type" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer">
+                <option value="">All Types</option>
+                <option value="Villa">Villa / Sanctuary</option>
+                <option value="Apartment">Apartment & Penthouse</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Land">Land Parcel</option>
+              </select>
+            </div>
+
+            <!-- Price Range -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Price Range (USD)</label>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mb-2.5">
+                <div>
+                  <input type="number" id="filter-min-price" placeholder="Min $" step="50000" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-2.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+                </div>
+                <div>
+                  <input type="number" id="filter-max-price" placeholder="Max $" step="50000" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-2.5 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A]" />
+                </div>
+              </div>
+              <!-- Quick Price Presets -->
+              <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                <button type="button" data-price-preset="under-1m" class="price-preset-btn px-2 py-1 bg-[#F7F5F0] hover:bg-[#F5EEDB] hover:text-[#0F2A43] text-[#64748B] rounded border border-[#E6E2DA] transition-colors">
+                  &lt; $1M
+                </button>
+                <button type="button" data-price-preset="1m-2m" class="price-preset-btn px-2 py-1 bg-[#F7F5F0] hover:bg-[#F5EEDB] hover:text-[#0F2A43] text-[#64748B] rounded border border-[#E6E2DA] transition-colors">
+                  $1M – $2M
+                </button>
+                <button type="button" data-price-preset="2m-3m" class="price-preset-btn px-2 py-1 bg-[#F7F5F0] hover:bg-[#F5EEDB] hover:text-[#0F2A43] text-[#64748B] rounded border border-[#E6E2DA] transition-colors">
+                  $2M – $3M
+                </button>
+                <button type="button" data-price-preset="above-3m" class="price-preset-btn px-2 py-1 bg-[#F7F5F0] hover:bg-[#F5EEDB] hover:text-[#0F2A43] text-[#64748B] rounded border border-[#E6E2DA] transition-colors">
+                  $3M+
+                </button>
+              </div>
+            </div>
+
+            <!-- Bedrooms Filter -->
+            <div>
+              <label for="filter-bedrooms" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Bedrooms</label>
+              <select id="filter-bedrooms" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer">
+                <option value="any">Any Bedrooms</option>
+                <option value="1">1+ Bedroom</option>
+                <option value="2">2+ Bedrooms</option>
+                <option value="3">3+ Bedrooms</option>
+                <option value="4">4+ Bedrooms</option>
+                <option value="5">5+ Bedrooms</option>
+              </select>
+            </div>
+
+            <!-- Bathrooms Filter -->
+            <div>
+              <label for="filter-bathrooms" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Bathrooms</label>
+              <select id="filter-bathrooms" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer">
+                <option value="any">Any Bathrooms</option>
+                <option value="1">1+ Bathroom</option>
+                <option value="2">2+ Bathrooms</option>
+                <option value="3">3+ Bathrooms</option>
+                <option value="4">4+ Bathrooms</option>
+              </select>
+            </div>
+
+            <!-- Status Filter -->
+            <div>
+              <label for="filter-status" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Availability Status</label>
+              <select id="filter-status" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-2 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer">
+                <option value="">All Statuses</option>
+                <option value="Available">Available Only</option>
+                <option value="Reserved">Reserved</option>
+                <option value="Sold">Sold</option>
+              </select>
+            </div>
+
+            <!-- Mobile Apply Button -->
+            <div class="pt-4 lg:hidden">
+              <button id="mobile-sidebar-apply" type="button" class="btn-gold w-full text-xs font-bold uppercase tracking-wider !py-3">
+                Apply Filters
+              </button>
+            </div>
+
+          </div>
+        </aside>
+
+        <!-- PROPERTIES LISTING CONTAINER -->
+        <section class="flex-1 w-full">
+          
+          <!-- Top Controls Bar: Results Count, Active Chips & Sort -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border border-[#E6E2DA] shadow-sm mb-6">
+            <div>
+              <span id="results-count" class="text-xs sm:text-sm font-semibold text-[#0F2A43]">
+                Loading residences...
+              </span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <!-- View Layout Switcher -->
+              <div class="flex items-center bg-[#F7F5F0] p-1 rounded-lg border border-[#E6E2DA]">
+                <button type="button" id="view-mode-grid" class="p-1.5 rounded text-[#0F2A43] bg-white shadow-xs transition-colors" title="Grid View" aria-label="Grid View">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                </button>
+                <button type="button" id="view-mode-list" class="p-1.5 rounded text-[#64748B] hover:text-[#0F2A43] transition-colors" title="Architectural List View" aria-label="List View">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+              </div>
+
+              <div class="h-4 w-px bg-[#E6E2DA] hidden sm:block"></div>
+
+              <label for="sort-select" class="text-xs text-[#64748B] font-semibold whitespace-nowrap">Sort By:</label>
+              <select id="sort-select" class="bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3 py-1.5 text-xs font-medium text-[#0F2A43] focus:border-[#C8A96A] cursor-pointer">
+                <option value="featured">Featured First</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="newest">Newest Year Built</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Active Filter Chips Bar -->
+          <div id="active-filters-chips" class="flex flex-wrap items-center gap-2 mb-6 hidden">
+            <!-- Dynamically populated tags with (x) delete -->
+          </div>
+
+          <!-- Property Cards Grid -->
+          <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Dynamically populated from data.js -->
+          </div>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="hidden text-center py-16 px-6 bg-white rounded-xl border border-[#E6E2DA] shadow-sm">
+            <div class="w-16 h-16 rounded-full bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-2">No Matching Residences Found</h3>
+            <p class="text-sm text-[#64748B] max-w-md mx-auto mb-6">
+              We couldn't find any properties matching all your selected criteria. Try broadening your price range or clearing filters.
+            </p>
+            <button type="button" onclick="document.getElementById('clear-all-filters-btn').click()" class="btn-gold !py-2.5 !px-6 text-xs uppercase tracking-wider">
+              Reset All Filters
+            </button>
+          </div>
+
+          <!-- Load More Button -->
+          <div class="text-center mt-12">
+            <button id="load-more-btn" type="button" class="btn-outline-navy text-xs uppercase tracking-wider !py-3 !px-8 hidden">
+              Load More Residences
+            </button>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="bg-[#091928] text-white pt-16 pb-12 border-t border-white/10">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A]">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span class="font-serif text-xl font-bold tracking-tight text-white" data-brand="name">Azure Bay Residences</span>
+          </div>
+          <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-6 max-w-sm">
+            Curator of exceptional coastal real estate, offering bespoke villas, marina residences, and strategic international land investments in premier sanctuaries.
+          </p>
+          <p class="text-[11px] text-white/50 leading-relaxed" data-brand="license">
+            Licensed Luxury Brokerage & Master Developer #RE-98442-AZ
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Portfolio</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="properties.html?type=Villa" class="hover:text-[#C8A96A] transition-colors">Villas & Sanctuaries</a></li>
+            <li><a href="properties.html?type=Apartment" class="hover:text-[#C8A96A] transition-colors">Marina Penthouses</a></li>
+            <li><a href="properties.html?type=Townhouse" class="hover:text-[#C8A96A] transition-colors">Garden Townhomes</a></li>
+            <li><a href="properties.html?type=Land" class="hover:text-[#C8A96A] transition-colors">Estate Land Parcels</a></li>
+            <li><a href="properties.html" class="hover:text-[#C8A96A] transition-colors">Full Inventory (21+ Master Collection)</a></li>
+            <li><a href="admin.html" class="text-[#C8A96A] font-semibold hover:underline flex items-center gap-1">Executive CMS Portal &rarr;</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Company</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="about.html" class="hover:text-[#C8A96A] transition-colors">Our Philosophy</a></li>
+            <li><a href="about.html#team" class="hover:text-[#C8A96A] transition-colors">Executive Leadership</a></li>
+            <li><a href="about.html#milestones" class="hover:text-[#C8A96A] transition-colors">Company Milestones</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Sales Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Investor Concierge</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Private Office</h4>
+          <address class="not-italic space-y-2.5 text-xs text-white/80">
+            <p data-brand="address">1400 Ocean Boulevard, Suite 500, Azure Bay Coastal Reserve</p>
+            <p>
+              <a href="tel:+18004289988" data-brand="phone-link" class="hover:text-[#C8A96A] transition-colors flex items-center gap-1.5">
+                <span data-brand="phone">+1 (800) 428-9988</span>
+              </a>
+            </p>
+            <p>
+              <a href="mailto:inquiries@azurebayresidences.com" data-brand="email-link" class="hover:text-[#C8A96A] transition-colors">
+                <span data-brand="email">inquiries@azurebayresidences.com</span>
+              </a>
+            </p>
+            <p class="text-[11px] text-white/50 pt-1" data-brand="officeHours">
+              Mon – Sat: 9:00 AM – 7:00 PM EST
+            </p>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-white/50">
+        <div>
+          &copy; <span data-brand="year">2026</span> <span data-brand="name">Azure Bay Residences</span>. All rights reserved. Equal Housing Opportunity.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Terms of Representation</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

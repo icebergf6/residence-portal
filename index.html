@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azure Bay Residences | Luxury Living, Designed Around You</title>
+  <meta name="description" content="Azure Bay Residences offers luxury coastal villas, waterfront penthouses, and private estates crafted for international buyers and discerning capital investors." />
+  <link rel="canonical" href="https://azurebayresidences.com/index.html" />
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Azure Bay Residences | Luxury Living, Designed Around You" />
+  <meta property="og:description" content="Discover prime oceanfront villas and architectural masterpieces in exclusive coastal reserves. Freehold ownership & private viewings." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0F2A43',
+              navyDark: '#091928',
+              navyLight: '#183C5E',
+              gold: '#C8A96A',
+              goldHover: '#B59555',
+              ivory: '#F7F5F0',
+              ivoryAlt: '#EFECE4',
+              charcoal: '#1F2933',
+              border: '#E6E2DA'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-[#F7F5F0] text-[#1F2933] antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- =========================================================================
+       GLOBAL HEADER / STICKY NAVBAR
+       ========================================================================= -->
+  <header id="main-header" data-transparent="true" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-5 bg-transparent">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 text-white group">
+          <div class="w-9 h-9 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A] group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white leading-none">
+              Azure Bay
+            </span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#C8A96A] font-semibold mt-1">
+              Residences
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-7">
+          <a href="index.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Home</a>
+          <a href="properties.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Properties</a>
+          <a href="about.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">About</a>
+          <a href="contact.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Contact</a>
+        </nav>
+
+        <!-- Currency Switcher, Favorites & CTA (Desktop) -->
+        <div class="hidden lg:flex items-center gap-4">
+          <!-- Currency Dropdown -->
+          <div class="relative">
+            <select id="currency-switcher" class="bg-[#0F2A43]/80 hover:bg-[#0F2A43] text-white/90 border border-white/20 rounded-lg text-xs py-1.5 px-2.5 focus:border-[#C8A96A] focus:outline-none cursor-pointer transition-colors" title="Select Display Currency" aria-label="Select Currency">
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="AED">AED (د.إ)</option>
+              <option value="SGD">SGD (S$)</option>
+              <option value="IDR">IDR (Rp)</option>
+            </select>
+          </div>
+
+          <!-- Favorites Trigger -->
+          <button id="header-favorites-btn" type="button" class="relative text-white/90 hover:text-[#C8A96A] transition-colors py-1 px-2.5 rounded-lg border border-white/20 hover:border-[#C8A96A]/50 bg-white/5 flex items-center gap-1.5 text-xs font-semibold" title="View Saved Residences" aria-label="View Saved Residences">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span>Saved</span>
+            <span id="favorites-count-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[10px] w-4 h-4 rounded-full inline-flex items-center justify-center">0</span>
+          </button>
+
+          <button type="button" data-open-modal="viewing-calendar" class="btn-gold !py-2 !px-4 !text-xs !tracking-wider uppercase">
+            Book a Viewing
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger Button & Quick Actions -->
+        <div class="flex items-center gap-2 md:hidden">
+          <!-- Mobile Currency Switcher -->
+          <select id="currency-switcher-mobile" class="bg-[#0F2A43]/80 text-white text-[11px] border border-white/20 rounded py-1 px-1.5" aria-label="Select Currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="AED">AED</option>
+            <option value="SGD">SGD</option>
+            <option value="IDR">IDR</option>
+          </select>
+          <!-- Mobile Favorites -->
+          <button id="mobile-favorites-btn" type="button" class="p-1.5 text-white/90 hover:text-[#C8A96A] relative" aria-label="Saved residences">
+            <svg class="w-5 h-5 fill-none stroke-current stroke-2 text-[#C8A96A]" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span id="mobile-favorites-badge" class="bg-[#C8A96A] text-[#0F2A43] font-bold text-[9px] w-3.5 h-3.5 rounded-full absolute -top-1 -right-1 flex items-center justify-center">0</span>
+          </button>
+          <button id="mobile-menu-btn" type="button" aria-expanded="false" aria-label="Toggle navigation menu" class="p-2 text-white hover:text-[#C8A96A] focus:outline-none focus:ring-2 focus:ring-[#C8A96A] rounded-lg">
+            <svg class="w-6 h-6 stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Slide-down Panel -->
+    <div id="mobile-nav" class="hidden md:hidden bg-[#0F2A43] border-b border-[#C8A96A]/20 shadow-2xl px-6 py-8 mt-3">
+      <nav class="flex flex-col gap-4">
+        <a href="index.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Home</a>
+        <a href="properties.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Properties</a>
+        <a href="about.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">About</a>
+        <a href="contact.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Contact</a>
+        <a href="admin.html" class="text-base uppercase tracking-wider text-[#C8A96A] hover:text-white py-2 border-b border-white/10 font-bold flex items-center justify-between">
+          <span>Admin CMS Portal</span>
+          <span class="text-[11px] bg-[#C8A96A] text-[#0F2A43] px-2 py-0.5 rounded font-sans font-bold">Manage</span>
+        </a>
+      </nav>
+      <div class="mt-6 pt-6 border-t border-white/10 flex flex-col gap-3">
+        <a href="contact.html" class="btn-gold w-full text-center">
+          Schedule Private Viewing
+        </a>
+        <a href="#" data-brand="whatsapp-link" class="btn-secondary w-full text-center text-xs">
+          Direct WhatsApp Concierge
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <!-- =========================================================================
+         SECTION 1: HERO
+         ========================================================================= -->
+    <section class="relative min-h-screen flex items-center justify-center bg-[#0F2A43] text-white pt-24 pb-28 md:pb-36 overflow-hidden">
+      <!-- Background Image with Gradient Overlay -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=85" 
+          alt="Azure Bay Residences - Oceanfront Luxury Villa with Infinity Pool" 
+          class="w-full h-full object-cover object-center scale-105 animate-[pulse_10s_ease-in-out_infinite] duration-1000"
+          width="1920" 
+          height="1080"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43] via-[#0F2A43]/70 to-[#0F2A43]/40"></div>
+        <div class="absolute inset-0 bg-radial-at-c from-transparent via-[#0F2A43]/30 to-[#0F2A43]/90"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="relative z-10 max-w-[1040px] mx-auto px-4 sm:px-6 text-center mt-12 sm:mt-8">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C8A96A]/20 border border-[#C8A96A]/40 text-[#C8A96A] text-xs uppercase tracking-[0.2em] font-semibold mb-6 backdrop-blur-md">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#C8A96A]"></span>
+          Ultra-Prime Coastal Real Estate
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.12]">
+          Luxury Living,<br class="hidden sm:inline" /> Designed Around You.
+        </h1>
+
+        <p class="max-w-2xl mx-auto text-lg sm:text-xl text-white/85 font-light leading-relaxed mb-10">
+          Architectural masterpieces nestled in pristine coastal reserves. 100% freehold foreign ownership, private deepwater marina berths, and dedicated investment advisory.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+          <a href="properties.html" class="btn-gold w-full sm:w-auto text-center !py-4 !px-8 text-base">
+            Explore Properties
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+          <a href="#" data-brand="whatsapp-link" class="btn-secondary w-full sm:w-auto text-center !py-4 !px-8 text-base">
+            <svg class="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Subtle Scroll Indicator -->
+      <a href="#quick-search" aria-label="Scroll down to search residences" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/60 hover:text-[#C8A96A] transition-colors">
+        <span class="text-[10px] tracking-widest uppercase mb-1">Scroll</span>
+        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 2: QUICK SEARCH BAR (Overlapping Hero Bottom)
+         ========================================================================= -->
+    <section id="quick-search" class="relative z-20 -mt-14 max-w-[1180px] mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-xl shadow-2xl border border-[#E6E2DA] p-5 sm:p-7">
+        <form id="quick-search-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+          
+          <!-- Location -->
+          <div>
+            <label for="search-location" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Location</label>
+            <div class="relative">
+              <select id="search-location" name="location" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-3 text-sm font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white appearance-none cursor-pointer">
+                <option value="">All Locations</option>
+                <option value="Azure Bay Coast">Azure Bay Coast</option>
+                <option value="Azure Marina">Azure Marina</option>
+                <option value="Pine Ridge Highlands">Pine Ridge Highlands</option>
+                <option value="Palm Gardens Quarter">Palm Gardens Quarter</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#64748B]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Property Type -->
+          <div>
+            <label for="search-type" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Property Type</label>
+            <div class="relative">
+              <select id="search-type" name="type" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-3 text-sm font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white appearance-none cursor-pointer">
+                <option value="">All Types</option>
+                <option value="Villa">Villa / Sanctuary</option>
+                <option value="Apartment">Apartment & Penthouse</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Land">Land Parcel</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#64748B]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Range -->
+          <div>
+            <label for="search-price" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Price Range (USD)</label>
+            <div class="relative">
+              <select id="search-price" name="price" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-3 text-sm font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white appearance-none cursor-pointer">
+                <option value="">Any Budget</option>
+                <option value="under-500k">Under $500,000</option>
+                <option value="500k-1m">$500,000 – $1,000,000</option>
+                <option value="1m-2m">$1,000,000 – $2,000,000</option>
+                <option value="above-2m">$2,000,000+</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#64748B]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bedrooms -->
+          <div>
+            <label for="search-bedrooms" class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Bedrooms</label>
+            <div class="relative">
+              <select id="search-bedrooms" name="bedrooms" class="w-full bg-[#F7F5F0] border border-[#E6E2DA] rounded-lg px-3.5 py-3 text-sm font-medium text-[#0F2A43] focus:border-[#C8A96A] focus:bg-white appearance-none cursor-pointer">
+                <option value="">Any Bedrooms</option>
+                <option value="1">1+ Bedroom</option>
+                <option value="2">2+ Bedrooms</option>
+                <option value="3">3+ Bedrooms</option>
+                <option value="4">4+ Bedrooms</option>
+                <option value="5">5+ Bedrooms</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[#64748B]">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <button type="submit" class="btn-gold w-full !py-3.5 text-sm font-semibold tracking-wide flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              Search
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 3: FEATURED PROPERTIES
+         ========================================================================= -->
+    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="section-eyebrow">Curated Portfolio</span>
+          <h2 class="section-title">Featured Residences</h2>
+          <p class="section-subtitle">
+            A hand-picked selection of our most distinguished coastal villas, hilltop pavilions, and marina penthouses.
+          </p>
+        </div>
+        <div class="mt-6 md:mt-0">
+          <a href="properties.html" class="btn-outline-navy text-sm">
+            Explore All 21+ Residences
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grid dynamically populated from data.js -->
+      <div id="featured-properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Javascript renders 6 featured cards here -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 4: WHY CHOOSE US
+         ========================================================================= -->
+    <section class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA]">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="section-eyebrow section-eyebrow-center justify-center">The Azure Bay Standard</span>
+          <h2 class="section-title">Why Discerning Buyers Choose Us</h2>
+          <p class="section-subtitle mx-auto">
+            From preliminary architectural concept through title deed closing and turnkey management, our bespoke advisory ensures complete security and peace of mind.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Clear Legal Title</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              Every estate comes with vetted notary certification, unencumbered freehold ownership rights, and full cross-border compliance for international buyers.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Prime Locations</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              Unrivaled clifftops, beachfront enclaves, and deepwater marina frontages selected for scarcity, panoramic ocean vistas, and sustained capital appreciation.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Architect-Designed</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              Timeless coastal minimalism created by award-winning European architects with imported Italian travertine, custom teak carpentry, and smart automation.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white rounded-xl p-8 border border-[#E6E2DA] shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Global Buyer Support</h3>
+            <p class="text-sm text-[#64748B] leading-relaxed">
+              Multilingual concierge handling overseas banking, VIP airport discovery visits, rental asset management, and currency remittance without hassle.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 5: STATS BAND (Navy Background, Animated Counters)
+         ========================================================================= -->
+    <section class="bg-[#0F2A43] text-white py-16 sm:py-20 border-y border-[#C8A96A]/20">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 text-center">
+          
+          <div class="p-4">
+            <div class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#C8A96A] mb-2" data-counter-target="120" data-counter-suffix="+">
+              0
+            </div>
+            <p class="text-xs sm:text-sm font-medium uppercase tracking-wider text-white/80">Homes Delivered</p>
+          </div>
+
+          <div class="p-4">
+            <div class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#C8A96A] mb-2" data-counter-target="8" data-counter-suffix=" Years">
+              0
+            </div>
+            <p class="text-xs sm:text-sm font-medium uppercase tracking-wider text-white/80">Developer Experience</p>
+          </div>
+
+          <div class="p-4">
+            <div class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#C8A96A] mb-2" data-counter-target="4.9" data-counter-suffix="/5">
+              0
+            </div>
+            <p class="text-xs sm:text-sm font-medium uppercase tracking-wider text-white/80">Client Satisfaction</p>
+          </div>
+
+          <div class="p-4">
+            <div class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#C8A96A] mb-2" data-counter-target="15" data-counter-suffix=" Awards">
+              0
+            </div>
+            <p class="text-xs sm:text-sm font-medium uppercase tracking-wider text-white/80">Architectural Honors</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 6: HOW IT WORKS (4 Steps with Connecting Line)
+         ========================================================================= -->
+    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="section-eyebrow section-eyebrow-center justify-center">Seamless Journey</span>
+        <h2 class="section-title">The Path to Your Sanctuary</h2>
+        <p class="section-subtitle mx-auto">
+          We have distilled international real estate acquisition into four transparent, fully supported milestones.
+        </p>
+      </div>
+
+      <div class="relative">
+        <!-- Connecting Line on Desktop -->
+        <div class="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-[#E6E2DA] z-0"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+          
+          <!-- Step 1 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-[#0F2A43] text-[#C8A96A] border-4 border-[#F7F5F0] flex items-center justify-center font-serif text-xl font-bold mb-6 shadow-md">
+              01
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mb-2">Consultation</h3>
+            <p class="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+              A private 1-on-1 strategy call to review your lifestyle preferences, investment timeline, and ownership framework.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-[#0F2A43] text-[#C8A96A] border-4 border-[#F7F5F0] flex items-center justify-center font-serif text-xl font-bold mb-6 shadow-md">
+              02
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mb-2">Private Viewing</h3>
+            <p class="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+              Experience the residences through a bespoke chauffeur-driven VIP Discovery Tour or an interactive 4K live video walk-through.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-[#0F2A43] text-[#C8A96A] border-4 border-[#F7F5F0] flex items-center justify-center font-serif text-xl font-bold mb-6 shadow-md">
+              03
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mb-2">Reservation</h3>
+            <p class="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+              Lock in your selected residence with an escrow deposit while our legal counsel pre-qualifies title and contracts.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-[#0F2A43] text-[#C8A96A] border-4 border-[#F7F5F0] flex items-center justify-center font-serif text-xl font-bold mb-6 shadow-md">
+              04
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mb-2">Handover</h3>
+            <p class="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+              Official notary deed registration, receipt of your keys, and introduction to our dedicated private property management concierge.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 7: TESTIMONIALS CAROUSEL
+         ========================================================================= -->
+    <section class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA] relative overflow-hidden" id="testimonials-section">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <span class="section-eyebrow">Client Testimonials</span>
+            <h2 class="section-title">Trusted by Global Investors</h2>
+            <p class="section-subtitle">
+              Read firsthand accounts from international homeowners and capital allocators who have partnered with Azure Bay Residences.
+            </p>
+          </div>
+
+          <!-- Marquee Speed & Pause Controls -->
+          <div class="flex items-center gap-3 bg-white/80 backdrop-blur-md px-4 py-2 rounded-xl border border-[#E6E2DA] shadow-sm">
+            <span class="text-xs font-semibold text-[#64748B] flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live Feed
+            </span>
+            <div class="h-3 w-px bg-[#E6E2DA]"></div>
+            <!-- Speed Toggles -->
+            <div class="flex items-center gap-1 text-xs">
+              <button type="button" id="marquee-speed-normal" class="marquee-speed-btn px-2.5 py-1 rounded-md font-semibold bg-[#0F2A43] text-white transition-all text-[11px]" data-speed="normal">
+                Normal
+              </button>
+              <button type="button" id="marquee-speed-slow" class="marquee-speed-btn px-2.5 py-1 rounded-md font-semibold text-[#64748B] hover:text-[#0F2A43] transition-all text-[11px]" data-speed="slow">
+                Slow
+              </button>
+              <button type="button" id="marquee-speed-fast" class="marquee-speed-btn px-2.5 py-1 rounded-md font-semibold text-[#64748B] hover:text-[#0F2A43] transition-all text-[11px]" data-speed="fast">
+                Fast
+              </button>
+            </div>
+            <div class="h-3 w-px bg-[#E6E2DA]"></div>
+            <button type="button" id="marquee-toggle-pause" class="p-1 text-[#64748B] hover:text-[#0F2A43] transition-colors" title="Pause/Resume Continuous Scroll" aria-label="Toggle pause">
+              <svg id="marquee-pause-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+              <svg id="marquee-play-icon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Infinite Continuous Marquee Container -->
+        <div class="marquee-container mt-6" id="investor-marquee-container" tabindex="0" aria-label="Continuous smooth investor carousel moving endlessly">
+          <div class="marquee-track" id="investor-marquee-track">
+            
+            <!-- Investor cards dynamically populated via main.js from INVESTOR_TESTIMONIALS with smooth infinite marquee -->
+
+
+
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NEW SECTION 1: INTERACTIVE INVESTMENT & YIELD CALCULATOR
+         ========================================================================= -->
+    <section class="section-luxury bg-white border-b border-[#E6E2DA]">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="section-eyebrow section-eyebrow-center justify-center">Financial Performance</span>
+          <h2 class="section-title">Interactive Investment & Yield Simulator</h2>
+          <p class="section-subtitle mx-auto">
+            Model projected rental yields, gross income, and 5-year capital appreciation based on Azure Bay's fully managed concierge rental program.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#F7F5F0] rounded-2xl p-6 sm:p-10 border border-[#E6E2DA] shadow-sm">
+          
+          <!-- Left: Interactive Sliders (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Slider 1: Villa Purchase Price -->
+            <div class="bg-white p-5 rounded-xl border border-[#E6E2DA]">
+              <div class="flex items-center justify-between mb-2">
+                <label for="calc-price" class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Property Acquisition Value</label>
+                <span id="calc-price-display" class="font-serif text-lg font-bold text-[#0F2A43]">$2,450,000</span>
+              </div>
+              <input type="range" id="calc-price" class="luxury-slider cursor-pointer" min="1000000" max="6000000" step="50000" value="2450000" />
+              <div class="flex justify-between text-[11px] text-[#64748B] mt-1.5">
+                <span>$1,000,000</span>
+                <span>$3,500,000</span>
+                <span>$6,000,000</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Average Daily Rate -->
+            <div class="bg-white p-5 rounded-xl border border-[#E6E2DA]">
+              <div class="flex items-center justify-between mb-2">
+                <label for="calc-adr" class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Average Daily Rental Rate (USD)</label>
+                <span id="calc-adr-display" class="font-serif text-lg font-bold text-[#0F2A43]">$1,200 / night</span>
+              </div>
+              <input type="range" id="calc-adr" class="luxury-slider cursor-pointer" min="500" max="3000" step="50" value="1200" />
+              <div class="flex justify-between text-[11px] text-[#64748B] mt-1.5">
+                <span>$500 / night</span>
+                <span>$1,750 / night</span>
+                <span>$3,000 / night</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: Occupancy Rate -->
+            <div class="bg-white p-5 rounded-xl border border-[#E6E2DA]">
+              <div class="flex items-center justify-between mb-2">
+                <label for="calc-occ" class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Annual Projected Occupancy</label>
+                <span id="calc-occ-display" class="font-serif text-lg font-bold text-[#0F2A43]">65% (237 nights)</span>
+              </div>
+              <input type="range" id="calc-occ" class="luxury-slider cursor-pointer" min="40" max="85" step="1" value="65" />
+              <div class="flex justify-between text-[11px] text-[#64748B] mt-1.5">
+                <span>40% (Conservative)</span>
+                <span>65% (Target)</span>
+                <span>85% (Peak)</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs text-[#64748B]">
+              <svg class="w-4 h-4 text-[#C8A96A] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>Net return estimates include 20% concierge management fee, insurance, and routine maintenance provisions.</span>
+            </div>
+
+          </div>
+
+          <!-- Right: Dynamic Results Card (5 cols) -->
+          <div class="lg:col-span-5 bg-[#0F2A43] text-white p-7 sm:p-8 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                <span class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A]">Projection Summary</span>
+                <span class="text-[11px] bg-white/10 px-2 py-0.5 rounded text-white/80">Turnkey Program</span>
+              </div>
+
+              <!-- Metric 1 -->
+              <div class="mb-5">
+                <span class="text-xs text-white/60 block mb-1">Gross Annual Rental Revenue</span>
+                <div id="calc-gross-revenue" class="font-serif text-3xl font-bold text-white tracking-tight">
+                  $284,400
+                </div>
+              </div>
+
+              <!-- Metric 2 -->
+              <div class="grid grid-cols-2 gap-4 pb-6 border-b border-white/10 mb-6">
+                <div>
+                  <span class="text-xs text-white/60 block mb-1">Estimated Net Yield</span>
+                  <div id="calc-net-yield" class="font-serif text-2xl font-bold text-[#C8A96A]">
+                    9.3%
+                  </div>
+                </div>
+                <div>
+                  <span class="text-xs text-white/60 block mb-1">Net Annual Profit</span>
+                  <div id="calc-net-profit" class="font-serif text-2xl font-bold text-white">
+                    $227,520
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metric 3: 5-Year Capital Growth -->
+              <div class="mb-6">
+                <div class="flex items-center justify-between text-xs text-white/60 mb-1">
+                  <span>5-Year Asset Appreciation (8.2% CAGR)</span>
+                  <span class="text-[#C8A96A] font-semibold">+48.3%</span>
+                </div>
+                <div id="calc-5yr-value" class="font-serif text-2xl font-bold text-white">
+                  $3,633,350
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <a href="contact.html?inquiry=Investment+Prospectus" class="btn-gold w-full text-center text-xs font-bold uppercase tracking-wider !py-3">
+                Request Tailored Investor Prospectus
+              </a>
+              <p class="text-[10px] text-white/40 text-center mt-2.5">
+                Past performance is not indicative of future returns. Figures are modeled estimates.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NEW SECTION 2: PRIME COASTAL ENCLAVES SHOWCASE
+         ========================================================================= -->
+    <section class="section-luxury bg-[#F7F5F0]">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <span class="section-eyebrow">Geography & Lifestyle</span>
+            <h2 class="section-title">The Four Coastal Enclaves</h2>
+            <p class="section-subtitle">
+              From dramatic wave-sculpted granite bluffs to superyacht berths and tranquil botanical parks, choose your ideal enclave.
+            </p>
+          </div>
+          <div>
+            <a href="properties.html" class="btn-outline-navy text-xs font-semibold !py-2.5 !px-5 inline-flex items-center gap-2">
+              <span>View All 12 Residences</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Enclave 1: Azure Bay Coast -->
+          <div class="group bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+            <div class="relative h-48 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&h=400&q=80" alt="Azure Bay Coast Clifftop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="300" height="200" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43]/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#C8A96A] bg-[#0F2A43]/90 px-2 py-0.5 rounded">Clifftop Reserve</span>
+                <h3 class="font-serif font-bold text-base mt-1">Azure Bay Coast</h3>
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <p class="text-xs text-[#64748B] leading-relaxed mb-4">
+                  Perched 45 meters above the sea with private funicular elevator access to secluded white-sand coves.
+                </p>
+                <div class="space-y-1.5 text-xs text-[#0F2A43] mb-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Active Listings:</span>
+                    <span class="font-semibold">5 Residences</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Pricing:</span>
+                    <span class="font-semibold">From $1,450,000</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Vibe:</span>
+                    <span class="font-semibold">Dramatic Sunset & Surf</span>
+                  </div>
+                </div>
+              </div>
+              <a href="properties.html?location=Azure+Bay+Coast" class="block text-center text-xs font-bold text-[#0F2A43] hover:text-[#C8A96A] py-2 border-t border-[#E6E2DA] transition-colors">
+                Explore Coast Residences &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Enclave 2: Azure Marina -->
+          <div class="group bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+            <div class="relative h-48 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&h=400&q=80" alt="Azure Marina Waterfront" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="300" height="200" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43]/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#C8A96A] bg-[#0F2A43]/90 px-2 py-0.5 rounded">Waterfront Haven</span>
+                <h3 class="font-serif font-bold text-base mt-1">Azure Marina</h3>
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <p class="text-xs text-[#64748B] leading-relaxed mb-4">
+                  Full-service deepwater berths catering to vessels up to 60 meters, vibrant promenades, and yacht clubs.
+                </p>
+                <div class="space-y-1.5 text-xs text-[#0F2A43] mb-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Active Listings:</span>
+                    <span class="font-semibold">3 Penthouses</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Pricing:</span>
+                    <span class="font-semibold">From $1,250,000</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Vibe:</span>
+                    <span class="font-semibold">Nautical & Cosmopolitan</span>
+                  </div>
+                </div>
+              </div>
+              <a href="properties.html?location=Azure+Marina" class="block text-center text-xs font-bold text-[#0F2A43] hover:text-[#C8A96A] py-2 border-t border-[#E6E2DA] transition-colors">
+                Explore Marina Residences &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Enclave 3: Pine Ridge Highlands -->
+          <div class="group bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+            <div class="relative h-48 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&h=400&q=80" alt="Pine Ridge Highlands" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="300" height="200" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43]/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#C8A96A] bg-[#0F2A43]/90 px-2 py-0.5 rounded">Highland Sanctuary</span>
+                <h3 class="font-serif font-bold text-base mt-1">Pine Ridge Highlands</h3>
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <p class="text-xs text-[#64748B] leading-relaxed mb-4">
+                  Elevated forest canopy microclimate offering natural breeze, panoramic sea horizon, and private hiking trails.
+                </p>
+                <div class="space-y-1.5 text-xs text-[#0F2A43] mb-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Active Listings:</span>
+                    <span class="font-semibold">2 Estates</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Pricing:</span>
+                    <span class="font-semibold">From $1,280,000</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Vibe:</span>
+                    <span class="font-semibold">Secluded & Meditative</span>
+                  </div>
+                </div>
+              </div>
+              <a href="properties.html?location=Pine+Ridge+Highlands" class="block text-center text-xs font-bold text-[#0F2A43] hover:text-[#C8A96A] py-2 border-t border-[#E6E2DA] transition-colors">
+                Explore Highland Estates &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Enclave 4: Palm Gardens Quarter -->
+          <div class="group bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+            <div class="relative h-48 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&h=400&q=80" alt="Palm Gardens Quarter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="300" height="200" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43]/80 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 text-white">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-[#C8A96A] bg-[#0F2A43]/90 px-2 py-0.5 rounded">Botanical Quarter</span>
+                <h3 class="font-serif font-bold text-base mt-1">Palm Gardens</h3>
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <p class="text-xs text-[#64748B] leading-relaxed mb-4">
+                  Gentle royal palm avenues, gated security, community tennis pavilion, and international bilingual academy proximity.
+                </p>
+                <div class="space-y-1.5 text-xs text-[#0F2A43] mb-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Active Listings:</span>
+                    <span class="font-semibold">2 Townhomes</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Pricing:</span>
+                    <span class="font-semibold">From $890,000</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[#64748B]">Vibe:</span>
+                    <span class="font-semibold">Family & Wellness</span>
+                  </div>
+                </div>
+              </div>
+              <a href="properties.html?location=Palm+Gardens+Quarter" class="block text-center text-xs font-bold text-[#0F2A43] hover:text-[#C8A96A] py-2 border-t border-[#E6E2DA] transition-colors">
+                Explore Palm Gardens &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         NEW SECTION: INTERACTIVE RESORT MASTERPLAN
+         ========================================================================= -->
+    <section class="section-luxury bg-[#091928] text-white border-y border-white/10 relative overflow-hidden" id="masterplan-section">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="section-eyebrow text-[#C8A96A]">Spatial Topography</span>
+            <h2 class="section-title !text-white">Interactive Resort Masterplan</h2>
+            <p class="section-subtitle !text-white/70">
+              Explore the masterplan footprint of our private reserve. Click on any active pin to preview residence positioning, cliff elevations, and immediate availability.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-white/60 flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#C8A96A] inline-block"></span> Available
+            </span>
+            <span class="text-xs text-white/60 flex items-center gap-1.5 ml-3">
+              <span class="w-3 h-3 rounded-full bg-blue-400 inline-block"></span> Reserved
+            </span>
+            <span class="text-xs text-white/60 flex items-center gap-1.5 ml-3">
+              <span class="w-3 h-3 rounded-full bg-slate-500 inline-block"></span> Sold
+            </span>
+          </div>
+        </div>
+
+        <!-- Masterplan Aerial Interactive Canvas -->
+        <div class="relative rounded-2xl overflow-hidden border border-white/15 bg-[#0F2A43] shadow-2xl min-h-[340px] sm:min-h-[420px] aspect-[16/9] md:aspect-[21/9]">
+          <!-- Background Aerial Photography -->
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&h=900&q=80" alt="Azure Bay Masterplan Topography" class="w-full h-full object-cover filter brightness-[0.7] contrast-[1.1]" />
+          
+          <!-- Subtle Blueprint Grid Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent pointer-events-none"></div>
+
+          <!-- Interactive Pins Container -->
+          <div id="masterplan-pins-container" class="absolute inset-0">
+            <!-- Dynamically populated or static pin positions -->
+          </div>
+
+          <!-- Floating Unit Preview Card (Opens on pin click) -->
+          <div id="masterplan-popup-card" class="hidden absolute z-40 bg-white text-[#0F2A43] rounded-xl p-4 shadow-2xl border border-[#C8A96A] max-w-xs w-72 transition-all duration-300">
+            <button id="masterplan-popup-close" type="button" class="absolute top-2 right-2 text-[#64748B] hover:text-[#0F2A43] p-1 font-bold" aria-label="Close preview">&times;</button>
+            <div id="masterplan-popup-content">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Map Hint on Bottom Left -->
+          <div class="absolute bottom-4 left-4 z-10 bg-[#0F2A43]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-white/80 hidden sm:flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+            <span>Click any glowing unit marker to preview details</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 8: LOCATION HIGHLIGHTS (Map + Nearby POIs)
+         ========================================================================= -->
+    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-12 items-center">
+        
+        <!-- Left: Details & POI list -->
+        <div class="w-full lg:w-1/2">
+          <span class="section-eyebrow">Prime Enclave</span>
+          <h2 class="section-title">An Unmatched Coastal Haven</h2>
+          <p class="text-[#64748B] text-base leading-relaxed mb-8">
+            Strategically secluded within the Azure Bay Reserve, yet mere minutes from Michelin-rated dining, private international aviation terminals, and full-service deepwater marinas.
+          </p>
+
+          <div class="space-y-5">
+            
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">Azure Bay Private Cove</h4>
+                  <span class="text-xs font-semibold text-[#C8A96A]">4 min walk (300m)</span>
+                </div>
+                <p class="text-xs text-[#64748B]">Turquoise calm waters, private beach lounge, and stand-up paddle club.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><line x1="12" y1="22" x2="12" y2="8"></line><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path></svg>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">Azure International Yacht Club</h4>
+                  <span class="text-xs font-semibold text-[#C8A96A]">3 min drive (1.2km)</span>
+                </div>
+                <p class="text-xs text-[#64748B]">Deepwater harbor accommodating superyachts up to 120ft with customs desk.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">The Promenade & Fine Dining</h4>
+                  <span class="text-xs font-semibold text-[#C8A96A]">5 min drive (1.8km)</span>
+                </div>
+                <p class="text-xs text-[#64748B]">Curated dining establishments, wine bars, and high-fashion luxury boutiques.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
+              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">International Airport & FBO</h4>
+                  <span class="text-xs font-semibold text-[#C8A96A]">20 min drive (18km)</span>
+                </div>
+                <p class="text-xs text-[#64748B]">Private jet hangar facilities with expedited diplomatic security corridors.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Map Frame -->
+        <div class="w-full lg:w-1/2">
+          <div class="rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-xl bg-white aspect-[4/3] relative">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114964.38943899479!2d-80.24421600000001!3d25.761681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sMiami%2C%20FL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Azure Bay Residences Location Map"
+              class="w-full h-full grayscale contrast-125"
+            ></iframe>
+            <div class="absolute bottom-4 left-4 right-4 bg-[#0F2A43]/90 backdrop-blur-md p-4 rounded-xl text-white text-xs flex items-center justify-between border border-[#C8A96A]/30">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#C8A96A] animate-ping"></span>
+                <span>Azure Bay Sales Gallery & Coastal Reserve</span>
+              </div>
+              <a href="contact.html" class="text-[#C8A96A] hover:underline font-semibold">Get Directions</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 9: FAQ ACCORDION
+         ========================================================================= -->
+    <section class="section-luxury bg-[#EFECE4] border-t border-[#E6E2DA]">
+      <div class="max-w-[880px] mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12">
+          <span class="section-eyebrow section-eyebrow-center justify-center">Questions & Answers</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle mx-auto">
+            Essential information regarding foreign title rights, payment schedules, legal frameworks, and after-sales service.
+          </p>
+        </div>
+
+        <div class="space-y-4" id="faq-accordion-list">
+          
+          <!-- Q1 -->
+          <div class="bg-white rounded-xl border border-[#E6E2DA] overflow-hidden shadow-sm">
+            <button type="button" class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#0F2A43] hover:text-[#C8A96A] transition-colors focus:outline-none" aria-expanded="false">
+              <span>Can foreign nationals purchase property with 100% legal ownership?</span>
+              <svg class="accordion-icon w-5 h-5 text-[#C8A96A] transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-6 text-sm text-[#64748B] leading-relaxed">
+                Yes. All properties offered by Azure Bay Residences qualify for direct, 100% freehold foreign ownership or long-term renewable 99-year registered leases, depending on the buyer's preference and legal residency status. Our in-house legal counsel facilitates all title deed registrations through accredited government notaries.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="bg-white rounded-xl border border-[#E6E2DA] overflow-hidden shadow-sm">
+            <button type="button" class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#0F2A43] hover:text-[#C8A96A] transition-colors focus:outline-none" aria-expanded="false">
+              <span>What is the typical payment schedule for off-plan and completed properties?</span>
+              <svg class="accordion-icon w-5 h-5 text-[#C8A96A] transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-6 text-sm text-[#64748B] leading-relaxed">
+                For completed residences, purchase terms typically require a 10% refundable earnest deposit, followed by 90% at notary deed execution (within 30–60 days). For bespoke builds and off-plan acquisitions, payments are tied directly to certified construction milestones: 20% reservation, 20% foundation, 25% roof completion, 25% interior finishes, and 10% upon formal key handover.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="bg-white rounded-xl border border-[#E6E2DA] overflow-hidden shadow-sm">
+            <button type="button" class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#0F2A43] hover:text-[#C8A96A] transition-colors focus:outline-none" aria-expanded="false">
+              <span>What taxes, notary fees, and recurring costs should international buyers expect?</span>
+              <svg class="accordion-icon w-5 h-5 text-[#C8A96A] transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-6 text-sm text-[#64748B] leading-relaxed">
+                Closing costs typically total between 3% and 4.5% of the deeded purchase price, covering government transfer taxes, independent legal fees, and official notary stamps. Annual property taxes are exceptionally favorable at approximately 0.25% to 0.4%, and monthly estate maintenance covers 24/7 security, landscaping, and community amenities.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="bg-white rounded-xl border border-[#E6E2DA] overflow-hidden shadow-sm">
+            <button type="button" class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#0F2A43] hover:text-[#C8A96A] transition-colors focus:outline-none" aria-expanded="false">
+              <span>How does the private viewing process work for international clients?</span>
+              <svg class="accordion-icon w-5 h-5 text-[#C8A96A] transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-6 text-sm text-[#64748B] leading-relaxed">
+                We offer both immersive 4K live guided video walkthroughs with our senior brokers and curated VIP Discovery Trips. For clients visiting in person, our concierge arranges airport transfers, luxury accommodation, and private chauffeur-driven viewings of our estates and private clubs.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="bg-white rounded-xl border border-[#E6E2DA] overflow-hidden shadow-sm">
+            <button type="button" class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#0F2A43] hover:text-[#C8A96A] transition-colors focus:outline-none" aria-expanded="false">
+              <span>Are financing and mortgage options available for overseas purchasers?</span>
+              <svg class="accordion-icon w-5 h-5 text-[#C8A96A] transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-6 text-sm text-[#64748B] leading-relaxed">
+                Yes. We maintain preferred relationships with premier international private banks that provide cross-border mortgage lending for qualified foreign buyers up to 60–70% loan-to-value (LTV). Alternatively, developer installment plans are available with 0% interest during active construction periods.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="bg-white rounded-xl border border-[#E6E2DA] overflow-hidden shadow-sm">
+            <button type="button" class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-serif font-bold text-base sm:text-lg text-[#0F2A43] hover:text-[#C8A96A] transition-colors focus:outline-none" aria-expanded="false">
+              <span>What after-sales and asset management services do you provide?</span>
+              <svg class="accordion-icon w-5 h-5 text-[#C8A96A] transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-6 text-sm text-[#64748B] leading-relaxed">
+                Azure Bay Residences operates a dedicated full-service asset management division. Services include turnkey furnishing packages, 24/7 preventative maintenance, high-end short-term vacation rental management (including guest screening and cleaning), bill payments, and tax compliance reporting.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 10: FINAL CTA BANNER
+         ========================================================================= -->
+    <section class="relative py-24 sm:py-28 overflow-hidden bg-[#0F2A43] text-white">
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80" 
+          alt="Azure Bay Luxury Villa Evening View" 
+          class="w-full h-full object-cover opacity-25"
+          loading="lazy"
+          width="1920" 
+          height="800"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#0F2A43] via-[#0F2A43]/90 to-[#0F2A43]/80"></div>
+      </div>
+
+      <div class="relative z-10 max-w-[960px] mx-auto px-4 sm:px-6 text-center">
+        <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Private Inquiries</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white mb-6">
+          Schedule Your Private Viewing
+        </h2>
+        <p class="max-w-2xl mx-auto text-base sm:text-lg text-white/85 mb-10 leading-relaxed font-light">
+          Whether you are traveling to Azure Bay or wish to arrange an initial video conference with our managing director, our team stands ready to assist with full discretion.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="contact.html" class="btn-gold !py-4 !px-8 text-base">
+            Request Private Consultation
+          </a>
+          <a href="#" data-brand="whatsapp-link" class="btn-secondary !py-4 !px-8 text-base flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            Speak via WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="bg-[#091928] text-white pt-16 pb-12 border-t border-white/10">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        
+        <!-- Col 1: Brand blurb -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-[#C8A96A]/20 border border-[#C8A96A]/50 flex items-center justify-center text-[#C8A96A]">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span class="font-serif text-xl font-bold tracking-tight text-white" data-brand="name">Azure Bay Residences</span>
+          </div>
+          <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-6 max-w-sm">
+            Curator of exceptional coastal real estate, offering bespoke villas, marina residences, and strategic international land investments in premier sanctuaries.
+          </p>
+          <p class="text-[11px] text-white/50 leading-relaxed" data-brand="license">
+            Licensed Luxury Brokerage & Master Developer #RE-98442-AZ
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Portfolio</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="properties.html?type=Villa" class="hover:text-[#C8A96A] transition-colors">Villas & Sanctuaries</a></li>
+            <li><a href="properties.html?type=Apartment" class="hover:text-[#C8A96A] transition-colors">Marina Penthouses</a></li>
+            <li><a href="properties.html?type=Townhouse" class="hover:text-[#C8A96A] transition-colors">Garden Townhomes</a></li>
+            <li><a href="properties.html?type=Land" class="hover:text-[#C8A96A] transition-colors">Estate Land Parcels</a></li>
+            <li><a href="properties.html" class="hover:text-[#C8A96A] transition-colors">Full Inventory (21+ Master Collection)</a></li>
+            <li><a href="admin.html" class="text-[#C8A96A] font-semibold hover:underline flex items-center gap-1">Executive CMS Portal &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Company</h4>
+          <ul class="space-y-2.5 text-xs text-white/80">
+            <li><a href="about.html" class="hover:text-[#C8A96A] transition-colors">Our Philosophy</a></li>
+            <li><a href="about.html#team" class="hover:text-[#C8A96A] transition-colors">Executive Leadership</a></li>
+            <li><a href="about.html#milestones" class="hover:text-[#C8A96A] transition-colors">Company Milestones</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Sales Gallery</a></li>
+            <li><a href="contact.html" class="hover:text-[#C8A96A] transition-colors">Investor Concierge</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Inquiries -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Private Office</h4>
+          <address class="not-italic space-y-2.5 text-xs text-white/80">
+            <p data-brand="address">1400 Ocean Boulevard, Suite 500, Azure Bay Coastal Reserve</p>
+            <p>
+              <a href="tel:+18004289988" data-brand="phone-link" class="hover:text-[#C8A96A] transition-colors flex items-center gap-1.5">
+                <span data-brand="phone">+1 (800) 428-9988</span>
+              </a>
+            </p>
+            <p>
+              <a href="mailto:inquiries@azurebayresidences.com" data-brand="email-link" class="hover:text-[#C8A96A] transition-colors">
+                <span data-brand="email">inquiries@azurebayresidences.com</span>
+              </a>
+            </p>
+            <p class="text-[11px] text-white/50 pt-1" data-brand="officeHours">
+              Mon – Sat: 9:00 AM – 7:00 PM EST
+            </p>
+          </address>
+        </div>
+
+      </div>
+
+      <!-- Legal bottom bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-white/50">
+        <div>
+          &copy; <span data-brand="year">2026</span> <span data-brand="name">Azure Bay Residences</span>. All rights reserved. Equal Housing Opportunity.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Terms of Representation</a>
+          <a href="#" class="hover:text-[#C8A96A] transition-colors">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
