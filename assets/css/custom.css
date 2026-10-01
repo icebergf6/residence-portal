@@ -626,6 +626,86 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   box-shadow: 0 12px 30px rgba(15, 42, 67, 0.1);
 }
 
+/* HIDE HORIZONTAL SCROLLBAR UTILITY */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* ==========================================================================
+   PROPERTIES PAGE RESPONSIVE SIDEBAR & MOBILE DRAWER
+   ========================================================================== */
+
+/* Mobile & Tablet Drawer (< 1024px) */
+@media (max-width: 1023.98px) {
+  #filters-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 320px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    z-index: 1050 !important;
+    background-color: #FFFFFF !important;
+    transform: translateX(-100%) !important;
+    translate: none !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 25px 50px -12px rgba(15, 42, 67, 0.35) !important;
+    border-radius: 0 !important;
+    border: none !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 !important;
+  }
+
+  #filters-sidebar.drawer-open {
+    transform: translateX(0) !important;
+  }
+
+  #mobile-filters-toggle {
+    display: inline-flex !important;
+  }
+}
+
+/* Desktop Sticky Sidebar (>= 1024px) */
+@media (min-width: 1024px) {
+  #filters-sidebar {
+    position: sticky !important;
+    top: 6.5rem !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 18.5rem !important; /* 296px */
+    flex-shrink: 0 !important;
+    transform: none !important;
+    translate: none !important;
+    background-color: #FFFFFF !important;
+    border-radius: 1rem !important;
+    border: 1px solid #E6E2DA !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    max-height: calc(100vh - 8rem) !important;
+    overflow-y: auto !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  #mobile-filters-toggle {
+    display: none !important;
+  }
+
+  #sidebar-drawer-overlay {
+    display: none !important;
+  }
+}
+
 /* ==========================================================================
    AUTHENTIC DEVICE MOCKUP HARDWARE STYLES (MacBook Pro 16" & iPhone 16 Pro)
    ========================================================================== */

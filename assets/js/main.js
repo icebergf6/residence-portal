@@ -983,7 +983,7 @@ function initPropertiesPage() {
   function openMobileDrawer() {
     if (filtersSidebar) {
       filtersSidebar.classList.remove('-translate-x-full');
-      filtersSidebar.classList.add('translate-x-0');
+      filtersSidebar.classList.add('drawer-open');
     }
     if (sidebarOverlay) {
       sidebarOverlay.classList.add('active');
@@ -993,14 +993,19 @@ function initPropertiesPage() {
 
   function closeMobileDrawer() {
     if (filtersSidebar) {
-      filtersSidebar.classList.remove('translate-x-0');
-      filtersSidebar.classList.add('-translate-x-full');
+      filtersSidebar.classList.remove('drawer-open', '-translate-x-full', 'translate-x-0');
     }
     if (sidebarOverlay) {
       sidebarOverlay.classList.remove('active');
     }
     document.body.style.overflow = '';
   }
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      closeMobileDrawer();
+    }
+  });
 
   if (mobileFiltersToggle) {
     mobileFiltersToggle.addEventListener('click', openMobileDrawer);
@@ -1547,10 +1552,10 @@ function createPropertyCardHTML(property) {
             </button>
           </div>
 
-          <h3 class="font-serif text-xl font-bold text-[#0F2A43] group-hover:text-[#C8A96A] transition-colors mb-2 line-clamp-1">
+          <h3 class="font-serif text-lg sm:text-xl font-bold text-[#0F2A43] group-hover:text-[#C8A96A] transition-colors mb-1.5 line-clamp-2 min-h-[3.25rem] leading-snug">
             <a href="property.html?id=${property.id}">${property.name}</a>
           </h3>
-          <p class="text-xs text-[#64748B] mb-4 line-clamp-1">${property.tagline}</p>
+          <p class="text-xs text-[#64748B] mb-4 line-clamp-1 leading-relaxed">${property.tagline}</p>
         </div>
 
         <div>
