@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initViewingCalendarModal();
   initBrochureDownloadModal();
   initFloatingWhatsApp();
+  initBackToTop();
   initScrollReveal();
   initStatsCounter();
   initFAQAccordion();
@@ -90,31 +91,57 @@ function initNavbar() {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
-  // Mobile menu toggle
+  // Mobile menu toggle with smooth animated transitions
   if (mobileMenuBtn && mobileNav) {
+    let isTransitioning = false;
+
+    const openMobileNav = () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      mobileNav.classList.remove('hidden');
+      mobileNav.classList.add('mobile-nav-closed');
+      // Force reflow for CSS transition
+      void mobileNav.offsetHeight;
+      mobileNav.classList.remove('mobile-nav-closed');
+      mobileNav.classList.add('mobile-nav-open');
+      document.body.classList.add('overflow-hidden');
+      setTimeout(() => { isTransitioning = false; }, 320);
+    };
+
+    const closeMobileNav = () => {
+      if (isTransitioning || mobileNav.classList.contains('hidden')) return;
+      isTransitioning = true;
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileNav.classList.remove('mobile-nav-open');
+      mobileNav.classList.add('mobile-nav-closed');
+      document.body.classList.remove('overflow-hidden');
+      setTimeout(() => {
+        mobileNav.classList.add('hidden');
+        mobileNav.classList.remove('mobile-nav-closed');
+        isTransitioning = false;
+      }, 300);
+    };
+
     mobileMenuBtn.addEventListener('click', () => {
       const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-      mobileMenuBtn.setAttribute('aria-expanded', (!isExpanded).toString());
-      mobileNav.classList.toggle('hidden');
-      document.body.classList.toggle('overflow-hidden', !isExpanded);
+      if (isExpanded) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
     });
 
     // Close when clicking any nav link
     mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      });
+      link.addEventListener('click', closeMobileNav);
     });
 
     // Close when clicking outside mobile menu
     document.addEventListener('click', (e) => {
       if (!mobileNav.classList.contains('hidden')) {
         if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-          mobileMenuBtn.setAttribute('aria-expanded', 'false');
-          mobileNav.classList.add('hidden');
-          document.body.classList.remove('overflow-hidden');
+          closeMobileNav();
         }
       }
     });
@@ -122,9 +149,7 @@ function initNavbar() {
     // Close on Escape key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
+        closeMobileNav();
       }
     });
   }
@@ -164,11 +189,55 @@ function initFloatingWhatsApp() {
 }
 
 /* ==========================================================================
-   4. SCROLL REVEAL (IntersectionObserver)
+   4. SCROLL REVEAL (IntersectionObserver with Smooth Orchestration)
    ========================================================================= */
 function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal-on-scroll');
-  if (!reveals.length) return;
+  // Candidate selectors that give texture and smooth entrance to pages
+  const candidateSelectors = [
+    '.reveal-on-scroll',
+    '.reveal-fade',
+    '.reveal-scale',
+    'main section .section-eyebrow',
+    'main section h2',
+    'main section .section-subtitle',
+    '.property-card',
+    'section#features .grid > div',
+    '#why-us .grid > div'
+  ];
+
+  const elementsToObserve = new Set();
+
+  candidateSelectors.forEach(sel => {
+    try {
+      document.querySelectorAll(sel).forEach(el => {
+        // Skip elements inside carousels, mobile navigation drawers, or modals
+        if (el.closest('#about-carousel-viewport') || el.closest('#mobile-nav') || el.closest('.modal-container') || el.closest('#milestone-stage-card')) {
+          return;
+        }
+
+        if (!el.classList.contains('reveal-on-scroll') && !el.classList.contains('reveal-fade') && !el.classList.contains('reveal-scale')) {
+          el.classList.add('reveal-on-scroll');
+        }
+
+        // Add stagger delay for grid items
+        if (!el.className.includes('delay-')) {
+          const parentGrid = el.closest('.grid');
+          if (parentGrid) {
+            const siblings = Array.from(parentGrid.children);
+            const childIdx = siblings.indexOf(el);
+            if (childIdx >= 0) {
+              const delayVal = (childIdx % 4) * 100;
+              if (delayVal > 0) el.classList.add(`delay-${delayVal}`);
+            }
+          }
+        }
+
+        elementsToObserve.add(el);
+      });
+    } catch (e) {}
+  });
+
+  if (!elementsToObserve.size) return;
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
@@ -178,11 +247,77 @@ function initScrollReveal() {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px'
   });
 
-  reveals.forEach(el => observer.observe(el));
+  elementsToObserve.forEach(el => {
+    // If element is already in the viewport on page load, reveal immediately
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('revealed');
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+/* ==========================================================================
+   4.1 LUXURY FLOATING BACK-TO-TOP BUTTON (Smooth Scroll & Circular Progress)
+   ========================================================================= */
+function initBackToTop() {
+  if (document.getElementById('floating-back-to-top')) return;
+
+  const btn = document.createElement('button');
+  btn.id = 'floating-back-to-top';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Scroll back to top');
+  btn.title = 'Back to Top';
+  btn.className = 'fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#0F2A43]/90 hover:bg-[#0F2A43] text-[#C8A96A] border border-[#C8A96A]/40 shadow-xl backdrop-blur-md flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-4 hover:scale-110 active:scale-95 group cursor-pointer';
+
+  btn.innerHTML = `
+    <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="21" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2.5"></circle>
+      <circle id="back-to-top-progress" cx="24" cy="24" r="21" fill="none" stroke="#C8A96A" stroke-width="2.5" stroke-dasharray="131.95" stroke-dashoffset="131.95" class="transition-all duration-150"></circle>
+    </svg>
+    <svg class="w-4 h-4 stroke-current stroke-2 fill-none group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  `;
+
+  document.body.appendChild(btn);
+
+  const progressCircle = document.getElementById('back-to-top-progress');
+  const circumference = 2 * Math.PI * 21; // ~131.95
+
+  const updateProgress = () => {
+    const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 320) {
+      btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      btn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+    } else {
+      btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      btn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+    }
+
+    if (progressCircle && scrollTotal > 0) {
+      const scrollPct = Math.min(Math.max(currentScroll / scrollTotal, 0), 1);
+      const offset = circumference - (scrollPct * circumference);
+      progressCircle.style.strokeDashoffset = offset;
+    }
+  };
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 }
 
 /* ==========================================================================

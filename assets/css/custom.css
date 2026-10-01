@@ -94,7 +94,7 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .btn-gold:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-secondary {
@@ -122,6 +122,10 @@ h1, h2, h3, h4, .font-serif {
   transform: translateY(-2px);
 }
 
+.btn-secondary:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .btn-outline-navy {
   background-color: transparent;
   color: var(--color-primary);
@@ -143,6 +147,10 @@ h1, h2, h3, h4, .font-serif {
   color: var(--color-white);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+.btn-outline-navy:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* SECTION HEADINGS */
@@ -204,8 +212,8 @@ h1, h2, h3, h4, .font-serif {
 
 .property-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(200, 169, 106, 0.45);
+  box-shadow: 0 16px 36px -8px rgba(15, 42, 67, 0.14), 0 0 0 1px rgba(200, 169, 106, 0.35);
+  border-color: rgba(200, 169, 106, 0.5);
 }
 
 .property-card .card-media {
@@ -219,11 +227,11 @@ h1, h2, h3, h4, .font-serif {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .property-card:hover .card-media img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 /* BADGES */
@@ -253,17 +261,67 @@ h1, h2, h3, h4, .font-serif {
   color: #FFFFFF;
 }
 
-/* SCROLL REVEAL ANIMATIONS */
+/* SCROLL REVEAL ANIMATIONS (Smooth & Non-Rigid) */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-on-scroll.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-fade.revealed {
+  opacity: 1;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94) translateY(16px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Staggered Delays for Fluid Orchestration */
+.delay-75 { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-250 { transition-delay: 250ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Smooth Mobile Nav Menu Animation */
+#mobile-nav {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top center;
+}
+
+#mobile-nav.mobile-nav-closed {
+  opacity: 0 !important;
+  transform: translateY(-8px) scaleY(0.98) !important;
+  pointer-events: none;
+}
+
+#mobile-nav.mobile-nav-open {
+  opacity: 1 !important;
+  transform: translateY(0) scaleY(1) !important;
+  pointer-events: auto;
 }
 
 /* LIGHTBOX */
