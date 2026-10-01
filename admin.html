@@ -19,12 +19,12 @@
   <!-- Compiled High-Performance Stylesheet -->
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="bg-[#081624] text-[#E2E8F0] min-h-screen flex font-sans antialiased selection:bg-[#C8A96A] selection:text-[#0F2A43]">
+<body class="admin-body bg-[#081624] text-[#E2E8F0] min-h-screen font-sans antialiased selection:bg-[#C8A96A] selection:text-[#0F2A43]">
 
   <!-- =========================================================================
        EXECUTIVE SIDEBAR (DESKTOP & COLLAPSIBLE MOBILE)
        ========================================================================= -->
-  <aside id="admin-sidebar" class="w-72 shrink-0 bg-[#091928] border-r border-[#C8A96A]/20 min-h-screen p-5 flex flex-col justify-between fixed lg:sticky top-0 z-50 transition-all duration-300 h-screen overflow-y-auto">
+  <aside id="admin-sidebar" class="w-72 shrink-0 bg-[#091928] border-r border-[#C8A96A]/20 min-h-screen p-5 flex flex-col justify-between transition-all duration-300 h-screen overflow-y-auto">
     <div class="space-y-6">
       <!-- Brand & CMS Indicator -->
       <div class="flex items-center justify-between pb-5 border-b border-white/10">
@@ -122,7 +122,7 @@
   <!-- =========================================================================
        MAIN CONTENT CONTAINER
        ========================================================================= -->
-  <div class="flex-1 flex flex-col min-w-0">
+  <div id="admin-main-container" class="admin-main-content">
     
     <!-- Top Header Bar -->
     <header class="bg-[#091928]/90 border-b border-[#C8A96A]/20 sticky top-0 z-30 backdrop-blur-md shadow-lg">
@@ -171,44 +171,44 @@
         
         <!-- Top KPI Stats Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="admin-kpi flex items-center justify-between">
+          <div class="admin-kpi flex items-center justify-between cursor-pointer hover:border-[#C8A96A] hover:scale-[1.01] transition-all" data-switch-tab="tab-properties" data-filter-status="" title="View all residences in catalog">
             <div>
               <span class="text-xs font-semibold uppercase tracking-wider text-white/60">Total Portfolio Units</span>
               <h3 id="stat-total-props" class="font-serif text-3xl font-bold text-white mt-1">21</h3>
-              <p class="text-[11px] text-emerald-400 font-semibold mt-1">Full Master Catalog</p>
+              <p class="text-[11px] text-emerald-400 font-semibold mt-1">Full Master Catalog &rarr;</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-[#C8A96A]/15 text-[#C8A96A] border border-[#C8A96A]/30 flex items-center justify-center">
               <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             </div>
           </div>
 
-          <div class="admin-kpi flex items-center justify-between">
+          <div class="admin-kpi flex items-center justify-between cursor-pointer hover:border-emerald-500 hover:scale-[1.01] transition-all" data-switch-tab="tab-yields" title="View yield analytics and simulator">
             <div>
               <span class="text-xs font-semibold uppercase tracking-wider text-white/60">Portfolio Valuation</span>
               <h3 id="stat-total-value" class="font-serif text-3xl font-bold text-white mt-1">$54.2M</h3>
-              <p class="text-[11px] text-[#C8A96A] font-semibold mt-1">Deeded Prime Assets</p>
+              <p class="text-[11px] text-[#C8A96A] font-semibold mt-1">Yield Analytics &rarr;</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
               <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
           </div>
 
-          <div class="admin-kpi flex items-center justify-between">
+          <div class="admin-kpi flex items-center justify-between cursor-pointer hover:border-blue-500 hover:scale-[1.01] transition-all" data-switch-tab="tab-properties" data-filter-status="Available" title="Filter catalog by Available only">
             <div>
               <span class="text-xs font-semibold uppercase tracking-wider text-white/60">Active Available</span>
               <h3 id="stat-active-available" class="font-serif text-3xl font-bold text-white mt-1">16</h3>
-              <p class="text-[11px] text-blue-400 font-semibold mt-1">Ready for Acquisition</p>
+              <p class="text-[11px] text-blue-400 font-semibold mt-1">Filter Available &rarr;</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-blue-500/15 text-blue-400 border border-blue-500/30 flex items-center justify-center">
               <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
           </div>
 
-          <div class="admin-kpi flex items-center justify-between">
+          <div class="admin-kpi flex items-center justify-between cursor-pointer hover:border-amber-500 hover:scale-[1.01] transition-all" data-switch-tab="tab-properties" data-filter-status="Reserved" title="Filter catalog by Reserved / Escrow">
             <div>
               <span class="text-xs font-semibold uppercase tracking-wider text-white/60">Contracts in Escrow</span>
               <h3 id="stat-reserved-sold" class="font-serif text-3xl font-bold text-white mt-1">5</h3>
-              <p class="text-[11px] text-amber-400 font-semibold mt-1">Reserved / Closed</p>
+              <p class="text-[11px] text-amber-400 font-semibold mt-1">Filter In Escrow &rarr;</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-400 border border-amber-500/30 flex items-center justify-center">
               <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>

@@ -286,6 +286,11 @@
   document.querySelectorAll('[data-switch-tab]').forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-switch-tab');
+      const filter = btn.getAttribute('data-filter-status');
+      if (filter !== null && typeof filter !== 'undefined' && filterStatus) {
+        filterStatus.value = filter;
+        updateQuickPillsActive(filter);
+      }
       switchTab(target);
     });
   });

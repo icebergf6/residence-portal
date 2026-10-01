@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Our Heritage & Team | Azure Bay Residences</title>
-  <meta name="description" content="Discover the vision, architectural philosophy, leadership team, and development milestones behind Azure Bay Residences." />
+  <title>About Our Heritage & Leadership | Azure Bay Residences</title>
+  <meta name="description" content="Discover the vision, architectural philosophy, executive leadership, and development milestones behind Azure Bay Residences." />
   <link rel="canonical" href="https://azurebayresidences.com/about.html" />
 
   <!-- Open Graph -->
@@ -17,7 +17,7 @@
   <!-- Google Fonts: Playfair Display & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
 
   <!-- DNS prefetch & preconnect for external assets -->
   <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -26,7 +26,7 @@
   <!-- Compiled High-Performance Stylesheet -->
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="bg-[#F7F5F0] text-[#1F2933] antialiased min-h-screen flex flex-col font-sans">
+<body class="bg-[#F7F5F0] text-[#1F2933] antialiased min-h-screen flex flex-col font-sans selection:bg-[#C8A96A] selection:text-[#0F2A43]">
 
   <!-- =========================================================================
        GLOBAL HEADER / STICKY NAVBAR
@@ -58,7 +58,7 @@
         <nav class="hidden md:flex items-center gap-8">
           <a href="index.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Home</a>
           <a href="properties.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Properties</a>
-          <a href="about.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">About</a>
+          <a href="about.html" class="nav-link text-sm uppercase tracking-wider text-[#C8A96A] font-semibold transition-colors py-1">About</a>
           <a href="contact.html" class="nav-link text-sm uppercase tracking-wider text-white/90 hover:text-[#C8A96A] transition-colors py-1">Contact</a>
           <a href="admin.html" class="nav-link text-sm uppercase tracking-wider text-[#C8A96A] hover:text-white transition-colors py-1 flex items-center gap-1.5 font-semibold">
             <span class="w-1.5 h-1.5 rounded-full bg-[#C8A96A] animate-pulse"></span>
@@ -123,7 +123,7 @@
       <nav class="flex flex-col gap-4">
         <a href="index.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Home</a>
         <a href="properties.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Properties</a>
-        <a href="about.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">About</a>
+        <a href="about.html" class="nav-link text-base uppercase tracking-wider text-[#C8A96A] font-semibold py-2 border-b border-white/10">About</a>
         <a href="contact.html" class="nav-link text-base uppercase tracking-wider text-white hover:text-[#C8A96A] py-2 border-b border-white/10">Contact</a>
         <a href="admin.html" class="text-base uppercase tracking-wider text-[#C8A96A] hover:text-white py-2 border-b border-white/10 font-bold flex items-center justify-between">
           <span>Admin CMS Portal</span>
@@ -141,126 +141,385 @@
     </div>
   </header>
 
-  <main class="flex-grow pt-24">
+  <main class="flex-grow pt-20">
     
-    <!-- Hero Banner -->
-    <section class="relative bg-[#0F2A43] text-white py-20 sm:py-28 overflow-hidden">
+    <!-- =========================================================================
+         HERO BANNER: CINEMATIC OCEANIC HORIZON
+         ========================================================================= -->
+    <section class="relative bg-[#071422] text-white pt-24 pb-28 sm:pt-32 sm:pb-36 overflow-hidden">
+      <!-- Background Luxury Visual & Gradient -->
       <div class="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80" 
-          alt="Azure Bay Heritage & Development" 
-          class="w-full h-full object-cover opacity-20"
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=85" 
+          alt="Azure Bay Coastal Architecture Heritage" 
+          class="w-full h-full object-cover opacity-25 filter brightness-90 transform scale-105"
           width="1920" 
-          height="600"
+          height="800"
         />
-        <div class="absolute inset-0 bg-gradient-to-r from-[#0F2A43] via-[#0F2A43]/90 to-[#0F2A43]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#071422] via-[#0B1E32]/85 to-transparent"></div>
+        <div class="absolute inset-0 bg-radial from-transparent via-[#071422]/60 to-[#071422]"></div>
       </div>
 
+      <!-- Glowing Decorative Orbs -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#C8A96A]/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
       <div class="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl">
-          <span class="section-eyebrow text-[#C8A96A]">Our Heritage & Vision</span>
-          <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
-            Sculpting Coastal Legacies
+        <div class="max-w-3xl">
+          <!-- Eyebrow Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C8A96A]/40 text-[#C8A96A] text-[11px] uppercase tracking-[0.2em] font-bold mb-6 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
+            Established 2018 &bull; Sovereign Coastal Architecture
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-6xl lg:text-[68px] font-bold text-white tracking-tight leading-[1.1] mb-6">
+            Sculpting <span class="text-[#C8A96A] italic">Timeless Coastal</span> Legacies.
           </h1>
-          <p class="text-base sm:text-lg text-white/80 leading-relaxed font-light">
-            Founded on the principle that luxury is defined by harmony between human habitation and untouched natural sanctuaries, Azure Bay Residences develops world-class coastal enclaves designed to endure generations.
+
+          <p class="text-base sm:text-xl text-white/80 leading-relaxed font-light mb-8 max-w-2xl">
+            Where restorative natural sanctuaries meet European structural mastery. We craft irreplaceable oceanfront sanctuaries engineered to safeguard capital and family heritage across generations.
           </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#story" class="btn-gold !py-3 !px-7 text-xs uppercase tracking-wider font-bold shadow-lg">
+              Explore Our Story
+            </a>
+            <a href="#team" class="btn-secondary !bg-white/10 !text-white hover:!bg-white/20 !border-white/20 !py-3 !px-7 text-xs uppercase tracking-wider font-semibold">
+              Meet The Leadership
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Company Story Section -->
-    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div>
-          <span class="section-eyebrow">The Origin</span>
-          <h2 class="section-title">An Unwavering Pursuit of Perfection</h2>
-          <div class="space-y-5 text-sm sm:text-base text-[#1F2933]/85 leading-relaxed">
+    <!-- =========================================================================
+         FLOATING EXECUTIVE STATS STRIP (OVERLAPPING HERO & STORY)
+         ========================================================================= -->
+    <div class="relative z-20 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20">
+      <div class="bg-[#0F2A43] text-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#C8A96A]/30 backdrop-blur-xl">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+          
+          <div class="pt-4 sm:pt-0 sm:px-4 first:pt-0 first:px-0">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[#C8A96A]">Track Record</span>
+            </div>
+            <strong class="font-serif text-3xl sm:text-4xl font-bold text-white block">120+</strong>
+            <span class="text-xs text-white/70 block mt-1">Custom Coastal Villas Handed Over</span>
+          </div>
+
+          <div class="pt-4 sm:pt-0 sm:px-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[#C8A96A]">Asset Base</span>
+            </div>
+            <strong class="font-serif text-3xl sm:text-4xl font-bold text-white block">$140M+</strong>
+            <span class="text-xs text-white/70 block mt-1">Capital Portfolio Under Management</span>
+          </div>
+
+          <div class="pt-4 sm:pt-0 sm:px-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-[#C8A96A]"></span>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[#C8A96A]">Title Security</span>
+            </div>
+            <strong class="font-serif text-3xl sm:text-4xl font-bold text-white block">100%</strong>
+            <span class="text-xs text-white/70 block mt-1">Freehold Title with Escrow Guarantees</span>
+          </div>
+
+          <div class="pt-4 sm:pt-0 sm:px-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-[#C8A96A]">Annual Yield</span>
+            </div>
+            <strong class="font-serif text-3xl sm:text-4xl font-bold text-emerald-400 block">10.8%</strong>
+            <span class="text-xs text-white/70 block mt-1">Average Net Rental Distribution YTD</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         COMPANY GENESIS & ARCHITECTURAL PHILOSOPHY
+         ========================================================================= -->
+    <section id="story" class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Story Copy (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <span class="section-eyebrow text-[#C8A96A]">The Genesis</span>
+            <h2 class="section-title text-[#0F2A43] mb-4">
+              Architecture That Bends Reverently to the Coastline
+            </h2>
+          </div>
+
+          <div class="space-y-4 text-sm sm:text-base text-[#1F2933]/90 leading-relaxed font-normal">
             <p>
-              Azure Bay Residences was established in 2018 by an international consortium of European master architects, structural engineers, and private wealth managers. Having observed how conventional resort developments sacrificed the delicate topography of coastal bluffs, our founders envisioned a restorative model: architecture that bends reverently to the coastline rather than flattening it.
+              Azure Bay Residences was established in 2018 by an international consortium of European master architects, marine structural engineers, and private wealth managers. Having observed how conventional mass-market resort developments frequently scar coastal topography, our founders established an uncompromising mandate: <strong class="text-[#0F2A43] font-bold">never flatten nature to accommodate concrete</strong>.
             </p>
             <p>
-              Over the past eight years, we have brought over 120 custom residences from preliminary sketch to deeded title across our four distinguished enclaves. Every villa is individually engineered to maximize natural cross-ventilation, utilize locally sourced limestone and sustainable hardwoods, and offer foreign investors guaranteed title transparency with turnkey fiduciary management.
+              Instead, each Azure Bay villa is custom-engineered to follow the natural contours of our private cliffline and oceanfront bluffs. By utilizing cantilevers that touch the earth with minimal footprint, locally quarried limestone blocks, and thermally insulated European double-glazing, we achieve residences that stay naturally cool in ocean breezes while withstanding coastal salinity for decades.
+            </p>
+            <p>
+              Beyond architectural permanence, we provide international foreign investors with absolute legal sovereignty: direct deed registration, government notary escrow safekeeping, and an integrated private concierge managing premium holiday lettings and maintenance.
             </p>
           </div>
 
-          <div class="grid grid-cols-3 gap-6 pt-8 mt-8 border-t border-[#E6E2DA]">
-            <div>
-              <span class="block font-serif text-3xl font-bold text-[#0F2A43]">120+</span>
-              <span class="text-xs text-[#64748B] uppercase tracking-wider">Villas Delivered</span>
+          <!-- Highlight Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <div class="p-4 rounded-2xl bg-white border border-[#E6E2DA] shadow-sm flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-[#F5EEDB] text-[#C8A96A] flex items-center justify-center font-bold text-base shrink-0">
+                🌿
+              </div>
+              <div>
+                <h4 class="font-serif font-bold text-sm text-[#0F2A43]">65% Native Flora Conservation</h4>
+                <p class="text-xs text-[#64748B] mt-0.5">Every parcel retains mature coastal trees with microgrid graywater retention.</p>
+              </div>
             </div>
-            <div>
-              <span class="block font-serif text-3xl font-bold text-[#0F2A43]">$140M+</span>
-              <span class="text-xs text-[#64748B] uppercase tracking-wider">Portfolio Assets</span>
-            </div>
-            <div>
-              <span class="block font-serif text-3xl font-bold text-[#0F2A43]">100%</span>
-              <span class="text-xs text-[#64748B] uppercase tracking-wider">Freehold Security</span>
+
+            <div class="p-4 rounded-2xl bg-white border border-[#E6E2DA] shadow-sm flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-base shrink-0">
+                🛡️
+              </div>
+              <div>
+                <h4 class="font-serif font-bold text-sm text-[#0F2A43]">Direct Foreign Freehold (HGB/Strata)</h4>
+                <p class="text-xs text-[#64748B] mt-0.5">Pre-vetted legal structures ensuring 100% offshore capital ownership.</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="relative">
-          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-[#E6E2DA]">
+        <!-- Visual Showcase & Founder Quote (5 cols) -->
+        <div class="lg:col-span-5 relative">
+          <!-- Main Photo Frame -->
+          <div class="rounded-3xl overflow-hidden shadow-2xl border border-[#E6E2DA] bg-[#0F2A43]">
             <img 
               src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80" 
               alt="Architectural Blueprint Review at Azure Bay" 
-              class="w-full h-full object-cover"
+              class="w-full h-[460px] object-cover"
               loading="lazy"
               width="800" 
               height="600"
             />
           </div>
-          <div class="absolute -bottom-6 -left-6 bg-[#0F2A43] text-white p-6 rounded-xl shadow-xl max-w-xs border border-[#C8A96A]/40 hidden sm:block">
-            <p class="font-serif italic text-sm text-[#C8A96A] mb-2">
-              "We do not simply build structures; we curate lifelong personal sanctuaries."
+
+          <!-- Floating Founder Quote Box -->
+          <div class="absolute -bottom-8 -left-6 bg-[#0F2A43] text-white p-6 rounded-2xl shadow-2xl max-w-sm border border-[#C8A96A]/40 hidden sm:block">
+            <div class="flex items-center gap-3 mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80" 
+                alt="Julian De La Torre" 
+                class="w-10 h-10 rounded-full object-cover border-2 border-[#C8A96A]" 
+              />
+              <div>
+                <h5 class="text-xs font-bold text-white">Julian De La Torre</h5>
+                <span class="text-[10px] text-[#C8A96A] uppercase tracking-wider block">Founder &amp; Chief Executive</span>
+              </div>
+            </div>
+            <p class="font-serif italic text-xs text-white/90 leading-relaxed">
+              &ldquo;We do not simply build structures; we curate lifelong personal sanctuaries where families thrive and capital endures.&rdquo;
             </p>
-            <span class="text-[11px] uppercase tracking-wider text-white/70 block">— Julian De La Torre, Founder</span>
           </div>
+
+          <!-- Floating Seal -->
+          <div class="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-[#E6E2DA] hidden sm:flex items-center gap-2">
+            <span class="text-xl">🏆</span>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-[#0F2A43] block">Architectural Excellence</span>
+              <span class="text-[9px] text-[#64748B]">FIABCI Luxury Winner</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         THE FOUR MASTERPLAN ENCLAVES (INTERACTIVE PORTFOLIO SHOWCASE)
+         ========================================================================= -->
+    <section class="section-luxury bg-[#0F2A43] text-white py-20 lg:py-28 relative overflow-hidden">
+      <!-- Ambient Glow -->
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C8A96A]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+          <div>
+            <span class="section-eyebrow text-[#C8A96A]">Masterplan Enclaves</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white mt-1">
+              Four Distinctive Oceanfront Enclaves
+            </h2>
+            <p class="text-sm sm:text-base text-white/70 max-w-2xl mt-3 font-light leading-relaxed">
+              Carefully zoned micro-communities across our 450-acre reserve, catering to private seclusion, yachting lifestyles, and architectural freedom.
+            </p>
+          </div>
+          <div>
+            <a href="properties.html" class="btn-gold !py-3 !px-6 text-xs uppercase tracking-wider font-bold whitespace-nowrap shadow-md">
+              View Master Catalog &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Enclave 1 -->
+          <div class="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-[#C8A96A]/60 transition-all duration-300 group flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/11] overflow-hidden relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=80" 
+                  alt="Clifftop Villa Sanctuaries" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43] via-transparent to-transparent"></div>
+                <span class="absolute top-3 left-3 text-[10px] font-bold bg-[#C8A96A] text-[#0F2A43] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  Enclave 01
+                </span>
+              </div>
+              <div class="p-5">
+                <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#C8A96A] transition-colors">Clifftop Sanctuaries</h3>
+                <p class="text-xs text-white/70 mt-2 leading-relaxed">
+                  Elevated residences perched 45 meters above the sea, featuring glass-walled cantilevered pools and private cliff elevators.
+                </p>
+              </div>
+            </div>
+            <div class="p-5 pt-0 border-t border-white/10 mt-4 flex items-center justify-between text-xs">
+              <span class="text-[#C8A96A] font-semibold">From $2.45M</span>
+              <a href="properties.html?type=Villa" class="text-white/60 hover:text-white transition-colors">Explore &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Enclave 2 -->
+          <div class="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-[#C8A96A]/60 transition-all duration-300 group flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/11] overflow-hidden relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=700&q=80" 
+                  alt="Marina Yacht Basin" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43] via-transparent to-transparent"></div>
+                <span class="absolute top-3 left-3 text-[10px] font-bold bg-[#C8A96A] text-[#0F2A43] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  Enclave 02
+                </span>
+              </div>
+              <div class="p-5">
+                <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#C8A96A] transition-colors">Marina Pier &amp; Lofts</h3>
+                <p class="text-xs text-white/70 mt-2 leading-relaxed">
+                  Deepwater marina penthouses with dedicated superyacht slips up to 120 feet and direct boardwalk fine dining.
+                </p>
+              </div>
+            </div>
+            <div class="p-5 pt-0 border-t border-white/10 mt-4 flex items-center justify-between text-xs">
+              <span class="text-[#C8A96A] font-semibold">From $1.45M</span>
+              <a href="properties.html?type=Apartment" class="text-white/60 hover:text-white transition-colors">Explore &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Enclave 3 -->
+          <div class="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-[#C8A96A]/60 transition-all duration-300 group flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/11] overflow-hidden relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" 
+                  alt="Botanical Garden Townhomes" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43] via-transparent to-transparent"></div>
+                <span class="absolute top-3 left-3 text-[10px] font-bold bg-[#C8A96A] text-[#0F2A43] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  Enclave 03
+                </span>
+              </div>
+              <div class="p-5">
+                <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#C8A96A] transition-colors">Botanical Townhomes</h3>
+                <p class="text-xs text-white/70 mt-2 leading-relaxed">
+                  Low-density courtyard homes wrapped in native bougainvillea, shaded walking boulevards, and community wellness pavilions.
+                </p>
+              </div>
+            </div>
+            <div class="p-5 pt-0 border-t border-white/10 mt-4 flex items-center justify-between text-xs">
+              <span class="text-[#C8A96A] font-semibold">From $890K</span>
+              <a href="properties.html?type=Townhouse" class="text-white/60 hover:text-white transition-colors">Explore &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Enclave 4 -->
+          <div class="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-[#C8A96A]/60 transition-all duration-300 group flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/11] overflow-hidden relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" 
+                  alt="Highland Crest Land Parcels" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43] via-transparent to-transparent"></div>
+                <span class="absolute top-3 left-3 text-[10px] font-bold bg-[#C8A96A] text-[#0F2A43] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  Enclave 04
+                </span>
+              </div>
+              <div class="p-5">
+                <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#C8A96A] transition-colors">Highland Crest Parcels</h3>
+                <p class="text-xs text-white/70 mt-2 leading-relaxed">
+                  Expansive estate plots ranging from 1,200m² to 2,500m² with pre-approved building permits and architectural freedom.
+                </p>
+              </div>
+            </div>
+            <div class="p-5 pt-0 border-t border-white/10 mt-4 flex items-center justify-between text-xs">
+              <span class="text-[#C8A96A] font-semibold">From $850K</span>
+              <a href="properties.html?type=Land" class="text-white/60 hover:text-white transition-colors">Explore &rarr;</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Mission & Values Section -->
-    <section class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA]">
+    <!-- =========================================================================
+         MISSION & CORE VALUES: THE TRIAD OF COMMITMENT
+         ========================================================================= -->
+    <section class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA] py-20 lg:py-28">
       <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16">
-          <span class="section-eyebrow section-eyebrow-center justify-center">Guiding Principles</span>
-          <h2 class="section-title">Our Triad of Commitment</h2>
-          <p class="section-subtitle mx-auto">
-            The non-negotiable foundations that guide every land acquisition, blueprint, and client interaction.
+          <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Guiding Principles</span>
+          <h2 class="section-title text-[#0F2A43]">Our Triad of Enduring Commitment</h2>
+          <p class="section-subtitle mx-auto text-[#64748B]">
+            The non-negotiable foundations that guide every land acquisition, architectural blueprint, and fiduciary client partnership.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          <div class="bg-white p-8 rounded-xl border border-[#E6E2DA] shadow-sm">
-            <div class="w-12 h-12 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-lg font-bold mb-6">
+          <div class="bg-white p-8 sm:p-9 rounded-2xl border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-xl font-bold mb-6 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-colors">
               01
             </div>
-            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Uncompromising Quality</h3>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Uncompromising Structural Integrity</h3>
             <p class="text-sm text-[#64748B] leading-relaxed">
-              We partner exclusively with certified master builders, sourcing grade-A Italian marble, thermal double-glazing, and commercial-grade structural steel resistant to coastal salinity.
+              We partner exclusively with certified structural engineers and master builders. Every villa incorporates marine-grade anti-salinity reinforced steel, thermal double-glazing, and Italian Carrara slabs built to endure harsh coastal weather for a century.
             </p>
           </div>
 
-          <div class="bg-white p-8 rounded-xl border border-[#E6E2DA] shadow-sm">
-            <div class="w-12 h-12 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-lg font-bold mb-6">
+          <div class="bg-white p-8 sm:p-9 rounded-2xl border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-xl font-bold mb-6 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-colors">
               02
             </div>
-            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Environmental Stewardship</h3>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Ecological &amp; Biophilic Stewardship</h3>
             <p class="text-sm text-[#64748B] leading-relaxed">
-              We preserve at least 65% of native flora on every estate parcel, integrating microgrid solar arrays, graywater irrigation, and zero-runoff rainwater retention reservoirs.
+              We preserve at least 65% of native flora on every parcel. Decentralized solar microgrid arrays, rainwater catchment cisterns, and biological wastewater filtration ensure our enclaves operate with net-positive environmental harmony.
             </p>
           </div>
 
-          <div class="bg-white p-8 rounded-xl border border-[#E6E2DA] shadow-sm">
-            <div class="w-12 h-12 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-lg font-bold mb-6">
+          <div class="bg-white p-8 sm:p-9 rounded-2xl border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <div class="w-14 h-14 rounded-2xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center font-serif text-xl font-bold mb-6 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-colors">
               03
             </div>
-            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Fiduciary Integrity</h3>
+            <h3 class="font-serif text-xl font-bold text-[#0F2A43] mb-3">Absolute Fiduciary Transparency</h3>
             <p class="text-sm text-[#64748B] leading-relaxed">
-              Full transparency with zero hidden brokerage markups. Direct government notary escrow accounts safeguard capital, while our legal division handles deed registration seamlessly.
+              Zero hidden broker markups or speculative escalations. Independent government notary escrow accounts safeguard 100% of buyer capital until milestone sign-off, while our legal counsel guarantees foreign title validity.
             </p>
           </div>
 
@@ -268,98 +527,104 @@
       </div>
     </section>
 
-    <!-- Leadership Team Section -->
-    <section id="team" class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- =========================================================================
+         EXECUTIVE LEADERSHIP TEAM
+         ========================================================================= -->
+    <section id="team" class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="section-eyebrow section-eyebrow-center justify-center">Executive Leadership</span>
-        <h2 class="section-title">The Curators Behind Azure Bay</h2>
-        <p class="section-subtitle mx-auto">
-          Seasoned developers, visionary architects, and international wealth advisors with decades of prime market expertise.
+        <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Executive Leadership</span>
+        <h2 class="section-title text-[#0F2A43]">The Masterminds Behind Azure Bay</h2>
+        <p class="section-subtitle mx-auto text-[#64748B]">
+          Seasoned developers, visionary architects, and sovereign wealth advisors with decades of prime international real estate expertise.
         </p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         
         <!-- Member 1 -->
-        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
-          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+        <div class="bg-white rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#0F2A43] relative">
             <img 
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" 
-              alt="Julian De La Torre - CEO" 
+              alt="Julian De La Torre - Founder & CEO" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
               width="300"
               height="375"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
           <div class="p-6">
             <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Julian De La Torre</h3>
-            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Founder & CEO</span>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Founder &amp; Chief Executive</span>
             <p class="text-xs text-[#64748B] leading-relaxed">
-              Over 22 years spearheading ultra-prime coastal developments across Southern Europe, the Caribbean, and Central America.
+              22+ years spearheading ultra-prime coastal master developments across Monaco, Southern Spain, and the Pacific Rim.
             </p>
           </div>
         </div>
 
         <!-- Member 2 -->
-        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
-          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+        <div class="bg-white rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#0F2A43] relative">
             <img 
               src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=750&q=80" 
-              alt="Camille Moreau - Architectural Director" 
+              alt="Camille Moreau - Principal Architect" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
               width="300"
               height="375"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
           <div class="p-6">
             <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Camille Moreau</h3>
             <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Principal Architect</span>
             <p class="text-xs text-[#64748B] leading-relaxed">
-              Renowned French architect specializing in passive bioclimatic villa design, sustainable luxury materials, and cantilevered infinity structures.
+              Acclaimed French architect specializing in bioclimatic villa design, passive thermal cooling, and infinity cantilever structures.
             </p>
           </div>
         </div>
 
         <!-- Member 3 -->
-        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
-          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+        <div class="bg-white rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#0F2A43] relative">
             <img 
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=750&q=80" 
-              alt="Tariq Al-Mansoor - Managing Director Investments" 
+              alt="Tariq Al-Mansoor - Director of Investments" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
               width="300"
               height="375"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
           <div class="p-6">
             <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Tariq Al-Mansoor</h3>
-            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Director, Investments</span>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Director of Investments</span>
             <p class="text-xs text-[#64748B] leading-relaxed">
-              Advises sovereign wealth funds, family offices, and high-net-worth individuals on offshore property portfolios and tax-advantaged structures.
+              Advises family offices, sovereign funds, and high-net-worth investors on offshore real estate yields and tax-advantaged structures.
             </p>
           </div>
         </div>
 
         <!-- Member 4 -->
-        <div class="bg-white rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm group">
-          <div class="aspect-[4/5] overflow-hidden bg-[#E2E8F0]">
+        <div class="bg-white rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 group">
+          <div class="aspect-[4/5] overflow-hidden bg-[#0F2A43] relative">
             <img 
               src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=750&q=80" 
-              alt="Isabella Rossi - Concierge Director" 
+              alt="Isabella Rossi - Head of Concierge" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
               width="300"
               height="375"
             />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
           <div class="p-6">
             <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Isabella Rossi</h3>
-            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Head of Concierge</span>
+            <span class="block text-xs font-semibold text-[#C8A96A] uppercase tracking-wider mb-2">Head of Concierge &amp; VIP Stay</span>
             <p class="text-xs text-[#64748B] leading-relaxed">
-              Directs client onboarding, bespoke viewings, and VIP discovery stays with impeccable attention to detail and discretion.
+              Curates private helicopter transfers, discrete on-site villa viewings, and turnkey property stewardship for global owners.
             </p>
           </div>
         </div>
@@ -367,65 +632,78 @@
       </div>
     </section>
 
-    <!-- Milestones Timeline Section -->
-    <section id="milestones" class="section-luxury bg-[#EFECE4] border-y border-[#E6E2DA]">
+    <!-- =========================================================================
+         DEVELOPMENT CHRONOLOGY & MILESTONES TIMELINE
+         ========================================================================= -->
+    <section id="milestones" class="section-luxury bg-[#0F2A43] text-white py-20 lg:py-28 relative">
       <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
         <div class="text-center mb-16">
-          <span class="section-eyebrow section-eyebrow-center justify-center">Chronology</span>
-          <h2 class="section-title">Key Milestones of Excellence</h2>
+          <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Chronology</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">Milestones of Proven Excellence</h2>
+          <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mt-2">
+            Eight years of disciplined capital execution, architectural awards, and punctual delivery.
+          </p>
         </div>
 
-        <div class="space-y-8 relative before:absolute before:inset-0 before:left-5 sm:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-[#C8A96A]/40">
+        <div class="space-y-12 relative before:absolute before:inset-0 before:left-5 sm:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-[#C8A96A]/30">
           
           <!-- Milestone 1 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div class="sm:w-1/2 sm:text-right pr-6">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2018</span>
-              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Foundation & Land Master-Planning</h3>
-              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Acquisition of the 450-acre Azure Bay Coastal Reserve and inaugural ecological master plan.</p>
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
+            <div class="sm:w-1/2 sm:text-right pr-0 sm:pr-8">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/10 px-2.5 py-1 rounded-md border border-[#C8A96A]/30 inline-block mb-2">2018</span>
+              <h3 class="font-serif text-xl font-bold text-white">Land Acquisition &amp; Master Plan</h3>
+              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
+                Secured the 450-acre Azure Bay pristine coastal bluffs reserve with comprehensive geological and topographical clearances.
+              </p>
             </div>
-            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+            <div class="w-11 h-11 rounded-full bg-[#081624] border-2 border-[#C8A96A] text-[#C8A96A] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_15px_rgba(200,169,106,0.5)]">
               ✓
             </div>
-            <div class="sm:w-1/2 pl-6 hidden sm:block"></div>
+            <div class="sm:w-1/2 pl-0 sm:pl-8 hidden sm:block"></div>
           </div>
 
           <!-- Milestone 2 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div class="sm:w-1/2 pr-6 hidden sm:block"></div>
-            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
+            <div class="sm:w-1/2 pr-0 sm:pr-8 hidden sm:block"></div>
+            <div class="w-11 h-11 rounded-full bg-[#081624] border-2 border-[#C8A96A] text-[#C8A96A] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_15px_rgba(200,169,106,0.5)]">
               ✓
             </div>
-            <div class="sm:w-1/2 sm:text-left pl-6">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2020</span>
-              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Villa Phase 1 Completion</h3>
-              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Handover of the first 35 clifftop villas with 100% foreign title registrations completed in record time.</p>
+            <div class="sm:w-1/2 sm:text-left pl-0 sm:pl-8">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/10 px-2.5 py-1 rounded-md border border-[#C8A96A]/30 inline-block mb-2">2020</span>
+              <h3 class="font-serif text-xl font-bold text-white">Phase 1 Clifftop Villas Handed Over</h3>
+              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
+                Delivered 35 cliff residences on schedule with 100% foreign freehold registrations recognized by international sovereign registries.
+              </p>
             </div>
           </div>
 
           <!-- Milestone 3 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div class="sm:w-1/2 sm:text-right pr-6">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2022</span>
-              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Azure Marina & Yacht Basin Launch</h3>
-              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Inauguration of the deepwater harbor capable of berthing vessels up to 120 feet alongside promenade dining.</p>
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
+            <div class="sm:w-1/2 sm:text-right pr-0 sm:pr-8">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/10 px-2.5 py-1 rounded-md border border-[#C8A96A]/30 inline-block mb-2">2022</span>
+              <h3 class="font-serif text-xl font-bold text-white">Deepwater Marina Basin Inauguration</h3>
+              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
+                Completed private harbor infrastructure capable of berthing vessels up to 120ft alongside promenade dining and customs clearance.
+              </p>
             </div>
-            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
+            <div class="w-11 h-11 rounded-full bg-[#081624] border-2 border-[#C8A96A] text-[#C8A96A] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_15px_rgba(200,169,106,0.5)]">
               ✓
             </div>
-            <div class="sm:w-1/2 pl-6 hidden sm:block"></div>
+            <div class="sm:w-1/2 pl-0 sm:pl-8 hidden sm:block"></div>
           </div>
 
           <!-- Milestone 4 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div class="sm:w-1/2 pr-6 hidden sm:block"></div>
-            <div class="w-10 h-10 rounded-full bg-[#0F2A43] border-4 border-white text-[#C8A96A] flex items-center justify-center text-xs font-bold shrink-0 z-10 sm:mx-auto">
-              ✓
+          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
+            <div class="sm:w-1/2 pr-0 sm:pr-8 hidden sm:block"></div>
+            <div class="w-11 h-11 rounded-full bg-[#C8A96A] border-2 border-white text-[#0F2A43] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_20px_rgba(200,169,106,0.8)] animate-pulse">
+              ★
             </div>
-            <div class="sm:w-1/2 sm:text-left pl-6">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-wider">2024–2026</span>
-              <h3 class="font-serif text-lg font-bold text-[#0F2A43]">Sustainable Microgrid & Global Expansion</h3>
-              <p class="text-xs sm:text-sm text-[#64748B] mt-1">Deployment of independent community solar power, private helipad terminal, and premier rental asset program.</p>
+            <div class="sm:w-1/2 sm:text-left pl-0 sm:pl-8">
+              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/20 px-2.5 py-1 rounded-md border border-[#C8A96A]/50 inline-block mb-2">2024–2026</span>
+              <h3 class="font-serif text-xl font-bold text-white">Solar Microgrid &amp; Master Expansion</h3>
+              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
+                Full deployment of decentralized community solar battery power, private helipad terminal, and proprietary investor yield portal.
+              </p>
             </div>
           </div>
 
@@ -433,98 +711,160 @@
       </div>
     </section>
 
-    <!-- Partners & Certifications Strip -->
-    <section class="py-12 bg-white border-b border-[#E6E2DA]">
+    <!-- =========================================================================
+         INSTITUTIONAL ACCREDITATIONS & AWARDS
+         ========================================================================= -->
+    <section class="py-14 bg-white border-b border-[#E6E2DA]">
       <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        <p class="text-center text-xs uppercase tracking-widest text-[#64748B] font-semibold mb-8">
-          Recognized by Leading Global Real Estate & Architecture Institutions
+        <p class="text-center text-xs uppercase tracking-[0.2em] text-[#64748B] font-bold mb-8">
+          Recognized by Leading Global Real Estate &amp; Architecture Institutions
         </p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-70">
-          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
-            LEED PLATINUM
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3.5 px-6 rounded-xl w-full max-w-[220px] bg-[#F7F5F0] hover:border-[#C8A96A] transition-colors">
+            LEED PLATINUM &bull; 2025
           </div>
-          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
-            FIABCI LUXURY
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3.5 px-6 rounded-xl w-full max-w-[220px] bg-[#F7F5F0] hover:border-[#C8A96A] transition-colors">
+            FIABCI PRIX D'EXCELLENCE
           </div>
-          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
-            WORLD REALTY
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3.5 px-6 rounded-xl w-full max-w-[220px] bg-[#F7F5F0] hover:border-[#C8A96A] transition-colors">
+            WORLD LUXURY REALTY
           </div>
-          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3 px-6 rounded-lg w-full max-w-[200px]">
-            ARCHITECTURAL '24
+          <div class="text-center font-serif text-sm font-bold tracking-wider text-[#0F2A43] border border-[#E6E2DA] py-3.5 px-6 rounded-xl w-full max-w-[220px] bg-[#F7F5F0] hover:border-[#C8A96A] transition-colors">
+            ARCHITECTURAL DIGEST &bull; TOP
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Completed Projects Showcase -->
-    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+    <!-- =========================================================================
+         COMPLETED DEVELOPMENTS SHOWCASE
+         ========================================================================= -->
+    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
         <div>
-          <span class="section-eyebrow">Proven Track Record</span>
-          <h2 class="section-title">Completed Developments</h2>
-          <p class="section-subtitle">
-            A testament to our design execution, construction integrity, and punctual milestone delivery.
+          <span class="section-eyebrow text-[#C8A96A]">Track Record of Excellence</span>
+          <h2 class="section-title text-[#0F2A43]">Proven Completed Developments</h2>
+          <p class="section-subtitle text-[#64748B] max-w-xl">
+            A testament to our design execution, construction integrity, and punctual milestone delivery for discerning global buyers.
           </p>
         </div>
-        <div class="mt-4 md:mt-0">
-          <a href="properties.html" class="btn-outline-navy text-xs">
-            Explore Active Listings
+        <div>
+          <a href="properties.html" class="btn-outline-navy text-xs font-semibold uppercase tracking-wider">
+            Explore Active Residences &rarr;
           </a>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         
-        <div class="rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm bg-white">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Solis Point Sanctuaries" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <!-- Project 1 -->
+        <div class="rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 bg-white group flex flex-col justify-between">
+          <div>
+            <div class="aspect-[16/10] overflow-hidden relative">
+              <img 
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" 
+                alt="Solis Point Sanctuaries" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy" 
+              />
+              <span class="absolute top-3 right-3 text-[10px] font-bold bg-emerald-600 text-white px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                100% Sold Out
+              </span>
+            </div>
+            <div class="p-6">
+              <span class="text-[11px] uppercase font-bold text-[#C8A96A] tracking-wider block">Completed Q2 2024</span>
+              <h3 class="font-serif text-xl font-bold text-[#0F2A43] mt-1">Solis Point Sanctuaries</h3>
+              <p class="text-xs text-[#64748B] mt-2.5 leading-relaxed">
+                18 oceanfront clifftop villas featuring cantilevered glass infinity pools, private beach elevator, and Italian marble finishes.
+              </p>
+            </div>
           </div>
-          <div class="p-6">
-            <span class="text-[11px] uppercase font-semibold text-[#C8A96A] tracking-wider">Completed 2024 • 100% Sold</span>
-            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mt-1">Solis Point Sanctuaries</h3>
-            <p class="text-xs text-[#64748B] mt-2">18 oceanfront clifftop villas featuring cantilevered glass pools and private beach elevator.</p>
+          <div class="p-6 pt-0 border-t border-[#E6E2DA] mt-4 flex items-center justify-between text-xs text-[#64748B]">
+            <span>18 Turnkey Villas</span>
+            <span class="font-bold text-[#0F2A43]">$52.4M Volume</span>
           </div>
         </div>
 
-        <div class="rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm bg-white">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=800&q=80" alt="The Marina Pier Towers" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <!-- Project 2 -->
+        <div class="rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 bg-white group flex flex-col justify-between">
+          <div>
+            <div class="aspect-[16/10] overflow-hidden relative">
+              <img 
+                src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=800&q=80" 
+                alt="The Marina Pier Towers" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy" 
+              />
+              <span class="absolute top-3 right-3 text-[10px] font-bold bg-emerald-600 text-white px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                100% Sold Out
+              </span>
+            </div>
+            <div class="p-6">
+              <span class="text-[11px] uppercase font-bold text-[#C8A96A] tracking-wider block">Completed Q4 2023</span>
+              <h3 class="font-serif text-xl font-bold text-[#0F2A43] mt-1">The Marina Pier Towers</h3>
+              <p class="text-xs text-[#64748B] mt-2.5 leading-relaxed">
+                32 bespoke waterfront residences overlooking the yacht basin with private berths, concierge wine vaults, and rooftop spa.
+              </p>
+            </div>
           </div>
-          <div class="p-6">
-            <span class="text-[11px] uppercase font-semibold text-[#C8A96A] tracking-wider">Completed 2023 • 100% Sold</span>
-            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mt-1">The Marina Pier Towers</h3>
-            <p class="text-xs text-[#64748B] mt-2">32 bespoke waterfront residences overlooking the yacht basin with private berths.</p>
+          <div class="p-6 pt-0 border-t border-[#E6E2DA] mt-4 flex items-center justify-between text-xs text-[#64748B]">
+            <span>32 Luxury Lofts</span>
+            <span class="font-bold text-[#0F2A43]">$48.6M Volume</span>
           </div>
         </div>
 
-        <div class="rounded-xl overflow-hidden border border-[#E6E2DA] shadow-sm bg-white">
-          <div class="aspect-[16/10] overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Palma Garden Courts" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+        <!-- Project 3 -->
+        <div class="rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-sm hover:shadow-xl transition-all duration-300 bg-white group flex flex-col justify-between">
+          <div>
+            <div class="aspect-[16/10] overflow-hidden relative">
+              <img 
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" 
+                alt="Palma Garden Courts" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy" 
+              />
+              <span class="absolute top-3 right-3 text-[10px] font-bold bg-emerald-600 text-white px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                100% Sold Out
+              </span>
+            </div>
+            <div class="p-6">
+              <span class="text-[11px] uppercase font-bold text-[#C8A96A] tracking-wider block">Completed Q2 2023</span>
+              <h3 class="font-serif text-xl font-bold text-[#0F2A43] mt-1">Palma Garden Courts</h3>
+              <p class="text-xs text-[#64748B] mt-2.5 leading-relaxed">
+                24 pedestrian courtyard townhomes nestled along private shaded citrus boulevards with direct access to private tennis courts.
+              </p>
+            </div>
           </div>
-          <div class="p-6">
-            <span class="text-[11px] uppercase font-semibold text-[#C8A96A] tracking-wider">Completed 2023 • 100% Sold</span>
-            <h3 class="font-serif text-lg font-bold text-[#0F2A43] mt-1">Palma Garden Courts</h3>
-            <p class="text-xs text-[#64748B] mt-2">24 pedestrian courtyard townhomes nestled along private shaded citrus boulevards.</p>
+          <div class="p-6 pt-0 border-t border-[#E6E2DA] mt-4 flex items-center justify-between text-xs text-[#64748B]">
+            <span>24 Townhomes</span>
+            <span class="font-bold text-[#0F2A43]">$34.2M Volume</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="bg-[#0F2A43] text-white py-20 text-center border-t border-[#C8A96A]/20">
-      <div class="max-w-[700px] mx-auto px-4">
-        <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Private Inquiries</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold mb-4">Partner with Azure Bay</h2>
-        <p class="text-sm sm:text-base text-white/80 mb-8 leading-relaxed">
-          Connect directly with our executive leadership team to discuss custom commissions, private land holdings, or upcoming off-market releases.
+    <!-- =========================================================================
+         CALL TO ACTION: PARTNER WITH AZURE BAY
+         ========================================================================= -->
+    <section class="bg-[#0F2A43] text-white py-24 text-center border-t border-[#C8A96A]/30 relative overflow-hidden">
+      <!-- Glow effect -->
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#C8A96A]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-[760px] mx-auto px-4 relative z-10">
+        <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Private Consultations</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold mb-4 tracking-tight text-white">
+          Begin Your Journey with Azure Bay
+        </h2>
+        <p class="text-sm sm:text-base text-white/80 mb-9 leading-relaxed font-light">
+          Connect directly with our executive office to discuss custom private commissions, discrete off-market acquisition opportunities, or bespoke helicopter discovery stays.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="contact.html" class="btn-gold !py-3.5 !px-8 text-xs uppercase tracking-wider">
+          <a href="contact.html" class="btn-gold !py-3.5 !px-8 text-xs uppercase tracking-wider font-bold shadow-xl w-full sm:w-auto">
             Contact Executive Office
           </a>
-          <a href="properties.html" class="btn-secondary !py-3.5 !px-8 text-xs uppercase tracking-wider">
-            View Current Inventory
+          <a href="properties.html" class="btn-secondary !bg-white/10 !text-white hover:!bg-white/20 !border-white/20 !py-3.5 !px-8 text-xs uppercase tracking-wider font-semibold w-full sm:w-auto">
+            Explore Active Residences (21+)
           </a>
         </div>
       </div>
@@ -554,14 +894,14 @@
             Curator of exceptional coastal real estate, offering bespoke villas, marina residences, and strategic international land investments in premier sanctuaries.
           </p>
           <p class="text-[11px] text-white/50 leading-relaxed" data-brand="license">
-            Licensed Luxury Brokerage & Master Developer #RE-98442-AZ
+            Licensed Luxury Brokerage &amp; Master Developer #RE-98442-AZ
           </p>
         </div>
 
         <div>
           <h4 class="text-xs font-semibold uppercase tracking-wider text-[#C8A96A] mb-4">Portfolio</h4>
           <ul class="space-y-2.5 text-xs text-white/80">
-            <li><a href="properties.html?type=Villa" class="hover:text-[#C8A96A] transition-colors">Villas & Sanctuaries</a></li>
+            <li><a href="properties.html?type=Villa" class="hover:text-[#C8A96A] transition-colors">Villas &amp; Sanctuaries</a></li>
             <li><a href="properties.html?type=Apartment" class="hover:text-[#C8A96A] transition-colors">Marina Penthouses</a></li>
             <li><a href="properties.html?type=Townhouse" class="hover:text-[#C8A96A] transition-colors">Garden Townhomes</a></li>
             <li><a href="properties.html?type=Land" class="hover:text-[#C8A96A] transition-colors">Estate Land Parcels</a></li>

@@ -1069,6 +1069,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    EXECUTIVE ADMIN CMS LUXURY DESIGN SYSTEM
    ========================================================================== */
 
+/* ==========================================================================
+   ADMIN CMS EXECUTIVE APPLICATION LAYOUT
+   ========================================================================== */
+
+/* Force horizontal row layout on admin application shell */
+body.admin-body {
+  display: flex !important;
+  flex-direction: row !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  background-color: #081624 !important;
+  color: #E2E8F0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+/* Main workspace container fills remaining width cleanly */
+.admin-main-content {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
 /* Admin Mobile Sidebar Drawer (< 1024px) */
 @media (max-width: 1023.98px) {
   #admin-sidebar {
@@ -1076,7 +1105,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     top: 0 !important;
     bottom: 0 !important;
     left: 0 !important;
-    width: 290px !important;
+    width: 288px !important;
     max-width: 85vw !important;
     height: 100vh !important;
     z-index: 1050 !important;
@@ -1084,7 +1113,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     transform: translateX(-100%) !important;
     translate: none !important;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
   }
 
   #admin-sidebar.drawer-open {
@@ -1097,10 +1126,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   #admin-sidebar {
     position: sticky !important;
     top: 0 !important;
-    left: auto !important;
+    left: 0 !important;
     transform: none !important;
     translate: none !important;
     display: flex !important;
+    width: 18rem !important; /* 288px */
+    min-width: 18rem !important;
+    flex-shrink: 0 !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    z-index: 40 !important;
   }
 }
 
