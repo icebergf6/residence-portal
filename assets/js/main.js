@@ -283,6 +283,13 @@ function initPageSpecificLogic() {
     initPropertyDetailPage();
   } else if (path === 'contact.html') {
     initContactPage();
+  } else if (path === 'about.html' || path.includes('about')) {
+    initAboutPage();
+  }
+
+  // Also initialize about page if about-specific containers exist in DOM
+  if (document.getElementById('milestone-stage-card') || document.getElementById('about-carousel-viewport')) {
+    initAboutPage();
   }
 }
 
@@ -2912,3 +2919,394 @@ function init360TourViewer(property) {
     });
   }
 }
+
+/* ==========================================================================
+   ABOUT PAGE: INTERACTIVE CHRONOLOGY & SIGNATURE SPACES CAROUSEL
+   ========================================================================== */
+function initAboutPage() {
+  if (window.__aboutPageInitialized) return;
+  window.__aboutPageInitialized = true;
+
+  initMilestonesInteractive();
+  initAboutCarousel();
+}
+
+/**
+ * Interactive Milestones Chronology Scrubber
+ */
+function initMilestonesInteractive() {
+  const stageCard = document.getElementById('milestone-stage-card');
+  const navTrack = document.getElementById('milestones-nav-track');
+  if (!stageCard || !navTrack) return;
+
+  const progressBar = document.getElementById('milestone-progress-bar');
+  const navBtns = navTrack.querySelectorAll('.milestone-nav-btn');
+  const yearEl = document.getElementById('milestone-card-year');
+  const statusEl = document.getElementById('milestone-card-status');
+  const titleEl = document.getElementById('milestone-card-title');
+  const subtitleEl = document.getElementById('milestone-card-subtitle');
+  const descEl = document.getElementById('milestone-card-desc');
+  const metricsEl = document.getElementById('milestone-card-metrics');
+  const quoteEl = document.getElementById('milestone-card-quote');
+  const authorEl = document.getElementById('milestone-card-author');
+  const imgEl = document.getElementById('milestone-card-img');
+  const badgeEl = document.getElementById('milestone-card-badge');
+  const prevBtn = document.getElementById('milestone-prev-btn');
+  const nextBtn = document.getElementById('milestone-next-btn');
+  const indicatorEl = document.getElementById('milestone-index-indicator');
+
+  const MILESTONES = [
+    {
+      year: 'ERA 2018',
+      yearShort: '2018',
+      status: '100% Commissioned & Cleared',
+      statusColor: 'emerald',
+      title: 'Land Acquisition & Master Plan',
+      subtitle: '450-Acre Coastal Bluffs & Topographical Sovereignty',
+      desc: 'Azure Bay secured exclusive perpetual development rights across 450 pristine coastal hectares, undertaking 18 months of intensive geological, maritime wave dynamics, and environmental conservation audits to guarantee a zero-erosion footprint.',
+      metrics: [
+        { label: 'Reserve Footprint', val: '450 Hectares', sub: 'Zero-Erosion Zone', subColor: 'text-emerald-400' },
+        { label: 'Survey Period', val: '18 Months', sub: 'Wave & Soil Dynamics', subColor: 'text-[#C8A96A]' },
+        { label: 'Bedrock Quality', val: 'Basalt Shelf', sub: 'Centuries Stability', subColor: 'text-blue-400' }
+      ],
+      quote: '"Our initial geological surveys ensured every clifftop foundation rests directly on virgin granite and basalt shelf, creating structures designed to outlast centuries."',
+      author: '— Julian De La Torre, Founder & Managing Partner',
+      img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+      badge: 'Historical Blueprint Archive'
+    },
+    {
+      year: 'ERA 2020',
+      yearShort: '2020',
+      status: 'Phase 1 Handover Complete',
+      statusColor: 'emerald',
+      title: 'Phase 1 Handover: The Ridge Residences',
+      subtitle: '35 Clifftop Estates Delivered with Foreign Freehold Title Deeds',
+      desc: 'Despite global supply headwinds, Phase 1 was delivered 2 months ahead of schedule. 35 international buyers received turnkey keys and sovereign freehold strata titles, setting an unprecedented benchmark for Mediterranean development fidelity.',
+      metrics: [
+        { label: 'Residences Handed', val: '35 Estates', sub: '100% Occupancy', subColor: 'text-emerald-400' },
+        { label: 'Title Issuance', val: '14 Days', sub: 'Guaranteed Strata Deed', subColor: 'text-[#C8A96A]' },
+        { label: 'Capital Growth', val: '+42%', sub: 'Since Groundbreaking', subColor: 'text-blue-400' }
+      ],
+      quote: '"Delivering ahead of contract during worldwide lockdown proved that our direct procurement supply chain and localized artisan ateliers are bulletproof."',
+      author: '— Elena Rostova, VP of Development & Delivery',
+      img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+      badge: 'Phase 1 Ribbon Cutting Record'
+    },
+    {
+      year: 'ERA 2022',
+      yearShort: '2022',
+      status: 'Full Maritime Clearance',
+      statusColor: 'blue',
+      title: 'Deepwater Marina Basin & Port Customs Hub',
+      subtitle: '84 Superyacht Berths with Direct Mediterranean Channel Depth',
+      desc: 'Azure Bay dredged a natural 6.8-meter deepwater channel and engineered an outer protective breakwater with interlocking basalt tetrahedrons. Equipped with private port-of-entry customs and high-speed shore power.',
+      metrics: [
+        { label: 'Superyacht Slips', val: '84 Berths', sub: 'Up to 75m Mega-yachts', subColor: 'text-blue-400' },
+        { label: 'Channel Depth', val: '6.8 Meters', sub: 'Low-Tide Navigational Clearance', subColor: 'text-emerald-400' },
+        { label: 'Fuel & Shore Grid', val: '400A 3-Phase', sub: 'High-Capacity Bunkering', subColor: 'text-[#C8A96A]' }
+      ],
+      quote: '"Owners can now sail directly from Monaco or Ibiza and dock at their private villa slipway with sovereign customs clearance done in cabin."',
+      author: '— Capt. Matteo Vane, Director of Maritime Infrastructure',
+      img: 'https://images.unsplash.com/photo-1567684014761-b65e2e59b9eb?auto=format&fit=crop&w=1200&q=80',
+      badge: 'Maritime Authority Sovereign License'
+    },
+    {
+      year: 'ERA 2024',
+      yearShort: '2024',
+      status: 'Net-Positive Operational',
+      statusColor: 'emerald',
+      title: 'Clean Microgrid & Terminal AZ-01 Helipad Concourse',
+      subtitle: '4.2 MW Solar + 12 MWh Battery Array & ICAO Aviation Concourse',
+      desc: 'Azure Bay achieved true energy self-sufficiency with a silent 4.2 MW solar microgrid and industrial battery storage, shielding estates from grid outages. Concurrently, Terminal AZ-01 was certified for twin-engine helicopter night ops.',
+      metrics: [
+        { label: 'Microgrid Solar', val: '4.2 Megawatts', sub: '100% Clean Energy', subColor: 'text-emerald-400' },
+        { label: 'Battery Reserve', val: '12 MWh', sub: '72-Hr Continuous Autonomy', subColor: 'text-[#C8A96A]' },
+        { label: 'Heli Transit', val: '6 Minutes', sub: 'Direct to Airport Hub', subColor: 'text-blue-400' }
+      ],
+      quote: '"Sustainability at Azure Bay is not a marketing checkbox—it is institutional energy independence, military-grade redundancy, and zero sound pollution."',
+      author: '— Dr. Hiroshi Tanaka, Chief Sustainability Officer',
+      img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+      badge: 'ICAO & LEED Platinum Operational Stamp'
+    },
+    {
+      year: 'ERA 2026+',
+      yearShort: '2026+',
+      status: 'Pre-Allocation Open',
+      statusColor: 'amber',
+      title: 'Master Horizon Expansion: Private Island & Wellness Citadel',
+      subtitle: 'Next-Generation Biophilic Architecture & Fractional Yield Protocols',
+      desc: 'The final masterplan frontier introduces 18 ultra-exclusive offshore water sanctuaries, a 5,000 sqm subterranean longevity medical spa, and private family office sovereign vaulting suites.',
+      metrics: [
+        { label: 'Offshore Villas', val: '18 Sanctuaries', sub: 'Over-Water Architecture', subColor: 'text-amber-400' },
+        { label: 'Longevity Spa', val: '5,000 sqm', sub: 'Cellular Diagnostics Lab', subColor: 'text-[#C8A96A]' },
+        { label: 'Projected Yield', val: '8.8% Net ROI', sub: 'Guaranteed Reserve Pool', subColor: 'text-emerald-400' }
+      ],
+      quote: '"The Horizon expansion encapsulates everything we have learned over eight years—combining extreme privacy, restorative medicine, and generational capital stewardship."',
+      author: '— Julian De La Torre, Founder & Managing Partner',
+      img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+      badge: '2026 Horizon Master Blueprints'
+    }
+  ];
+
+  let currentIdx = 0;
+
+  function renderMilestone(idx, animate = true) {
+    if (idx < 0) idx = 0;
+    if (idx >= MILESTONES.length) idx = MILESTONES.length - 1;
+    currentIdx = idx;
+    const m = MILESTONES[idx];
+
+    // Update navigation scrubber buttons styling
+    navBtns.forEach((btn, i) => {
+      const yearSpan = btn.querySelector('.font-serif');
+      const dotSpan = btn.querySelector('span:last-child');
+      if (i === idx) {
+        btn.className = 'milestone-nav-btn active group p-3.5 rounded-2xl bg-[#0F2A43] border border-[#C8A96A] text-left transition-all shadow-lg text-white cursor-pointer ring-1 ring-[#C8A96A]/50 scale-[1.02]';
+        if (yearSpan) yearSpan.className = 'font-serif text-lg font-bold text-[#C8A96A]';
+        if (dotSpan) dotSpan.className = 'w-2.5 h-2.5 rounded-full bg-[#C8A96A] shadow-[0_0_8px_#C8A96A]';
+      } else {
+        btn.className = 'milestone-nav-btn group p-3.5 rounded-2xl bg-white/5 border border-white/10 text-left transition-all hover:bg-white/10 hover:border-white/20 text-white/80 cursor-pointer';
+        if (yearSpan) yearSpan.className = 'font-serif text-lg font-bold text-white/90 group-hover:text-[#C8A96A]';
+        if (dotSpan) {
+          const colors = ['bg-[#C8A96A]', 'bg-emerald-400', 'bg-blue-400', 'bg-emerald-400', 'bg-amber-400'];
+          dotSpan.className = `w-2.5 h-2.5 rounded-full ${colors[i] || 'bg-white/50'}`;
+        }
+      }
+    });
+
+    // Update horizontal progress bar
+    if (progressBar) {
+      const pct = (idx / (MILESTONES.length - 1)) * 100;
+      progressBar.style.width = `${pct}%`;
+    }
+
+    // Content fade transition
+    if (animate) {
+      stageCard.style.opacity = '0.35';
+      stageCard.style.transform = 'translateY(6px)';
+    }
+
+    setTimeout(() => {
+      if (yearEl) yearEl.textContent = m.year;
+      
+      if (statusEl) {
+        let badgeBg = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+        let dotBg = 'bg-emerald-400';
+        if (m.statusColor === 'blue') {
+          badgeBg = 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+          dotBg = 'bg-blue-400';
+        } else if (m.statusColor === 'amber') {
+          badgeBg = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+          dotBg = 'bg-amber-400';
+        }
+        statusEl.className = `text-xs font-bold ${badgeBg} border px-3 py-1 rounded-full flex items-center gap-1.5`;
+        statusEl.innerHTML = `<span class="w-1.5 h-1.5 rounded-full ${dotBg} animate-pulse"></span><span>${m.status}</span>`;
+      }
+
+      if (titleEl) titleEl.textContent = m.title;
+      if (subtitleEl) subtitleEl.textContent = m.subtitle;
+      if (descEl) descEl.textContent = m.desc;
+
+      if (metricsEl && m.metrics) {
+        metricsEl.innerHTML = m.metrics.map(met => `
+          <div class="bg-black/30 rounded-2xl p-3.5 border border-white/10 hover:border-[#C8A96A]/40 transition-colors">
+            <span class="text-[10px] text-white/50 uppercase font-semibold block">${met.label}</span>
+            <strong class="font-serif text-base sm:text-lg text-white font-bold block mt-0.5">${met.val}</strong>
+            <span class="text-[10px] ${met.subColor}">${met.sub}</span>
+          </div>
+        `).join('');
+      }
+
+      if (quoteEl) quoteEl.textContent = m.quote;
+      if (authorEl) authorEl.textContent = m.author;
+      if (imgEl) {
+        imgEl.src = m.img;
+        imgEl.alt = m.title;
+      }
+      if (badgeEl) badgeEl.textContent = m.badge;
+      if (indicatorEl) indicatorEl.textContent = `Era ${idx + 1} of ${MILESTONES.length}`;
+
+      if (animate) {
+        stageCard.style.opacity = '1';
+        stageCard.style.transform = 'translateY(0)';
+      }
+    }, animate ? 140 : 0);
+  }
+
+  // Button clicks on scrubber
+  navBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-milestone-idx'), 10);
+      if (!isNaN(idx)) renderMilestone(idx);
+    });
+  });
+
+  // Prev / Next button actions
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const target = currentIdx > 0 ? currentIdx - 1 : MILESTONES.length - 1;
+      renderMilestone(target);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const target = currentIdx < MILESTONES.length - 1 ? currentIdx + 1 : 0;
+      renderMilestone(target);
+    });
+  }
+
+  // Keyboard navigation when user is focused on the milestones section
+  const sectionKeyHandler = (e) => {
+    const rect = stageCard.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+
+    if (e.key === 'ArrowLeft') {
+      const target = currentIdx > 0 ? currentIdx - 1 : MILESTONES.length - 1;
+      renderMilestone(target);
+    } else if (e.key === 'ArrowRight') {
+      const target = currentIdx < MILESTONES.length - 1 ? currentIdx + 1 : 0;
+      renderMilestone(target);
+    }
+  };
+  window.addEventListener('keydown', sectionKeyHandler);
+
+  // Initial render
+  renderMilestone(0, false);
+}
+
+/**
+ * The Living Masterpiece - Signature Spaces Animated Carousel
+ */
+function initAboutCarousel() {
+  const viewport = document.getElementById('about-carousel-viewport');
+  const track = document.getElementById('about-carousel-track');
+  const prevBtn = document.getElementById('about-carousel-prev');
+  const nextBtn = document.getElementById('about-carousel-next');
+  const currentEl = document.getElementById('about-carousel-current');
+  const totalEl = document.getElementById('about-carousel-total');
+  const dotsContainer = document.getElementById('about-carousel-dots');
+
+  if (!viewport || !track) return;
+
+  const slides = track.querySelectorAll('.about-carousel-slide');
+  const totalSlides = slides.length;
+  if (totalSlides === 0) return;
+
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  const AUTOPLAY_DELAY = 5000;
+
+  if (totalEl) totalEl.textContent = String(totalSlides).padStart(2, '0');
+
+  // Build dots navigation
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `carousel-dot-btn transition-all duration-300 cursor-pointer ${
+        i === 0 ? 'w-8 h-2 rounded-full bg-[#C8A96A]' : 'w-2 h-2 rounded-full bg-white/30 hover:bg-white/60'
+      }`;
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        goToSlide(i);
+        restartAutoplay();
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateDots(idx) {
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.carousel-dot-btn');
+    dots.forEach((dot, i) => {
+      if (i === idx) {
+        dot.className = 'carousel-dot-btn transition-all duration-300 cursor-pointer w-8 h-2 rounded-full bg-[#C8A96A]';
+      } else {
+        dot.className = 'carousel-dot-btn transition-all duration-300 cursor-pointer w-2 h-2 rounded-full bg-white/30 hover:bg-white/60';
+      }
+    });
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0) idx = totalSlides - 1;
+    if (idx >= totalSlides) idx = 0;
+    currentIndex = idx;
+
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    if (currentEl) currentEl.textContent = String(currentIndex + 1).padStart(2, '0');
+    updateDots(currentIndex);
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      restartAutoplay();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      restartAutoplay();
+    });
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Hover Pause & Resume
+  viewport.addEventListener('mouseenter', stopAutoplay);
+  viewport.addEventListener('mouseleave', startAutoplay);
+
+  // Mobile Touch Gestures
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  viewport.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAutoplay();
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    startAutoplay();
+  }, { passive: true });
+
+  // Start Autoplay Engine
+  startAutoplay();
+}
+

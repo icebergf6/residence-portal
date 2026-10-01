@@ -633,81 +633,188 @@
     </section>
 
     <!-- =========================================================================
-         DEVELOPMENT CHRONOLOGY & MILESTONES TIMELINE
+         DEVELOPMENT CHRONOLOGY & INTERACTIVE MILESTONES OF PROVEN EXCELLENCE
          ========================================================================= -->
-    <section id="milestones" class="section-luxury bg-[#0F2A43] text-white py-20 lg:py-28 relative">
-      <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
-        <div class="text-center mb-16">
-          <span class="section-eyebrow section-eyebrow-center justify-center text-[#C8A96A]">Chronology</span>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">Milestones of Proven Excellence</h2>
-          <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mt-2">
-            Eight years of disciplined capital execution, architectural awards, and punctual delivery.
+    <section id="milestones" class="py-20 lg:py-28 bg-[#091928] text-white relative overflow-hidden border-t border-white/10">
+      <!-- Ambient Lighting -->
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[#C8A96A]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-[#C8A96A]/30 text-xs font-semibold text-[#C8A96A] mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#C8A96A] animate-ping"></span>
+            <span>Historical Execution</span>
+          </div>
+          <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            Milestones of Proven <span class="text-[#C8A96A] italic">Excellence</span>
+          </h2>
+          <p class="text-sm sm:text-base text-white/70 mt-3 font-light leading-relaxed">
+            Eight years of disciplined capital allocation, master-planned engineering, and 100% on-schedule foreign freehold deliveries.
           </p>
         </div>
 
-        <div class="space-y-12 relative before:absolute before:inset-0 before:left-5 sm:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-[#C8A96A]/30">
+        <!-- Interactive Chronological Scrubber & Era Selector -->
+        <div class="mb-10 relative">
+          <!-- Timeline Track Line (Desktop) -->
+          <div class="hidden md:block absolute top-1/2 left-8 right-8 h-0.5 bg-white/15 -translate-y-1/2 z-0">
+            <div id="milestone-progress-bar" class="h-full bg-gradient-to-r from-[#C8A96A] to-[#E6CA85] transition-all duration-500" style="width: 20%;"></div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 relative z-10" id="milestones-nav-track">
+            <!-- 5 Milestone Buttons -->
+            <button type="button" data-milestone-idx="0" class="milestone-nav-btn active group p-3.5 rounded-2xl bg-[#0F2A43] border border-[#C8A96A] text-left transition-all shadow-lg hover:border-[#C8A96A] text-white cursor-pointer">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-serif text-lg font-bold text-[#C8A96A]">2018</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#C8A96A] shadow-[0_0_8px_#C8A96A]"></span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-[#C8A96A] transition-colors truncate">Acquisition &amp; Plan</h4>
+              <p class="text-[10px] text-white/50 truncate mt-0.5">450-Acre Reserve Clearances</p>
+            </button>
+
+            <button type="button" data-milestone-idx="1" class="milestone-nav-btn group p-3.5 rounded-2xl bg-white/5 border border-white/10 text-left transition-all hover:bg-white/10 hover:border-white/20 text-white/80 cursor-pointer">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-serif text-lg font-bold text-white/90 group-hover:text-[#C8A96A]">2020</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-[#C8A96A] transition-colors truncate">Phase 1 Handover</h4>
+              <p class="text-[10px] text-white/50 truncate mt-0.5">35 Clifftop Estates Delivered</p>
+            </button>
+
+            <button type="button" data-milestone-idx="2" class="milestone-nav-btn group p-3.5 rounded-2xl bg-white/5 border border-white/10 text-left transition-all hover:bg-white/10 hover:border-white/20 text-white/80 cursor-pointer">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-serif text-lg font-bold text-white/90 group-hover:text-[#C8A96A]">2022</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-[#C8A96A] transition-colors truncate">Deepwater Marina Basin</h4>
+              <p class="text-[10px] text-white/50 truncate mt-0.5">84 Slips &amp; Port Customs</p>
+            </button>
+
+            <button type="button" data-milestone-idx="3" class="milestone-nav-btn group p-3.5 rounded-2xl bg-white/5 border border-white/10 text-left transition-all hover:bg-white/10 hover:border-white/20 text-white/80 cursor-pointer">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-serif text-lg font-bold text-white/90 group-hover:text-[#C8A96A]">2024</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-[#C8A96A] transition-colors truncate">Clean Microgrid &amp; Helipad</h4>
+              <p class="text-[10px] text-white/50 truncate mt-0.5">4.2 MW Solar + Terminal AZ-01</p>
+            </button>
+
+            <button type="button" data-milestone-idx="4" class="milestone-nav-btn group p-3.5 rounded-2xl bg-white/5 border border-white/10 text-left transition-all hover:bg-white/10 hover:border-white/20 text-white/80 cursor-pointer">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-serif text-lg font-bold text-white/90 group-hover:text-[#C8A96A]">2026+</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-[#C8A96A] transition-colors truncate">Master Horizon Expansion</h4>
+              <p class="text-[10px] text-white/50 truncate mt-0.5">Offshore Asset Yield Engine</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Milestone Stage Presentation Card -->
+        <div id="milestone-stage-card" class="bg-[#0F2A43] rounded-3xl p-6 sm:p-10 border border-[#C8A96A]/30 shadow-2xl transition-all duration-500 relative overflow-hidden">
           
-          <!-- Milestone 1 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
-            <div class="sm:w-1/2 sm:text-right pr-0 sm:pr-8">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/10 px-2.5 py-1 rounded-md border border-[#C8A96A]/30 inline-block mb-2">2018</span>
-              <h3 class="font-serif text-xl font-bold text-white">Land Acquisition &amp; Master Plan</h3>
-              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
-                Secured the 450-acre Azure Bay pristine coastal bluffs reserve with comprehensive geological and topographical clearances.
-              </p>
-            </div>
-            <div class="w-11 h-11 rounded-full bg-[#081624] border-2 border-[#C8A96A] text-[#C8A96A] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_15px_rgba(200,169,106,0.5)]">
-              ✓
-            </div>
-            <div class="sm:w-1/2 pl-0 sm:pl-8 hidden sm:block"></div>
-          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Info Column (7 Cols) -->
+            <div class="lg:col-span-7 space-y-6">
+              
+              <!-- Era Header Badges -->
+              <div class="flex flex-wrap items-center gap-3">
+                <span id="milestone-card-year" class="text-sm font-serif font-black bg-[#C8A96A] text-[#0F2A43] px-3.5 py-1 rounded-xl shadow-md">
+                  ERA 2018
+                </span>
+                <span id="milestone-card-status" class="text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>100% Commissioned &amp; Cleared</span>
+                </span>
+              </div>
 
-          <!-- Milestone 2 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
-            <div class="sm:w-1/2 pr-0 sm:pr-8 hidden sm:block"></div>
-            <div class="w-11 h-11 rounded-full bg-[#081624] border-2 border-[#C8A96A] text-[#C8A96A] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_15px_rgba(200,169,106,0.5)]">
-              ✓
-            </div>
-            <div class="sm:w-1/2 sm:text-left pl-0 sm:pl-8">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/10 px-2.5 py-1 rounded-md border border-[#C8A96A]/30 inline-block mb-2">2020</span>
-              <h3 class="font-serif text-xl font-bold text-white">Phase 1 Clifftop Villas Handed Over</h3>
-              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
-                Delivered 35 cliff residences on schedule with 100% foreign freehold registrations recognized by international sovereign registries.
-              </p>
-            </div>
-          </div>
+              <!-- Title & Narrative -->
+              <div>
+                <h3 id="milestone-card-title" class="font-serif text-2xl sm:text-4xl font-bold text-white leading-tight">
+                  Land Acquisition &amp; Master Plan
+                </h3>
+                <h4 id="milestone-card-subtitle" class="text-xs sm:text-sm font-semibold text-[#C8A96A] mt-1.5 tracking-wide">
+                  450-Acre Coastal Bluffs &amp; Topographical Sovereignty
+                </h4>
+                <p id="milestone-card-desc" class="text-xs sm:text-sm text-white/80 mt-4 leading-relaxed font-light">
+                  Azure Bay secured exclusive perpetual development rights across 450 pristine coastal hectares, undertaking 18 months of intensive geological, maritime wave dynamics, and environmental conservation audits to guarantee a zero-erosion footprint.
+                </p>
+              </div>
 
-          <!-- Milestone 3 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
-            <div class="sm:w-1/2 sm:text-right pr-0 sm:pr-8">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/10 px-2.5 py-1 rounded-md border border-[#C8A96A]/30 inline-block mb-2">2022</span>
-              <h3 class="font-serif text-xl font-bold text-white">Deepwater Marina Basin Inauguration</h3>
-              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
-                Completed private harbor infrastructure capable of berthing vessels up to 120ft alongside promenade dining and customs clearance.
-              </p>
-            </div>
-            <div class="w-11 h-11 rounded-full bg-[#081624] border-2 border-[#C8A96A] text-[#C8A96A] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_15px_rgba(200,169,106,0.5)]">
-              ✓
-            </div>
-            <div class="sm:w-1/2 pl-0 sm:pl-8 hidden sm:block"></div>
-          </div>
+              <!-- 3 Pillar Metrics Bar -->
+              <div id="milestone-card-metrics" class="grid grid-cols-3 gap-3 pt-2">
+                <div class="bg-black/30 rounded-2xl p-3.5 border border-white/10">
+                  <span class="text-[10px] text-white/50 uppercase font-semibold block">Reserve Footprint</span>
+                  <strong class="font-serif text-base sm:text-lg text-white font-bold block mt-0.5">450 Hectares</strong>
+                  <span class="text-[10px] text-emerald-400">Zero-Erosion Zone</span>
+                </div>
+                <div class="bg-black/30 rounded-2xl p-3.5 border border-white/10">
+                  <span class="text-[10px] text-white/50 uppercase font-semibold block">Survey Period</span>
+                  <strong class="font-serif text-base sm:text-lg text-white font-bold block mt-0.5">18 Months</strong>
+                  <span class="text-[10px] text-[#C8A96A]">Wave &amp; Soil Dynamics</span>
+                </div>
+                <div class="bg-black/30 rounded-2xl p-3.5 border border-white/10">
+                  <span class="text-[10px] text-white/50 uppercase font-semibold block">Bedrock Quality</span>
+                  <strong class="font-serif text-base sm:text-lg text-white font-bold block mt-0.5">Basalt Shelf</strong>
+                  <span class="text-[10px] text-blue-400">Centuries Stability</span>
+                </div>
+              </div>
 
-          <!-- Milestone 4 -->
-          <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 group">
-            <div class="sm:w-1/2 pr-0 sm:pr-8 hidden sm:block"></div>
-            <div class="w-11 h-11 rounded-full bg-[#C8A96A] border-2 border-white text-[#0F2A43] flex items-center justify-center text-sm font-bold shrink-0 z-10 sm:mx-auto shadow-[0_0_20px_rgba(200,169,106,0.8)] animate-pulse">
-              ★
+              <!-- Field Note Quote -->
+              <div class="bg-white/5 rounded-2xl p-4 border-l-2 border-[#C8A96A] text-xs text-white/80 italic font-light">
+                <p id="milestone-card-quote">
+                  "Our initial geological surveys ensured every clifftop foundation rests directly on virgin granite and basalt shelf, creating structures designed to outlast centuries."
+                </p>
+                <span id="milestone-card-author" class="block font-sans font-semibold text-[11px] text-[#C8A96A] not-italic mt-2">
+                  — Julian De La Torre, Founder &amp; Managing Partner
+                </span>
+              </div>
+
+              <!-- Era Navigation Controls -->
+              <div class="flex items-center justify-between pt-2">
+                <div class="flex items-center gap-2">
+                  <button type="button" id="milestone-prev-btn" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all flex items-center justify-center cursor-pointer shadow-sm" aria-label="Previous era">
+                    <svg class="w-4 h-4 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                  </button>
+                  <button type="button" id="milestone-next-btn" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/15 text-white/80 hover:text-white border border-white/15 transition-all flex items-center justify-center cursor-pointer shadow-sm" aria-label="Next era">
+                    <svg class="w-4 h-4 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <span class="text-xs text-white/50 ml-2 font-mono" id="milestone-index-indicator">Era 1 of 5</span>
+                </div>
+
+                <a href="#signature-spaces-carousel" class="text-xs font-semibold text-[#C8A96A] hover:underline flex items-center gap-1.5">
+                  <span>Explore Signature Spaces</span>
+                  <span>&darr;</span>
+                </a>
+              </div>
+
             </div>
-            <div class="sm:w-1/2 sm:text-left pl-0 sm:pl-8">
-              <span class="text-xs uppercase font-bold text-[#C8A96A] tracking-widest bg-[#C8A96A]/20 px-2.5 py-1 rounded-md border border-[#C8A96A]/50 inline-block mb-2">2024–2026</span>
-              <h3 class="font-serif text-xl font-bold text-white">Solar Microgrid &amp; Master Expansion</h3>
-              <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">
-                Full deployment of decentralized community solar battery power, private helipad terminal, and proprietary investor yield portal.
-              </p>
+
+            <!-- Right Visual Column (5 Cols) -->
+            <div class="lg:col-span-5">
+              <div class="relative rounded-2xl overflow-hidden aspect-[4/3] border border-white/15 shadow-2xl group">
+                <img 
+                  id="milestone-card-img" 
+                  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Milestone Master Planning" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  loading="lazy" 
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent opacity-80"></div>
+                
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] text-white/90 bg-[#071422]/90 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-white/15">
+                  <span id="milestone-card-badge" class="font-semibold text-[#C8A96A]">Historical Blueprint Archive</span>
+                  <span class="text-white/60 font-mono">AZ-CHRONO</span>
+                </div>
+              </div>
             </div>
+
           </div>
 
         </div>
+
       </div>
     </section>
 
@@ -838,6 +945,308 @@
           <div class="p-6 pt-0 border-t border-[#E6E2DA] mt-4 flex items-center justify-between text-xs text-[#64748B]">
             <span>24 Townhomes</span>
             <span class="font-bold text-[#0F2A43]">$34.2M Volume</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 7.8: THE LIVING MASTERPIECE - SIGNATURE SPACES ANIMATED CAROUSEL
+         ========================================================================= -->
+    <section id="signature-spaces-carousel" class="py-20 lg:py-28 bg-[#071422] text-white relative overflow-hidden border-t border-white/10">
+      <!-- Glow ambient background orbs -->
+      <div class="absolute top-1/4 -left-40 w-96 h-96 bg-[#C8A96A]/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-1/4 -right-40 w-96 h-96 bg-[#183C5E]/30 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Header with Controls -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
+              <span class="text-xs uppercase font-bold tracking-[0.2em] text-[#C8A96A]">Signature Living Spaces</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">
+              The Living <span class="text-[#C8A96A] italic">Masterpiece</span>
+            </h2>
+            <p class="text-sm sm:text-base text-white/70 max-w-xl mt-2 font-light">
+              Experience the sensory intimacy and bespoke architectural spaces designed for effortless coastal living.
+            </p>
+          </div>
+
+          <!-- Carousel Controls & Slide Indicator HUD -->
+          <div class="flex items-center gap-4 self-start md:self-auto">
+            <!-- Counter -->
+            <div class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/80 flex items-center gap-2">
+              <span id="about-carousel-current" class="text-[#C8A96A] font-bold">01</span>
+              <span class="text-white/30">/</span>
+              <span id="about-carousel-total" class="text-white/60">05</span>
+            </div>
+
+            <!-- Arrows -->
+            <div class="flex items-center gap-2">
+              <button type="button" id="about-carousel-prev" class="w-11 h-11 rounded-full bg-white/5 hover:bg-[#C8A96A] text-white hover:text-[#0F2A43] border border-white/15 hover:border-[#C8A96A] transition-all flex items-center justify-center shadow-lg active:scale-95 cursor-pointer" aria-label="Previous slide">
+                <svg class="w-5 h-5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button type="button" id="about-carousel-next" class="w-11 h-11 rounded-full bg-white/5 hover:bg-[#C8A96A] text-white hover:text-[#0F2A43] border border-white/15 hover:border-[#C8A96A] transition-all flex items-center justify-center shadow-lg active:scale-95 cursor-pointer" aria-label="Next slide">
+                <svg class="w-5 h-5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Viewport & Slider Track -->
+        <div class="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-[#091928]" id="about-carousel-viewport">
+          <div id="about-carousel-track" class="flex transition-transform duration-700 ease-out will-change-transform">
+            
+            <!-- Slide 1 -->
+            <div class="about-carousel-slide min-w-full relative flex flex-col lg:flex-row items-stretch">
+              <div class="lg:w-3/5 relative min-h-[360px] lg:min-h-[520px] overflow-hidden group">
+                <img 
+                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=85" 
+                  alt="Cantilevered Horizon Sanctuaries" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent lg:hidden"></div>
+                <div class="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#0F2A43]/90 text-[#C8A96A] border border-[#C8A96A]/40 text-xs font-bold backdrop-blur-md">
+                  ✦ Architectural Highlight
+                </div>
+              </div>
+              <div class="lg:w-2/5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-[#0F2A43] border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="space-y-4">
+                  <span class="text-xs uppercase font-bold tracking-widest text-[#C8A96A] block">Clifftop Engineering</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    Cantilevered Horizon Sanctuaries
+                  </h3>
+                  <p class="text-xs sm:text-sm text-white/70 leading-relaxed font-light">
+                    Suspended 18 meters past sheer ocean bluffs, these obsidian-edged glass infinity pools merge seamlessly into the Mediterranean sunset, resting on anchor pins driven 40 meters into volcanic granite shelf.
+                  </p>
+                  
+                  <div class="grid grid-cols-2 gap-3 pt-3">
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Elevation</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">85m Above Sea</strong>
+                    </div>
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Orientation</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">270° Sunset Sweep</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between">
+                  <div class="text-[11px] text-white/60">
+                    Featured in <strong class="text-[#C8A96A]">Architectural Digest 2025</strong>
+                  </div>
+                  <a href="properties.html?type=Villa" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider shadow-md">
+                    View Villas
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="about-carousel-slide min-w-full relative flex flex-col lg:flex-row items-stretch">
+              <div class="lg:w-3/5 relative min-h-[360px] lg:min-h-[520px] overflow-hidden group">
+                <img 
+                  src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=1600&q=85" 
+                  alt="Deepwater Marina & Yacht Club Basin" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent lg:hidden"></div>
+                <div class="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#0F2A43]/90 text-[#C8A96A] border border-[#C8A96A]/40 text-xs font-bold backdrop-blur-md">
+                  ✦ Maritime Infrastructure
+                </div>
+              </div>
+              <div class="lg:w-2/5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-[#0F2A43] border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="space-y-4">
+                  <span class="text-xs uppercase font-bold tracking-widest text-[#C8A96A] block">Nautical Haven</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    Deepwater Marina &amp; Private Basin
+                  </h3>
+                  <p class="text-xs sm:text-sm text-white/70 leading-relaxed font-light">
+                    84 sheltered slips accommodating yachts up to 120ft with individual three-phase shore power, private high-speed fueling bunkers, on-site customs clearance, and waterfront sommelier lockers.
+                  </p>
+                  
+                  <div class="grid grid-cols-2 gap-3 pt-3">
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Capacity</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">84 Superyacht Slips</strong>
+                    </div>
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Draft Clearance</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">6.8m Low Tide</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between">
+                  <div class="text-[11px] text-white/60">
+                    24/7 International <strong class="text-emerald-400">Harbor Master</strong>
+                  </div>
+                  <a href="properties.html?type=Apartment" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider shadow-md">
+                    Marina Suites
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="about-carousel-slide min-w-full relative flex flex-col lg:flex-row items-stretch">
+              <div class="lg:w-3/5 relative min-h-[360px] lg:min-h-[520px] overflow-hidden group">
+                <img 
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85" 
+                  alt="Biophilic Botanical Sanctuaries" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent lg:hidden"></div>
+                <div class="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#0F2A43]/90 text-[#C8A96A] border border-[#C8A96A]/40 text-xs font-bold backdrop-blur-md">
+                  ✦ Landscape Architecture
+                </div>
+              </div>
+              <div class="lg:w-2/5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-[#0F2A43] border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="space-y-4">
+                  <span class="text-xs uppercase font-bold tracking-widest text-[#C8A96A] block">Botanical Courtyards</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    Ancient Olive Groves &amp; Microclimates
+                  </h3>
+                  <p class="text-xs sm:text-sm text-white/70 leading-relaxed font-light">
+                    Over 4,000 indigenous trees, fragrant citrus promenades, and sheltered limestone breezeways designed to funnel maritime airflow, lowering ambient temperature by up to 5°C naturally.
+                  </p>
+                  
+                  <div class="grid grid-cols-2 gap-3 pt-3">
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Green Footprint</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">68% Native Reserve</strong>
+                    </div>
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Passive Cooling</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">-5°C Natural Breeze</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between">
+                  <div class="text-[11px] text-white/60">
+                    Preserving <strong class="text-emerald-400">Centuries Flora</strong>
+                  </div>
+                  <a href="properties.html?type=Townhouse" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider shadow-md">
+                    Townhomes
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="about-carousel-slide min-w-full relative flex flex-col lg:flex-row items-stretch">
+              <div class="lg:w-3/5 relative min-h-[360px] lg:min-h-[520px] overflow-hidden group">
+                <img 
+                  src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1600&q=85" 
+                  alt="Subterranean Sommelier Vaults" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent lg:hidden"></div>
+                <div class="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#0F2A43]/90 text-[#C8A96A] border border-[#C8A96A]/40 text-xs font-bold backdrop-blur-md">
+                  ✦ Private Collections
+                </div>
+              </div>
+              <div class="lg:w-2/5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-[#0F2A43] border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="space-y-4">
+                  <span class="text-xs uppercase font-bold tracking-widest text-[#C8A96A] block">Basalt Cellars</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    Subterranean Sommelier Vaults
+                  </h3>
+                  <p class="text-xs sm:text-sm text-white/70 leading-relaxed font-light">
+                    Carved into subterranean bedrock, private temperature-curated wine chambers maintain a constant 13°C natural humidity, providing private cellar curation for vintage Bordeaux and grand cru collections.
+                  </p>
+                  
+                  <div class="grid grid-cols-2 gap-3 pt-3">
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Cellar Climate</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">13°C Controlled</strong>
+                    </div>
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Bottle Capacity</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">2,500 Bottles / Unit</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between">
+                  <div class="text-[11px] text-white/60">
+                    Biometric <strong class="text-[#C8A96A]">Master Vault Access</strong>
+                  </div>
+                  <a href="contact.html" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider shadow-md">
+                    Request Dossier
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="about-carousel-slide min-w-full relative flex flex-col lg:flex-row items-stretch">
+              <div class="lg:w-3/5 relative min-h-[360px] lg:min-h-[520px] overflow-hidden group">
+                <img 
+                  src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&q=85" 
+                  alt="Helipad & Aerial Concierge Lounge" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent lg:hidden"></div>
+                <div class="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#0F2A43]/90 text-[#C8A96A] border border-[#C8A96A]/40 text-xs font-bold backdrop-blur-md">
+                  ✦ Executive Flight Terminal
+                </div>
+              </div>
+              <div class="lg:w-2/5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between bg-[#0F2A43] border-t lg:border-t-0 lg:border-l border-white/10">
+                <div class="space-y-4">
+                  <span class="text-xs uppercase font-bold tracking-widest text-[#C8A96A] block">Rapid Transit</span>
+                  <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    Terminal AZ-01 Helipad Concourse
+                  </h3>
+                  <p class="text-xs sm:text-sm text-white/70 leading-relaxed font-light">
+                    Direct ICAO-certified helipad terminal connecting Azure Bay to major international airport gates in under six minutes, supported by private aircraft marshaling and dedicated VIP customs clearance.
+                  </p>
+                  
+                  <div class="grid grid-cols-2 gap-3 pt-3">
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Flight Transfer</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">6 Min to Airport</strong>
+                    </div>
+                    <div class="bg-black/30 rounded-xl p-3 border border-white/10">
+                      <span class="text-[10px] text-white/50 block">Certification</span>
+                      <strong class="text-xs font-bold text-white block mt-0.5">ICAO Certified AZ-01</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between">
+                  <div class="text-[11px] text-white/60">
+                    Sovereign <strong class="text-blue-400">Customs Clearance</strong>
+                  </div>
+                  <a href="contact.html" class="btn-gold !py-2 !px-4 text-xs font-bold uppercase tracking-wider shadow-md">
+                    Book Flight Stay
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Progress Bar & Dots -->
+          <div class="absolute bottom-5 left-6 right-6 flex items-center justify-between z-20 pointer-events-none">
+            <div class="flex items-center gap-2 pointer-events-auto" id="about-carousel-dots">
+              <!-- Dynamically populated / interactive -->
+            </div>
+            <div class="text-[11px] text-white/50 hidden sm:flex items-center gap-2 bg-black/40 px-3 py-1 rounded-full backdrop-blur-md border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Autoplay Active (Pause on hover)</span>
+            </div>
           </div>
         </div>
 
