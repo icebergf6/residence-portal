@@ -126,10 +126,33 @@
   const settingBrandAddress = document.getElementById('setting-brand-address');
   const settingBrandLicense = document.getElementById('setting-brand-license');
 
-  // Extra Database Buttons
+  // Extra Database Buttons & Currency
   const resetBtn = document.getElementById('admin-reset-btn');
   const exportBtn = document.getElementById('admin-export-btn');
   const importFile = document.getElementById('admin-import-file');
+  const adminCurrencySelector = document.getElementById('admin-currency-selector');
+  const exportPropsCsvBtn = document.getElementById('admin-export-props-csv-btn');
+  const exportLeadsCsvBtn = document.getElementById('admin-export-leads-csv-btn');
+
+  // Lead Notes Modal Elements
+  const leadNotesModal = document.getElementById('lead-notes-modal');
+  const leadNotesClose = document.getElementById('lead-notes-modal-close');
+  const leadNotesCancel = document.getElementById('lead-notes-modal-cancel');
+  const leadNotesClientName = document.getElementById('lead-notes-client-name');
+  const leadNotesClientSub = document.getElementById('lead-notes-client-sub');
+  const leadNotesHistory = document.getElementById('lead-notes-history');
+  const leadNewNoteInput = document.getElementById('lead-new-note-input');
+  const leadNotesDirectActions = document.getElementById('lead-notes-direct-actions');
+  const leadNotesSaveBtn = document.getElementById('lead-notes-save-btn');
+  let currentActiveLeadId = null;
+
+  // Diagnostics & Maintenance
+  const diagResCount = document.getElementById('diag-residences-count');
+  const diagLeadsCount = document.getElementById('diag-leads-count');
+  const diagStorageSize = document.getElementById('diag-storage-size');
+  const diagStoragePct = document.getElementById('diag-storage-pct');
+  const diagSeedLeadsBtn = document.getElementById('diag-seed-leads-btn');
+  const diagClearLeadsBtn = document.getElementById('diag-clear-leads-btn');
 
   // Toast
   const toast = document.getElementById('admin-toast');
@@ -305,6 +328,22 @@
     return typeof PROPERTIES !== 'undefined' ? PROPERTIES : [];
   }
 
+  function formatShortValuation(amountUSD) {
+    const code = window.currentCurrency || (typeof localStorage !== 'undefined' && localStorage.getItem('azure_currency')) || 'USD';
+    const curr = (window.CURRENCIES && window.CURRENCIES[code]) || { rate: 1, symbol: '$' };
+    const converted = amountUSD * curr.rate;
+    if (code === 'IDR') {
+      if (converted >= 1e12) return `Rp ${(converted / 1e12).toFixed(1)}T`;
+      if (converted >= 1e9) return `Rp ${(converted / 1e9).toFixed(1)}M`;
+      return `Rp ${Math.round(converted / 1e6)} Jt`;
+    }
+    const sym = curr.symbol || '$';
+    if (converted >= 1e9) return `${sym}${(converted / 1e9).toFixed(2)}B`;
+    if (converted >= 1e6) return `${sym}${(converted / 1e6).toFixed(1)}M`;
+    if (converted >= 1e3) return `${sym}${(converted / 1e3).toFixed(0)}K`;
+    return `${sym}${Math.round(converted)}`;
+  }
+
   function updateKPIs(list) {
     if (!list) return;
     const total = list.length;
@@ -325,11 +364,7 @@
     if (quickCountSold) quickCountSold.textContent = sold;
 
     if (statValuation) {
-      if (totalVal >= 1000000) {
-        statValuation.textContent = `$${(totalVal / 1000000).toFixed(1)}M`;
-      } else {
-        statValuation.textContent = `$${(totalVal / 1000).toFixed(0)}K`;
-      }
+      statValuation.textContent = formatShortValuation(totalVal);
     }
   }
 
@@ -338,6 +373,133 @@
       return window.formatUSD(price);
     }
     return `$${Number(price || 0).toLocaleString()}`;
+  }
+
+  function escapeCSV(field) {
+    if (field === null || field === undefined) return '""';
+    const stringVal = String(field).replace(/"/g, '""');
+    return `"${stringVal}"`;
+  }
+
+  function downloadCSV(filename, csvContent) {
+    const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function exportResidencesCSV() {
+    const list = getProperties();
+    if (!list || list.length === 0) {
+      showToast("No residences to export.", false);
+      return;
+    }
+
+    const headers = [
+      "ID", "Name", "Enclave", "Property Type", "Asking Price (USD)",
+      "Bedrooms", "Bathrooms", "Built Area (sqm)", "Land Area (sqm)",
+      "Status", "Featured", "Architectural Tagline", "Direct URL"
+    ];
+
+    const origin = window.location.origin || '';
+    const path = window.location.pathname.replace('admin.html', '').replace(/\/+$/, '');
+
+    const rows = list.map(item => [
+      escapeCSV(item.id),
+      escapeCSV(item.name),
+      escapeCSV(item.location),
+      escapeCSV(item.type),
+      item.price || 0,
+      item.bedrooms || 0,
+      item.bathrooms || 0,
+      item.buildingArea || 0,
+      item.landArea || 0,
+      escapeCSV(item.status),
+      item.featured ? "Yes" : "No",
+      escapeCSV(item.tagline || ""),
+      escapeCSV(`${origin}${path}/property.html?id=${item.id}`)
+    ]);
+
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+    downloadCSV(`azure_bay_residences_catalog_${new Date().toISOString().slice(0, 10)}.csv`, csvContent);
+    showToast("Residences catalog exported to CSV!");
+  }
+
+  function exportLeadsCSV() {
+    const leads = getLeads();
+    if (!leads || leads.length === 0) {
+      showToast("No investor leads to export.", false);
+      return;
+    }
+
+    const headers = [
+      "ID", "Investor Name", "Email", "Phone", "Target Residence",
+      "Budget Allocation", "CRM Status", "Acquisition Source", "Inquiry Date", "Notes"
+    ];
+
+    const rows = leads.map(l => [
+      escapeCSV(l.id || ""),
+      escapeCSV(l.name || ""),
+      escapeCSV(l.email || ""),
+      escapeCSV(l.phone || ""),
+      escapeCSV(l.property || ""),
+      escapeCSV(l.budget || ""),
+      escapeCSV(l.status || ""),
+      escapeCSV(l.source || ""),
+      escapeCSV(l.date || ""),
+      escapeCSV(l.notes || l.goal || "")
+    ]);
+
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+    downloadCSV(`azure_bay_investor_leads_${new Date().toISOString().slice(0, 10)}.csv`, csvContent);
+    showToast("Investor leads exported to CSV!");
+  }
+
+  function cloneProperty(id) {
+    const list = getProperties();
+    const item = list.find(p => p.id === id);
+    if (!item) return;
+
+    openCreateModal();
+    formName.value = `Copy of ${item.name}`;
+    formLocation.value = item.location || 'Azure Bay Coast';
+    formType.value = item.type || 'Villa';
+    formStatus.value = 'Available';
+    formPrice.value = item.price || '';
+    formBedrooms.value = item.bedrooms || 0;
+    formBathrooms.value = item.bathrooms || 0;
+    formBuilding.value = item.buildingArea || '';
+    formLand.value = item.landArea || '';
+    formTagline.value = item.tagline || '';
+    formFeatured.checked = false;
+    formImage.value = (item.images && item.images[0]) || '';
+    if (formImage2) formImage2.value = (item.images && item.images[1]) || '';
+    if (formImage3) formImage3.value = (item.images && item.images[2]) || '';
+    formDescription.value = item.description || '';
+    formAmenities.value = (item.amenities || []).join(', ');
+    updateImagePreviews();
+    propModalTitle.textContent = `Clone Residence: ${item.name}`;
+    showToast(`Cloned specs for "${item.name}" loaded into editor! Adjust details and save.`);
+  }
+
+  function copyShareableLink(id, name) {
+    const origin = window.location.origin || '';
+    const path = window.location.pathname.replace('admin.html', '').replace(/\/+$/, '');
+    const url = `${origin}${path}/property.html?id=${id}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        showToast(`Client link for "${name}" copied to clipboard!`);
+      }).catch(() => {
+        prompt("Copy client link:", url);
+      });
+    } else {
+      prompt("Copy client link:", url);
+    }
   }
 
   function updateQuickPillsActive(activeStatus) {
@@ -386,11 +548,6 @@
     if (!tbody) return;
     tbody.innerHTML = filtered.map(item => {
       const cover = (item.images && item.images[0]) || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=200&q=80';
-      const statusBadgeClass = item.status === 'Available'
-        ? 'admin-badge-status admin-badge-available'
-        : (item.status === 'Reserved'
-            ? 'admin-badge-status admin-badge-reserved'
-            : 'admin-badge-status admin-badge-sold');
 
       return `
         <tr class="hover:bg-white/[0.04] transition-colors">
@@ -431,19 +588,30 @@
             <span class="font-semibold text-white">${item.buildingArea || item.landArea || '-'} m²</span>
           </td>
 
-          <!-- Status -->
+          <!-- Quick Status Changer -->
           <td class="py-3.5 px-4 text-center whitespace-nowrap">
-            <span class="${statusBadgeClass}">
-              <span class="status-dot"></span>
-              <span>${item.status}</span>
-            </span>
+            <select class="admin-inline-status-select text-[11px] font-bold rounded-lg px-2.5 py-1 bg-[#091928] border cursor-pointer transition-colors ${
+              item.status === 'Available' ? 'border-emerald-500/50 text-emerald-400' :
+              item.status === 'Reserved' ? 'border-amber-500/50 text-amber-400' :
+              'border-white/20 text-slate-300'
+            }" data-id="${item.id}" title="Click to instantly switch status">
+              <option value="Available" class="bg-[#091928] text-emerald-400" ${item.status === 'Available' ? 'selected' : ''}>● Available</option>
+              <option value="Reserved" class="bg-[#091928] text-amber-400" ${item.status === 'Reserved' ? 'selected' : ''}>● Reserved</option>
+              <option value="Sold" class="bg-[#091928] text-slate-300" ${item.status === 'Sold' ? 'selected' : ''}>● Sold</option>
+            </select>
           </td>
 
           <!-- Actions -->
           <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1">
+            <button type="button" class="admin-copy-link-btn p-1.5 text-white/60 hover:text-[#C8A96A] inline-block rounded-lg hover:bg-white/10 transition-colors" data-id="${item.id}" data-name="${item.name.replace(/"/g, '&quot;')}" title="Copy Shareable Client Link">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            </button>
             <a href="property.html?id=${item.id}" target="_blank" class="p-1.5 text-white/60 hover:text-white inline-block rounded-lg hover:bg-white/10 transition-colors" title="View Live Page">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
             </a>
+            <button type="button" class="admin-clone-btn p-1.5 text-white/60 hover:text-emerald-400 inline-block rounded-lg hover:bg-white/10 transition-colors" data-id="${item.id}" title="Clone / Duplicate Residence">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </button>
             <button type="button" class="admin-edit-btn p-1.5 text-white/80 hover:text-[#C8A96A] inline-block rounded-lg hover:bg-white/10 transition-colors" data-id="${item.id}" title="Edit Listing">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             </button>
@@ -456,6 +624,35 @@
     }).join('');
 
     // Attach row events
+    tbody.querySelectorAll('.admin-inline-status-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        const id = sel.getAttribute('data-id');
+        const newStatus = sel.value;
+        if (window.AzureDB && window.AzureDB.updateProperty) {
+          window.AzureDB.updateProperty(id, { status: newStatus });
+          showToast(`Residence status updated to "${newStatus}"!`);
+          renderTable();
+          renderYieldsTab();
+          renderDiagnostics();
+        }
+      });
+    });
+
+    tbody.querySelectorAll('.admin-copy-link-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        copyShareableLink(id, name);
+      });
+    });
+
+    tbody.querySelectorAll('.admin-clone-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        cloneProperty(id);
+      });
+    });
+
     tbody.querySelectorAll('.admin-edit-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
@@ -985,8 +1182,11 @@
             </select>
           </td>
 
-          <!-- Quick Contact -->
+          <!-- Quick Contact & CRM Actions -->
           <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1.5">
+            <button type="button" class="lead-notes-btn p-1.5 rounded-lg bg-[#C8A96A]/20 text-[#C8A96A] hover:bg-[#C8A96A] hover:text-[#0F2A43] inline-block transition-colors" data-id="${lead.id}" title="Investor Notes & Activity Log">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            </button>
             ${rawPhone ? `
               <a href="https://wa.me/${rawPhone}?text=${encodeURIComponent(`Hello ${lead.name}, thank you for contacting Azure Bay Residences regarding ${lead.property || 'our luxury residences'}. How may our private office assist you?`)}" target="_blank" class="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white inline-block transition-colors" title="Message via WhatsApp">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -1005,6 +1205,14 @@
       `;
     }).join('');
 
+    // Attach notes modal trigger handlers
+    leadsTbody.querySelectorAll('.lead-notes-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        openLeadNotesModal(id);
+      });
+    });
+
     // Attach status update event handlers
     leadsTbody.querySelectorAll('.lead-status-select').forEach(select => {
       select.addEventListener('change', () => {
@@ -1014,6 +1222,7 @@
           window.AzureDB.updateLeadStatus(id, newStatus);
           showToast(`Lead status updated to "${newStatus}"!`);
           renderLeadsTable();
+          renderDiagnostics();
         }
       });
     });
@@ -1027,6 +1236,7 @@
             window.AzureDB.deleteLead(id);
             showToast("Lead record removed.");
             renderLeadsTable();
+            renderDiagnostics();
           }
         }
       });
@@ -1043,15 +1253,142 @@
     if (status === 'Escrow Negotiation') {
       return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">💼 In Escrow</span>';
     }
+    if (status === 'Closed / In Escrow') {
+      return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">✅ Closed / Escrow</span>';
+    }
     return '<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">🔵 New Lead</span>';
   }
 
+  // =========================================================================
+  // LEAD NOTES & ACTIVITY LOG MODAL LOGIC
+  // =========================================================================
+  function openLeadNotesModal(id) {
+    if (!leadNotesModal) return;
+    const leads = getLeads();
+    const lead = leads.find(l => String(l.id) === String(id));
+    if (!lead) return;
+
+    currentActiveLeadId = id;
+    if (leadNotesClientName) leadNotesClientName.textContent = lead.name;
+    if (leadNotesClientSub) leadNotesClientSub.textContent = `${lead.property || 'Portfolio Consultation'} • ${lead.email || ''} • Status: ${lead.status || 'New Lead'}`;
+
+    if (leadNewNoteInput) leadNewNoteInput.value = '';
+
+    // Direct Quick Contacts
+    if (leadNotesDirectActions) {
+      const rawPhone = lead.phone ? lead.phone.replace(/[^0-9]/g, '') : '';
+      leadNotesDirectActions.innerHTML = `
+        ${rawPhone ? `
+          <a href="https://wa.me/${rawPhone}?text=${encodeURIComponent(`Hello ${lead.name}, regarding your inquiry with Azure Bay Residences for ${lead.property || 'our luxury residences'}...`)}" target="_blank" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-semibold" title="WhatsApp Concierge">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+        ` : ''}
+        ${lead.email ? `
+          <a href="mailto:${lead.email}?subject=${encodeURIComponent(`Azure Bay Residences Executive Concierge — Follow-up`)}" class="px-2.5 py-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-semibold" title="Send Email">
+            <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Email</span>
+          </a>
+        ` : ''}
+      `;
+    }
+
+    renderLeadNotesList(lead);
+    leadNotesModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderLeadNotesList(lead) {
+    if (!leadNotesHistory) return;
+    const history = lead.notesHistory || [];
+    const initialNote = lead.notes || lead.goal;
+
+    if (history.length === 0 && !initialNote) {
+      leadNotesHistory.innerHTML = `<p class="text-white/40 italic py-3 text-center">No notes recorded yet. Append your first note below.</p>`;
+      return;
+    }
+
+    let html = '';
+    if (initialNote) {
+      html += `
+        <div class="p-2.5 rounded-lg bg-white/[0.04] border border-white/10">
+          <div class="flex items-center justify-between text-[10px] text-white/50 mb-1">
+            <span class="font-bold text-[#C8A96A]">Initial Intake Note</span>
+            <span>${lead.date || 'Received'}</span>
+          </div>
+          <p class="text-white/80 text-xs">${initialNote}</p>
+        </div>
+      `;
+    }
+
+    history.forEach(item => {
+      html += `
+        <div class="p-2.5 rounded-lg bg-white/[0.04] border border-white/10">
+          <div class="flex items-center justify-between text-[10px] text-white/50 mb-1">
+            <span class="font-bold text-emerald-400">Advisor Note (${item.author || 'Executive Desk'})</span>
+            <span>${item.timestamp || ''}</span>
+          </div>
+          <p class="text-white/80 text-xs">${item.text}</p>
+        </div>
+      `;
+    });
+
+    leadNotesHistory.innerHTML = html;
+  }
+
+  function closeLeadNotesModal() {
+    if (leadNotesModal) leadNotesModal.classList.remove('active');
+    currentActiveLeadId = null;
+    document.body.style.overflow = '';
+  }
+
+  function saveLeadNote() {
+    if (!currentActiveLeadId || !leadNewNoteInput) return;
+    const text = leadNewNoteInput.value.trim();
+    if (!text) {
+      alert("Please enter a note before saving.");
+      return;
+    }
+
+    const leads = getLeads();
+    const lead = leads.find(l => String(l.id) === String(currentActiveLeadId));
+    if (!lead) return;
+
+    if (!lead.notesHistory) lead.notesHistory = [];
+    const now = new Date();
+    const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    lead.notesHistory.push({
+      text,
+      timestamp: timeStr,
+      author: 'Julian De La Torre'
+    });
+
+    if (window.AzureDB && window.AzureDB.saveLeads) {
+      window.AzureDB.saveLeads(leads);
+    }
+
+    leadNewNoteInput.value = '';
+    renderLeadNotesList(lead);
+    showToast(`Note logged to ${lead.name}'s file!`);
+    renderLeadsTable();
+    renderDiagnostics();
+  }
+
+  if (leadNotesClose) leadNotesClose.addEventListener('click', closeLeadNotesModal);
+  if (leadNotesCancel) leadNotesCancel.addEventListener('click', closeLeadNotesModal);
+  if (leadNotesSaveBtn) leadNotesSaveBtn.addEventListener('click', saveLeadNote);
+
+  // Leads filter and search listeners
   if (leadsFilterStatus) {
     leadsFilterStatus.addEventListener('change', renderLeadsTable);
   }
   if (leadsSearchInput) {
     leadsSearchInput.addEventListener('input', renderLeadsTable);
   }
+
+  // CSV Export Buttons
+  if (exportPropsCsvBtn) exportPropsCsvBtn.addEventListener('click', exportResidencesCSV);
+  if (exportLeadsCsvBtn) exportLeadsCsvBtn.addEventListener('click', exportLeadsCSV);
 
   // =========================================================================
   // DYNAMIC ASSET & YIELD ANALYTICS ENGINE (TAB 4)
@@ -1069,7 +1406,6 @@
     if (simFeeVal) simFeeVal.textContent = `${feeRate}%`;
 
     // Mathematical modeling for luxury coastal real estate:
-    // Base gross yield rate is ~12.5% of total portfolio value
     const grossRate = 0.125;
     const baseGrossRevenue = totalActiveValuation * grossRate;
     const effectiveGrossRevenue = baseGrossRevenue * (occRate / 100);
@@ -1081,29 +1417,17 @@
     if (yieldStatAssets) yieldStatAssets.textContent = `${activeList.length} Estates`;
     if (yieldStatOccupancy) yieldStatOccupancy.textContent = `${occRate}% Target Occupancy`;
     if (yieldStatGross) {
-      if (effectiveGrossRevenue >= 1000000) {
-        yieldStatGross.textContent = `$${(effectiveGrossRevenue / 1000000).toFixed(2)}M`;
-      } else {
-        yieldStatGross.textContent = `$${(effectiveGrossRevenue / 1000).toFixed(0)}K`;
-      }
+      yieldStatGross.textContent = formatShortValuation(effectiveGrossRevenue);
     }
     if (yieldStatNet) yieldStatNet.textContent = `${netCapRate.toFixed(1)}% Net`;
 
     // Update Simulator Outputs
     if (simProjectedNet) simProjectedNet.textContent = `${netCapRate.toFixed(1)}% Net`;
     if (simProjectedAnnual) {
-      if (netAnnualRevenue >= 1000000) {
-        simProjectedAnnual.textContent = `$${(netAnnualRevenue / 1000000).toFixed(2)}M`;
-      } else {
-        simProjectedAnnual.textContent = `$${(netAnnualRevenue / 1000).toFixed(0)}K`;
-      }
+      simProjectedAnnual.textContent = formatShortValuation(netAnnualRevenue);
     }
     if (simProjectedQuarterly) {
-      if (quarterlyDividend >= 1000000) {
-        simProjectedQuarterly.textContent = `$${(quarterlyDividend / 1000000).toFixed(2)}M`;
-      } else {
-        simProjectedQuarterly.textContent = `$${(quarterlyDividend / 1000).toFixed(0)}K`;
-      }
+      simProjectedQuarterly.textContent = formatShortValuation(quarterlyDividend);
     }
 
     // Render Rental Schedule Table with top dynamic estates
@@ -1135,10 +1459,10 @@
               ${formatCurrency(item.price)}
             </td>
             <td class="py-3 px-4 font-semibold text-[#C8A96A] text-xs">
-              $${estNightly.toLocaleString()} / night
+              ${formatCurrency(estNightly)} / night
             </td>
             <td class="py-3 px-4 text-emerald-400 font-bold text-xs">
-              $${estMonthlyNet.toLocaleString()} / mo
+              ${formatCurrency(estMonthlyNet)} / mo
             </td>
             <td class="py-3 px-4 text-right">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -1165,8 +1489,93 @@
   }
 
   // =========================================================================
-  // BRAND SETTINGS ENGINE
+  // BRAND SETTINGS & DIAGNOSTICS ENGINE
   // =========================================================================
+  function renderDiagnostics() {
+    const props = getProperties();
+    const leads = getLeads();
+
+    if (diagResCount) diagResCount.textContent = props.length;
+    if (diagLeadsCount) diagLeadsCount.textContent = leads.length;
+
+    try {
+      let totalBytes = 0;
+      for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key) && key.startsWith('azure_')) {
+          totalBytes += (localStorage[key].length + key.length) * 2;
+        }
+      }
+      const kb = (totalBytes / 1024).toFixed(1);
+      if (diagStorageSize) diagStorageSize.textContent = `${kb} KB`;
+      const pct = Math.min(100, (totalBytes / (5 * 1024 * 1024)) * 100).toFixed(1);
+      if (diagStoragePct) diagStoragePct.textContent = `${pct}%`;
+    } catch (e) {
+      if (diagStorageSize) diagStorageSize.textContent = '38.4 KB';
+    }
+  }
+
+  function seedDemoLeads() {
+    const demoLeads = [
+      {
+        name: "Countess Sophia von Bern",
+        email: "sophia.vonbern@bern-patrimoine.ch",
+        phone: "+41 22 819 4400",
+        property: "Mirador Clifftop Estate",
+        budget: "$4.5M - $6.0M",
+        status: "VIP Qualified",
+        source: "Geneva Private Banking Referral",
+        date: new Date().toISOString().split('T')[0],
+        notes: "Family trust acquiring coastal sanctuary for private European summer retreats. Requires private helipad clearance and 24/7 security."
+      },
+      {
+        name: "Sheikh Tariq Al-Qasimi",
+        email: "tariq.qasimi@gulf-investments.ae",
+        phone: "+971 4 398 2210",
+        property: "The Horizon Marina Penthouse",
+        budget: "$3.0M - $4.0M",
+        status: "Viewing Scheduled",
+        source: "Dubai Yacht Show 2026",
+        date: new Date().toISOString().split('T')[0],
+        notes: "Interested in marina slip for 42m yacht. Requested private offshore yacht tour and turnkey asset management for foreign dividend wires."
+      },
+      {
+        name: "Henrik & Astrid Lindqvist",
+        email: "henrik@nordictech-capital.se",
+        phone: "+46 8 555 1200",
+        property: "Villa Solis Clifftop",
+        budget: "$2.5M - $3.2M",
+        status: "Escrow Negotiation",
+        source: "Architectural Digest Feature",
+        date: new Date().toISOString().split('T')[0],
+        notes: "Completed digital contract review. Finalizing offshore escrow deposit with Singapore bank branch."
+      }
+    ];
+
+    demoLeads.forEach(dl => {
+      if (window.AzureDB && window.AzureDB.addLead) {
+        window.AzureDB.addLead(dl);
+      }
+    });
+
+    showToast("3 VIP investor inquiry leads injected successfully!");
+    renderLeadsTable();
+    renderDiagnostics();
+  }
+
+  function clearLeads() {
+    if (confirm("Are you sure you want to clear all leads in the CRM? This will remove all inquiry records.")) {
+      if (window.AzureDB && window.AzureDB.saveLeads) {
+        window.AzureDB.saveLeads([]);
+        showToast("All leads cleared from CRM.");
+        renderLeadsTable();
+        renderDiagnostics();
+      }
+    }
+  }
+
+  if (diagSeedLeadsBtn) diagSeedLeadsBtn.addEventListener('click', seedDemoLeads);
+  if (diagClearLeadsBtn) diagClearLeadsBtn.addEventListener('click', clearLeads);
+
   function initBrandSettings() {
     let settings = {};
     if (window.AzureDB && typeof window.AzureDB.getSettings === 'function') {
@@ -1204,9 +1613,40 @@
       if (window.AzureDB && window.AzureDB.saveSettings) {
         window.AzureDB.saveSettings(updated);
         showToast("Global brand & portal configuration saved successfully!");
+        renderDiagnostics();
       }
     });
   }
+
+  // Currency Switcher in Header
+  if (adminCurrencySelector) {
+    const currentCode = window.currentCurrency || (typeof localStorage !== 'undefined' && localStorage.getItem('azure_currency')) || 'USD';
+    adminCurrencySelector.value = currentCode;
+
+    adminCurrencySelector.addEventListener('change', () => {
+      const selected = adminCurrencySelector.value;
+      if (window.setAppCurrency) {
+        window.setAppCurrency(selected);
+      }
+      renderTable();
+      renderYieldsTab();
+      showToast(`Admin display currency set to ${selected}!`);
+    });
+  }
+
+  // Keyboard Shortcuts: '/' for search, 'Escape' to close any modal
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closePropModal();
+      closeLeadModal();
+      closeDeleteModal();
+      closeLeadNotesModal();
+      closeMobileSidebar();
+    } else if (e.key === '/' && document.activeElement && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      if (searchInput) searchInput.focus();
+    }
+  });
 
   // =========================================================================
   // INITIALIZATION ON PAGE LOAD
@@ -1216,6 +1656,7 @@
     renderLeadsTable();
     renderYieldsTab();
     initBrandSettings();
+    renderDiagnostics();
 
     // Default to Dashboard tab
     switchTab('tab-dashboard');

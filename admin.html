@@ -142,6 +142,19 @@
 
         <!-- Global Header Action Buttons -->
         <div class="flex items-center gap-2.5">
+          <!-- Admin Currency Selector -->
+          <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/15">
+            <span class="text-[10px] text-white/50 uppercase font-bold tracking-wider">Currency</span>
+            <select id="admin-currency-selector" class="bg-transparent text-xs font-bold text-[#C8A96A] focus:outline-none cursor-pointer">
+              <option value="USD" class="bg-[#091928] text-white">USD ($)</option>
+              <option value="EUR" class="bg-[#091928] text-white">EUR (€)</option>
+              <option value="GBP" class="bg-[#091928] text-white">GBP (£)</option>
+              <option value="AED" class="bg-[#091928] text-white">AED (د.إ)</option>
+              <option value="SGD" class="bg-[#091928] text-white">SGD (S$)</option>
+              <option value="IDR" class="bg-[#091928] text-white">IDR (Rp)</option>
+            </select>
+          </div>
+
           <button type="button" id="admin-add-lead-btn" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-white/10 hover:bg-white/15 border border-white/15 transition-all shadow-sm">
             <svg class="w-3.5 h-3.5 text-[#C8A96A] stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
             <span>+ Add Lead</span>
@@ -329,8 +342,13 @@
               </select>
             </div>
 
-            <!-- Reset / Import -->
+            <!-- Reset / Import / Export -->
             <div class="flex items-center gap-2">
+              <button type="button" id="admin-export-props-csv-btn" class="px-3 py-2 rounded-xl text-xs font-semibold text-white/90 bg-white/5 hover:bg-white/10 border border-white/15 transition-colors flex items-center gap-1.5" title="Export Residences Catalog to CSV">
+                <svg class="w-3.5 h-3.5 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Export CSV</span>
+              </button>
+
               <label class="px-3 py-2 rounded-xl text-xs font-semibold text-white/90 bg-white/5 hover:bg-white/10 border border-white/15 transition-colors flex items-center gap-1.5 cursor-pointer" title="Import JSON Database">
                 <svg class="w-3.5 h-3.5 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
                 <span>Import JSON</span>
@@ -429,6 +447,11 @@
               <option value="Escrow Negotiation">💼 Escrow Negotiation</option>
               <option value="Closed / In Escrow">✅ Closed / In Escrow</option>
             </select>
+
+            <button type="button" id="admin-export-leads-csv-btn" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-white/90 bg-white/5 hover:bg-white/10 border border-white/15 transition-colors flex items-center gap-1.5" title="Export Investor Leads to CSV">
+              <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span>Export CSV</span>
+            </button>
 
             <button type="button" id="admin-add-lead-btn-tab" class="btn-gold !py-1.5 !px-3 text-xs font-bold uppercase tracking-wider flex items-center gap-1 shadow-sm">
               <span>+ Add Lead</span>
@@ -648,6 +671,72 @@
               </button>
             </div>
           </form>
+        </div>
+
+        <!-- System Diagnostics, Local Database & Developer Controls -->
+        <div class="admin-card p-6 sm:p-8 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div>
+              <span class="text-xs uppercase font-bold tracking-wider text-[#C8A96A] block">Engine Health</span>
+              <h3 class="font-serif text-xl font-bold text-white mt-0.5">AzureDB Diagnostics & Local Storage</h3>
+              <p class="text-xs text-white/60">Live metrics on client cache, database storage quotas, and testing utilities.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="text-xs font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-full">
+                Database Synchronized
+              </span>
+            </div>
+          </div>
+
+          <!-- Diagnostics Metrics Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-black/30 rounded-xl p-4 border border-white/10">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-white/60">Active Residences</span>
+                <span class="text-[10px] text-[#C8A96A] bg-[#C8A96A]/20 px-1.5 py-0.5 rounded font-bold">Catalog</span>
+              </div>
+              <h4 id="diag-residences-count" class="font-serif text-2xl font-bold text-white mt-2">21</h4>
+              <p class="text-[11px] text-white/50 mt-1">Master luxury estate inventory</p>
+            </div>
+
+            <div class="bg-black/30 rounded-xl p-4 border border-white/10">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-white/60">Investor Leads</span>
+                <span class="text-[10px] text-emerald-400 bg-emerald-500/20 px-1.5 py-0.5 rounded font-bold">CRM</span>
+              </div>
+              <h4 id="diag-leads-count" class="font-serif text-2xl font-bold text-white mt-2">4</h4>
+              <p class="text-[11px] text-white/50 mt-1">Active client inquiries</p>
+            </div>
+
+            <div class="bg-black/30 rounded-xl p-4 border border-white/10">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-white/60">LocalStorage Used</span>
+                <span id="diag-storage-pct" class="text-[10px] text-blue-400 bg-blue-500/20 px-1.5 py-0.5 rounded font-bold">0.8%</span>
+              </div>
+              <h4 id="diag-storage-size" class="font-serif text-2xl font-bold text-white mt-2">38.4 KB</h4>
+              <p class="text-[11px] text-white/50 mt-1">Of ~5.0 MB browser storage quota</p>
+            </div>
+          </div>
+
+          <!-- Developer & Demo Utility Actions -->
+          <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <button type="button" id="diag-seed-leads-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-white/10 hover:bg-white/15 border border-white/15 transition-all flex items-center gap-2">
+                <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                <span>+ Seed 3 VIP Demo Inquiries</span>
+              </button>
+
+              <button type="button" id="diag-clear-leads-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-red-300 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 transition-all flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                <span>Clear Leads</span>
+              </button>
+            </div>
+
+            <div class="text-[11px] text-white/40">
+              Database engine: <span class="text-white/70 font-mono">AzureDB v2.4 (HTML5 WebStorage)</span>
+            </div>
+          </div>
         </div>
 
       </section>
@@ -898,6 +987,51 @@
       <div class="flex items-center justify-center gap-3">
         <button type="button" id="delete-modal-cancel" class="btn-outline-navy !text-white/80 hover:!text-white !py-2 !px-4 text-xs font-semibold">Cancel</button>
         <button type="button" id="delete-modal-confirm" class="py-2 px-5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs shadow-md transition-all">Confirm Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: INVESTOR LEAD NOTES & ACTIVITY LOG MODAL
+       ========================================================================= -->
+  <div id="lead-notes-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="bg-[#0F2A43] text-white rounded-2xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-[#C8A96A]/30 relative admin-custom-scrollbar">
+      <button id="lead-notes-modal-close" type="button" class="absolute top-4 right-4 p-2 text-white/60 hover:text-white text-xl font-bold" aria-label="Close notes modal">&times;</button>
+      
+      <div class="mb-5 pb-4 border-b border-white/10">
+        <span class="text-xs uppercase font-bold tracking-wider text-[#C8A96A] block">Lead Activity & Notes</span>
+        <h3 id="lead-notes-client-name" class="font-serif text-2xl font-bold text-white mt-0.5">Investor Notes</h3>
+        <p id="lead-notes-client-sub" class="text-xs text-white/60">Log advisor conversations, viewing scheduling, and financial arrangements.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Notes History List -->
+        <div>
+          <label class="block text-xs font-semibold text-white/90 mb-2">Advisor Notes & Consultation Log</label>
+          <div id="lead-notes-history" class="bg-black/30 rounded-xl p-3.5 border border-white/10 max-h-48 overflow-y-auto space-y-2.5 text-xs admin-custom-scrollbar">
+            <!-- Populated via admin.js -->
+          </div>
+        </div>
+
+        <!-- Add Note Box -->
+        <div>
+          <label class="block text-xs font-semibold text-white/90 mb-1">Append New Private Note</label>
+          <textarea id="lead-new-note-input" rows="3" placeholder="Enter follow-up details (e.g. 'Met with client rep in Zurich, confirmed wire transfer for reservation deposit')..." class="w-full admin-input-dark p-3 text-xs"></textarea>
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-white/10">
+          <div id="lead-notes-direct-actions" class="flex items-center gap-2">
+            <!-- Populated via admin.js -->
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="lead-notes-modal-cancel" class="btn-outline-navy !text-white/80 hover:!text-white !py-2 !px-4 text-xs font-semibold">
+              Close
+            </button>
+            <button type="button" id="lead-notes-save-btn" class="btn-gold !py-2 !px-5 text-xs uppercase tracking-wider font-bold shadow-md">
+              Save Note
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

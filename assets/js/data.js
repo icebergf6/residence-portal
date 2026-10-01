@@ -1364,18 +1364,18 @@ function formatUSD(number) {
 
 // Masterplan Pins Mapping (Coordinates on Resort Aerial Blueprint)
 const MASTERPLAN_UNITS = [
-  { id: "villa-solis", name: "Villa Solis", x: 18, y: 32, type: "Clifftop Villa", status: "Available", price: 2450000 },
-  { id: "the-horizon-penthouse", name: "Azure Horizon", x: 74, y: 22, type: "Marina Penthouse", status: "Available", price: 1890000 },
-  { id: "villa-botanica", name: "Villa Botanica", x: 42, y: 58, type: "Sanctuary Villa", status: "Reserved", price: 2150000 },
-  { id: "pine-ridge-estate", name: "Pine Ridge Estate", x: 26, y: 78, type: "Highland Estate", status: "Available", price: 1680000 },
-  { id: "coral-cove-residence", name: "Coral Cove", x: 12, y: 52, type: "Waterfront Villa", status: "Sold", price: 3200000 },
-  { id: "azure-heights-penthouse", name: "Azure Heights", x: 82, y: 38, type: "Sky Residence", status: "Available", price: 1450000 },
-  { id: "palm-grove-townhouse", name: "Palm Grove", x: 55, y: 68, type: "Townhouse", status: "Available", price: 920000 },
-  { id: "villa-marina-blu", name: "Villa Marina Blu", x: 68, y: 48, type: "Marina Villa", status: "Available", price: 2780000 },
-  { id: "highland-crest-land", name: "Highland Crest", x: 34, y: 88, type: "Land Parcel", status: "Available", price: 850000 },
-  { id: "the-sanctuary-penthouse", name: "The Sanctuary", x: 88, y: 15, type: "Trophy Penthouse", status: "Reserved", price: 3850000 },
-  { id: "cypress-ridge-villa", name: "Cypress Ridge", x: 38, y: 42, type: "Courtyard Villa", status: "Available", price: 1980000 },
-  { id: "palm-quarter-townhome", name: "Palm Quarter", x: 60, y: 80, type: "Townhouse", status: "Available", price: 890000 }
+  { id: "villa-solis", name: "Villa Solis", x: 22, y: 32, type: "Clifftop Villa", zone: "clifftop", status: "Available", price: 2450000 },
+  { id: "eden-crest-villa", name: "Eden Crest", x: 34, y: 40, type: "Hillside Villa", zone: "clifftop", status: "Available", price: 1950000 },
+  { id: "mirador-estate", name: "El Mirador", x: 14, y: 48, type: "Grand Estate", zone: "clifftop", status: "Available", price: 2750000 },
+  { id: "the-horizon-penthouse", name: "Azure Horizon", x: 74, y: 24, type: "Marina Penthouse", zone: "marina", status: "Available", price: 1850000 },
+  { id: "azure-promenade-suite", name: "Azure Promenade", x: 68, y: 30, type: "Marina Suite", zone: "marina", status: "Available", price: 480000 },
+  { id: "the-marina-studio-loft", name: "Marina Port Loft", x: 84, y: 36, type: "Studio Loft", zone: "marina", status: "Available", price: 1950000 },
+  { id: "azure-haven-villa", name: "Azure Haven", x: 42, y: 64, type: "Waterfront Villa", zone: "beachfront", status: "Available", price: 1280000 },
+  { id: "bayview-garden-villa", name: "Bayview Oasis", x: 52, y: 56, type: "Garden Villa", zone: "beachfront", status: "Available", price: 1150000 },
+  { id: "serena-cliff-plot", name: "Serena Promontory", x: 18, y: 72, type: "Sea-View Plot", zone: "beachfront", status: "Available", price: 640000 },
+  { id: "palma-courtyard-townhome", name: "The Palma", x: 58, y: 76, type: "Townhome", zone: "highland", status: "Available", price: 890000 },
+  { id: "cypress-terrace-townhome", name: "Cypress Terrace", x: 46, y: 84, type: "Garden Townhome", zone: "highland", status: "Available", price: 760000 },
+  { id: "highland-ridge-parcel", name: "Highland Ridge", x: 30, y: 82, type: "Land Parcel", zone: "highland", status: "Available", price: 390000 }
 ];
 
 // Attach all core objects to global window object

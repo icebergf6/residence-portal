@@ -1424,156 +1424,302 @@
     </section>
 
     <!-- =========================================================================
-         NEW SECTION: INTERACTIVE RESORT MASTERPLAN
+         SECTION 7.5: INTERACTIVE RESORT MASTERPLAN (Elevated Spatial Topography)
          ========================================================================= -->
-    <section class="section-luxury bg-[#091928] text-white border-y border-white/10 relative overflow-hidden" id="masterplan-section">
-      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-20 sm:py-28 bg-[#071422] text-white border-y border-white/10 relative overflow-hidden" id="masterplan-section">
+      <!-- Ambient Glow Orbs -->
+      <div class="absolute top-1/4 -left-32 w-96 h-96 bg-[#C8A96A]/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-          <div>
-            <span class="section-eyebrow text-[#C8A96A]">Spatial Topography</span>
-            <h2 class="section-title !text-white">Interactive Resort Masterplan</h2>
-            <p class="section-subtitle !text-white/70">
-              Explore the masterplan footprint of our private reserve. Click on any active pin to preview residence positioning, cliff elevations, and immediate availability.
+        <!-- Header & Top Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#C8A96A]/40 text-[#C8A96A] text-[11px] uppercase tracking-[0.2em] font-bold mb-4 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
+              Spatial Topography &bull; 120-Hectare Reserve
+            </div>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-3">
+              Interactive Resort <span class="text-[#C8A96A] italic">Masterplan</span>
+            </h2>
+            <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+              Explore the masterplan footprint of our private reserve. Filter by architectural enclave, inspect natural clifftop elevations, and click any active unit marker to inspect real-time pricing and interior dossiers.
             </p>
           </div>
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-white/60 flex items-center gap-1.5">
-              <span class="w-3 h-3 rounded-full bg-[#C8A96A] inline-block"></span> Available
-            </span>
-            <span class="text-xs text-white/60 flex items-center gap-1.5 ml-3">
-              <span class="w-3 h-3 rounded-full bg-blue-400 inline-block"></span> Reserved
-            </span>
-            <span class="text-xs text-white/60 flex items-center gap-1.5 ml-3">
-              <span class="w-3 h-3 rounded-full bg-slate-500 inline-block"></span> Sold
-            </span>
+
+          <!-- Enclave Zone Filter Buttons -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div class="flex flex-wrap items-center gap-2 bg-white/5 p-1.5 rounded-2xl border border-white/10 backdrop-blur-md" id="masterplan-zone-filters">
+              <button type="button" data-masterplan-zone="all" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#C8A96A] text-[#0F2A43] transition-all shadow-xs">
+                All Enclaves
+              </button>
+              <button type="button" data-masterplan-zone="clifftop" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-white/80 hover:bg-white/20 transition-all">
+                Clifftop Bluff
+              </button>
+              <button type="button" data-masterplan-zone="marina" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-white/80 hover:bg-white/20 transition-all">
+                Deepwater Marina
+              </button>
+              <button type="button" data-masterplan-zone="beachfront" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-white/80 hover:bg-white/20 transition-all">
+                Beachfront Haven
+              </button>
+              <button type="button" data-masterplan-zone="highland" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/10 text-white/80 hover:bg-white/20 transition-all">
+                Highland Ridge
+              </button>
+            </div>
+
+            <!-- Status Indicator Legend -->
+            <div class="flex items-center gap-3 text-xs text-white/70 bg-[#0F2A43]/80 px-3.5 py-2 rounded-xl border border-white/10">
+              <span class="flex items-center gap-1.5 font-medium">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#C8A96A] shadow-xs"></span> Available
+              </span>
+              <span class="flex items-center gap-1.5 font-medium ml-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-xs"></span> Reserved
+              </span>
+              <span class="flex items-center gap-1.5 font-medium ml-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-500 shadow-xs"></span> Sold
+              </span>
+            </div>
           </div>
         </div>
 
         <!-- Masterplan Aerial Interactive Canvas -->
-        <div class="relative rounded-2xl overflow-hidden border border-white/15 bg-[#0F2A43] shadow-2xl min-h-[340px] sm:min-h-[420px] aspect-[16/9] md:aspect-[21/9]">
-          <!-- Background Aerial Photography -->
-          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&h=900&q=80" alt="Azure Bay Masterplan Topography" class="w-full h-full object-cover filter brightness-[0.7] contrast-[1.1]" />
+        <div class="relative rounded-3xl overflow-hidden border border-white/15 bg-[#0F2A43] shadow-2xl min-h-[380px] sm:min-h-[500px] aspect-[16/9] md:aspect-[21/9]">
+          <!-- Background Aerial Topography Photography -->
+          <img 
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2200&h=1100&q=85" 
+            alt="Azure Bay Masterplan Topography" 
+            class="w-full h-full object-cover filter brightness-[0.7] contrast-[1.15]" 
+          />
           
-          <!-- Subtle Blueprint Grid Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-transparent pointer-events-none"></div>
+          <!-- Subtle Blueprint Grid & Vignette Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#071422] via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute inset-0 bg-radial from-transparent via-[#071422]/40 to-[#071422]/80 pointer-events-none"></div>
 
-          <!-- Interactive Pins Container -->
-          <div id="masterplan-pins-container" class="absolute inset-0">
-            <!-- Dynamically populated or static pin positions -->
+          <!-- Scale, Coordinates & Compass HUD (Top Right) -->
+          <div class="absolute top-4 right-4 z-20 bg-[#071422]/85 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 text-[11px] text-white/80 hidden sm:flex items-center gap-3 shadow-lg">
+            <span class="text-[#C8A96A] font-bold tracking-wider flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-[#C8A96A] animate-ping"></span>
+              COMPASS: 0° N
+            </span>
+            <span class="text-white/30">&bull;</span>
+            <span>ELEVATION: 0m – 92m</span>
+            <span class="text-white/30">&bull;</span>
+            <span class="font-mono">SCALE 1:2000</span>
+          </div>
+
+          <!-- Interactive Pins Container (Populated by main.js) -->
+          <div id="masterplan-pins-container" class="absolute inset-0 z-20">
+            <!-- Dynamically populated pin elements -->
           </div>
 
           <!-- Floating Unit Preview Card (Opens on pin click) -->
-          <div id="masterplan-popup-card" class="hidden absolute z-40 bg-white text-[#0F2A43] rounded-xl p-4 shadow-2xl border border-[#C8A96A] max-w-xs w-72 transition-all duration-300">
-            <button id="masterplan-popup-close" type="button" class="absolute top-2 right-2 text-[#64748B] hover:text-[#0F2A43] p-1 font-bold" aria-label="Close preview">&times;</button>
+          <div id="masterplan-popup-card" class="hidden absolute z-40 bg-white text-[#0F2A43] rounded-2xl p-4 sm:p-5 shadow-2xl border border-[#C8A96A] max-w-xs w-80 transition-all duration-300">
+            <button id="masterplan-popup-close" type="button" class="absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-[#F7F5F0] hover:bg-[#EFECE4] text-[#64748B] hover:text-[#0F2A43] flex items-center justify-center font-bold text-sm shadow-xs transition-colors" aria-label="Close preview">&times;</button>
             <div id="masterplan-popup-content">
-              <!-- Dynamically populated -->
+              <!-- Dynamically populated via main.js -->
             </div>
           </div>
 
           <!-- Map Hint on Bottom Left -->
-          <div class="absolute bottom-4 left-4 z-10 bg-[#0F2A43]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-white/80 hidden sm:flex items-center gap-2">
+          <div class="absolute bottom-4 left-4 z-20 bg-[#071422]/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 text-xs text-white/80 flex items-center gap-2 shadow-lg">
             <svg class="w-4 h-4 text-[#C8A96A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-            <span>Click any glowing unit marker to preview details</span>
+            <span>Click any glowing pin to preview unit specs & pricing</span>
           </div>
 
+        </div>
+
+        <!-- Masterplan Infrastructure & Reserve Highlights Bar -->
+        <div class="mt-8 bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-md">
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+            <div class="pt-2 md:pt-0 px-2">
+              <div class="font-serif text-2xl font-bold text-[#C8A96A] mb-1">120 Hectares</div>
+              <p class="text-[11px] text-white/70 uppercase tracking-wider">Protected Reserve</p>
+            </div>
+            <div class="pt-4 md:pt-0 px-2">
+              <div class="font-serif text-2xl font-bold text-[#C8A96A] mb-1">2.4 km</div>
+              <p class="text-[11px] text-white/70 uppercase tracking-wider">Private Shoreline</p>
+            </div>
+            <div class="pt-4 md:pt-0 px-2">
+              <div class="font-serif text-2xl font-bold text-[#C8A96A] mb-1">84 Slips</div>
+              <p class="text-[11px] text-white/70 uppercase tracking-wider">Superyacht Marina</p>
+            </div>
+            <div class="pt-4 md:pt-0 px-2">
+              <div class="font-serif text-2xl font-bold text-[#C8A96A] mb-1">1 Helipad</div>
+              <p class="text-[11px] text-white/70 uppercase tracking-wider">VIP Aviation Port</p>
+            </div>
+            <div class="pt-4 md:pt-0 px-2 col-span-2 md:col-span-1">
+              <div class="font-serif text-2xl font-bold text-[#C8A96A] mb-1">100% Freehold</div>
+              <p class="text-[11px] text-white/70 uppercase tracking-wider">Sovereign Land Title</p>
+            </div>
+          </div>
         </div>
 
       </div>
     </section>
 
     <!-- =========================================================================
-         SECTION 8: LOCATION HIGHLIGHTS (Map + Nearby POIs)
+         SECTION 8: LOCATION HIGHLIGHTS (Upgraded Unmatched Coastal Haven)
          ========================================================================= -->
-    <section class="section-luxury max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row gap-12 items-center">
+    <section class="py-20 sm:py-28 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-14 items-start">
         
-        <!-- Left: Details & POI list -->
+        <!-- Left Column: Details & Curated POI Cards -->
         <div class="w-full lg:w-1/2">
-          <span class="section-eyebrow">Prime Enclave</span>
-          <h2 class="section-title">An Unmatched Coastal Haven</h2>
-          <p class="text-[#64748B] text-base leading-relaxed mb-8">
-            Strategically secluded within the Azure Bay Reserve, yet mere minutes from Michelin-rated dining, private international aviation terminals, and full-service deepwater marinas.
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F2A43]/5 border border-[#C8A96A]/40 text-[#0F2A43] text-[11px] uppercase tracking-[0.2em] font-bold mb-4 shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-[#C8A96A] animate-pulse"></span>
+            Sovereign Geographic Positioning &bull; The Coastal Reserve
+          </div>
+          
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F2A43] tracking-tight mb-4">
+            An Unmatched <span class="text-[#C8A96A] italic">Coastal Haven</span>
+          </h2>
+          
+          <p class="text-sm sm:text-base text-[#64748B] font-light leading-relaxed mb-8">
+            Strategically secluded within pristine natural reserves, yet mere minutes from Michelin-rated dining, private international aviation terminals, and full-service deepwater superyacht marinas.
           </p>
 
-          <div class="space-y-5">
+          <div class="space-y-4">
             
-            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
-              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+            <!-- POI 1: Private Cove -->
+            <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-[#E6E2DA] shadow-sm hover:shadow-xl hover:border-[#C8A96A] transition-all duration-300 relative overflow-hidden">
+              <div class="w-12 h-12 rounded-xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all duration-300">
+                <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
               </div>
-              <div>
-                <div class="flex items-center justify-between mb-1">
-                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">Azure Bay Private Cove</h4>
-                  <span class="text-xs font-semibold text-[#C8A96A]">4 min walk (300m)</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h4 class="font-serif font-bold text-base text-[#0F2A43] group-hover:text-[#C8A96A] transition-colors">Azure Bay Private Cove</h4>
+                  <span class="text-[11px] font-bold text-[#0F2A43] bg-[#F5EEDB] px-2.5 py-0.5 rounded-full border border-[#C8A96A]/30">
+                    🚶 4 min stroll &bull; 300m
+                  </span>
                 </div>
-                <p class="text-xs text-[#64748B]">Turquoise calm waters, private beach lounge, and stand-up paddle club.</p>
+                <p class="text-xs text-[#64748B] leading-relaxed font-light">
+                  Protected turquoise lagoon, private white-sand beach club, daybeds, and exclusive stand-up paddleboarding pavilion.
+                </p>
               </div>
             </div>
 
-            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
-              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><line x1="12" y1="22" x2="12" y2="8"></line><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path></svg>
+            <!-- POI 2: Superyacht Club -->
+            <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-[#E6E2DA] shadow-sm hover:shadow-xl hover:border-[#C8A96A] transition-all duration-300 relative overflow-hidden">
+              <div class="w-12 h-12 rounded-xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all duration-300">
+                <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><line x1="12" y1="22" x2="12" y2="8"></line><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path></svg>
               </div>
-              <div>
-                <div class="flex items-center justify-between mb-1">
-                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">Azure International Yacht Club</h4>
-                  <span class="text-xs font-semibold text-[#C8A96A]">3 min drive (1.2km)</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h4 class="font-serif font-bold text-base text-[#0F2A43] group-hover:text-[#C8A96A] transition-colors">Azure International Yacht Club</h4>
+                  <span class="text-[11px] font-bold text-[#0F2A43] bg-[#F5EEDB] px-2.5 py-0.5 rounded-full border border-[#C8A96A]/30">
+                    🏎️ 3 min drive &bull; 1.2km
+                  </span>
                 </div>
-                <p class="text-xs text-[#64748B]">Deepwater harbor accommodating superyachts up to 120ft with customs desk.</p>
+                <p class="text-xs text-[#64748B] leading-relaxed font-light">
+                  Deepwater marina accommodating vessels up to 120ft with in-slip fueling, marine concierge, and private customs clearance.
+                </p>
               </div>
             </div>
 
-            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
-              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <!-- POI 3: Promenade & Dining -->
+            <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-[#E6E2DA] shadow-sm hover:shadow-xl hover:border-[#C8A96A] transition-all duration-300 relative overflow-hidden">
+              <div class="w-12 h-12 rounded-xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all duration-300">
+                <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               </div>
-              <div>
-                <div class="flex items-center justify-between mb-1">
-                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">The Promenade & Fine Dining</h4>
-                  <span class="text-xs font-semibold text-[#C8A96A]">5 min drive (1.8km)</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h4 class="font-serif font-bold text-base text-[#0F2A43] group-hover:text-[#C8A96A] transition-colors">The Promenade & Michelin Dining</h4>
+                  <span class="text-[11px] font-bold text-[#0F2A43] bg-[#F5EEDB] px-2.5 py-0.5 rounded-full border border-[#C8A96A]/30">
+                    🚤 5 min tender &bull; 1.8km
+                  </span>
                 </div>
-                <p class="text-xs text-[#64748B]">Curated dining establishments, wine bars, and high-fashion luxury boutiques.</p>
+                <p class="text-xs text-[#64748B] leading-relaxed font-light">
+                  Curated waterfront gourmet dining, private sommelier cellars, organic artisan markets, and luxury European boutiques.
+                </p>
               </div>
             </div>
 
-            <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-[#E6E2DA] shadow-sm">
-              <div class="w-10 h-10 rounded-lg bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0">
-                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            <!-- POI 4: Private Jet Airport & FBO -->
+            <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-[#E6E2DA] shadow-sm hover:shadow-xl hover:border-[#C8A96A] transition-all duration-300 relative overflow-hidden">
+              <div class="w-12 h-12 rounded-xl bg-[#0F2A43] text-[#C8A96A] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 group-hover:bg-[#C8A96A] group-hover:text-[#0F2A43] transition-all duration-300">
+                <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
               </div>
-              <div>
-                <div class="flex items-center justify-between mb-1">
-                  <h4 class="font-serif font-bold text-sm text-[#0F2A43]">International Airport & FBO</h4>
-                  <span class="text-xs font-semibold text-[#C8A96A]">20 min drive (18km)</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h4 class="font-serif font-bold text-base text-[#0F2A43] group-hover:text-[#C8A96A] transition-colors">International Aviation & VIP FBO</h4>
+                  <span class="text-[11px] font-bold text-[#0F2A43] bg-[#F5EEDB] px-2.5 py-0.5 rounded-full border border-[#C8A96A]/30">
+                    🚁 6 min flight &bull; 18km
+                  </span>
                 </div>
-                <p class="text-xs text-[#64748B]">Private jet hangar facilities with expedited diplomatic security corridors.</p>
+                <p class="text-xs text-[#64748B] leading-relaxed font-light">
+                  Private jet hangar facilities with direct diplomatic security corridors and expedited customs processing for estate owners.
+                </p>
               </div>
             </div>
 
           </div>
         </div>
 
-        <!-- Right: Map Frame -->
+        <!-- Right Column: Interactive Map Frame & Commute Matrix -->
         <div class="w-full lg:w-1/2">
-          <div class="rounded-2xl overflow-hidden border border-[#E6E2DA] shadow-xl bg-white aspect-[4/3] relative">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114964.38943899479!2d-80.24421600000001!3d25.761681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sMiami%2C%20FL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Azure Bay Residences Location Map"
-              class="w-full h-full grayscale contrast-125"
-            ></iframe>
-            <div class="absolute bottom-4 left-4 right-4 bg-[#0F2A43]/90 backdrop-blur-md p-4 rounded-xl text-white text-xs flex items-center justify-between border border-[#C8A96A]/30">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#C8A96A] animate-ping"></span>
-                <span>Azure Bay Sales Gallery & Coastal Reserve</span>
+          <div class="bg-white rounded-3xl overflow-hidden border border-[#E6E2DA] shadow-2xl">
+            <!-- Map Header with Coordinates -->
+            <div class="p-5 sm:p-6 bg-[#0F2A43] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#C8A96A]/30">
+              <div>
+                <span class="text-[10px] uppercase tracking-wider text-[#C8A96A] font-bold block mb-0.5">
+                  Exclusive Shoreline Positioning
+                </span>
+                <h3 class="font-serif text-lg sm:text-xl font-bold text-white">
+                  Azure Bay Sales Gallery & Reserve
+                </h3>
+                <p class="text-[11px] text-white/70 mt-0.5">
+                  Coordinates: 25.7617° N, 80.1918° W &bull; Helipad: AZ-01
+                </p>
               </div>
-              <a href="contact.html" class="text-[#C8A96A] hover:underline font-semibold">Get Directions</a>
+              <a 
+                href="https://maps.google.com/?q=25.761681,-80.244216" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn-gold !py-2 !px-4 text-xs uppercase tracking-wider font-bold shrink-0 inline-flex items-center gap-1.5"
+              >
+                <span>Google Maps</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
             </div>
+
+            <!-- Iframe Map -->
+            <div class="aspect-[4/3] w-full relative">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114964.38943899479!2d-80.24421600000001!3d25.761681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sMiami%2C%20FL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Azure Bay Residences Location Map"
+                class="w-full h-full grayscale contrast-125"
+              ></iframe>
+            </div>
+
+            <!-- Real-Time Transit Commute Matrix -->
+            <div class="p-5 bg-[#F7F5F0] border-t border-[#E6E2DA]">
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                <div class="p-2.5 rounded-xl bg-white border border-[#E6E2DA]">
+                  <div class="text-[10px] text-[#64748B] uppercase font-bold">Beach Club</div>
+                  <div class="font-serif text-sm font-bold text-[#0F2A43] mt-0.5">4 Min</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-[#E6E2DA]">
+                  <div class="text-[10px] text-[#64748B] uppercase font-bold">Yacht Marina</div>
+                  <div class="font-serif text-sm font-bold text-[#0F2A43] mt-0.5">3 Min</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-[#E6E2DA]">
+                  <div class="text-[10px] text-[#64748B] uppercase font-bold">Fine Dining</div>
+                  <div class="font-serif text-sm font-bold text-[#0F2A43] mt-0.5">5 Min</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-[#E6E2DA]">
+                  <div class="text-[10px] text-[#64748B] uppercase font-bold">Private FBO</div>
+                  <div class="font-serif text-sm font-bold text-[#0F2A43] mt-0.5">18 Min</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 

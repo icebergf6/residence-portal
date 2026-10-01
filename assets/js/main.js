@@ -2699,56 +2699,107 @@ function initMasterplanSection() {
   const popup = document.getElementById('masterplan-popup-card');
   const popupContent = document.getElementById('masterplan-popup-content');
   const popupClose = document.getElementById('masterplan-popup-close');
+  const zoneButtons = document.querySelectorAll('[data-masterplan-zone]');
 
   if (!container || typeof MASTERPLAN_UNITS === 'undefined') return;
 
-  container.innerHTML = MASTERPLAN_UNITS.map(unit => `
-    <div class="masterplan-pin" style="left: ${unit.x}%; top: ${unit.y}%;" data-unit-id="${unit.id}" title="${unit.name} (${unit.type})">
-      <div class="relative">
-        <span class="masterplan-pulse"></span>
-        <div class="w-6 h-6 rounded-full ${unit.status === 'Available' ? 'bg-[#C8A96A] text-[#0F2A43]' : (unit.status === 'Reserved' ? 'bg-blue-500 text-white' : 'bg-slate-600 text-white')} flex items-center justify-center font-bold text-[10px] shadow-lg border-2 border-white">
-          ★
-        </div>
-      </div>
-    </div>
-  `).join('');
+  function renderPins(activeZone = 'all') {
+    container.innerHTML = MASTERPLAN_UNITS.map(unit => {
+      const isVisible = activeZone === 'all' || unit.zone === activeZone;
+      const opacityClass = isVisible ? 'opacity-100 scale-100' : 'opacity-20 scale-75 pointer-events-none';
+      const statusColor = unit.status === 'Available' 
+        ? 'bg-[#C8A96A] text-[#0F2A43] ring-[#C8A96A]/40' 
+        : (unit.status === 'Reserved' ? 'bg-blue-500 text-white ring-blue-500/40' : 'bg-slate-600 text-white ring-white/20');
 
-  container.querySelectorAll('.masterplan-pin').forEach(pin => {
-    pin.addEventListener('click', (e) => {
-      const id = e.currentTarget.getAttribute('data-unit-id');
-      const property = PROPERTIES.find(p => p.id === id);
-      if (!property || !popup || !popupContent) return;
-
-      popupContent.innerHTML = `
-        <div class="relative h-24 rounded-lg overflow-hidden mb-2">
-          <img src="${property.images[0]}" alt="${property.name}" class="w-full h-full object-cover" />
-          <span class="absolute top-1.5 left-1.5 badge-status ${property.status === 'Available' ? 'badge-available' : 'badge-reserved'} text-[9px] !py-0.5">
-            ${property.status}
-          </span>
-        </div>
-        <h4 class="font-serif font-bold text-sm text-[#0F2A43]">${property.name}</h4>
-        <span class="text-[11px] text-[#64748B] block">${property.type} &bull; ${property.location}</span>
-        <div class="flex items-center justify-between mt-2 pt-2 border-t border-[#E6E2DA]">
-          <span class="font-serif font-bold text-xs text-[#0F2A43]">${formatCurrency(property.price)}</span>
-          <a href="property.html?id=${property.id}" class="text-[11px] font-bold text-[#C8A96A] hover:underline">View Residence &rarr;</a>
+      return `
+        <div class="masterplan-pin absolute transition-all duration-300 ${opacityClass}" style="left: ${unit.x}%; top: ${unit.y}%;" data-unit-id="${unit.id}" data-unit-zone="${unit.zone}" title="${unit.name} (${unit.type})">
+          <div class="relative group cursor-pointer">
+            <span class="masterplan-pulse ${unit.status === 'Available' ? 'bg-[#C8A96A]/60' : 'bg-blue-400/60'}"></span>
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full ${statusColor} ring-4 flex items-center justify-center font-bold text-[10px] sm:text-xs shadow-2xl border-2 border-white transform group-hover:scale-125 transition-transform duration-200">
+              ${unit.status === 'Available' ? '★' : (unit.status === 'Reserved' ? '●' : '✓')}
+            </div>
+            <div class="hidden sm:block absolute left-1/2 -translate-x-1/2 -bottom-6 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap bg-[#0F2A43]/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded shadow-lg border border-[#C8A96A]/40 z-30">
+              ${unit.name} &bull; ${formatCurrency(unit.price)}
+            </div>
+          </div>
         </div>
       `;
+    }).join('');
 
-      // Position popup safely within container bounds
-      const rect = e.currentTarget.getBoundingClientRect();
-      const parentRect = container.getBoundingClientRect();
-      let left = rect.left - parentRect.left - 130;
-      let top = rect.top - parentRect.top - 180;
+    // Attach click listeners to pins
+    container.querySelectorAll('.masterplan-pin').forEach(pin => {
+      pin.addEventListener('click', (e) => {
+        const id = pin.getAttribute('data-unit-id');
+        const property = PROPERTIES.find(p => p.id === id) || DEFAULT_PROPERTIES.find(p => p.id === id);
+        if (!property || !popup || !popupContent) return;
 
-      if (left < 10) left = 10;
-      if (left + 290 > parentRect.width) left = parentRect.width - 300;
-      if (top < 10) top = rect.top - parentRect.top + 30;
+        popupContent.innerHTML = `
+          <div class="relative h-28 rounded-xl overflow-hidden mb-3 shadow-sm">
+            <img src="${property.images[0]}" alt="${property.name}" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0F2A43]/80 via-transparent to-transparent"></div>
+            <span class="absolute top-2 left-2 badge-status ${property.status === 'Available' ? 'badge-available' : 'badge-reserved'} text-[10px] font-bold !py-0.5 !px-2 shadow-sm">
+              ${property.status}
+            </span>
+            <span class="absolute bottom-2 left-2 text-white font-serif font-bold text-sm drop-shadow-md">
+              ${formatCurrency(property.price)}
+            </span>
+          </div>
+          <h4 class="font-serif font-bold text-base text-[#0F2A43] leading-snug">${property.name}</h4>
+          <span class="text-xs text-[#64748B] block mt-0.5">${property.type} &bull; ${property.location}</span>
+          
+          <div class="flex items-center gap-3 my-2.5 py-2 border-y border-[#E6E2DA] text-[11px] text-[#1F2933]">
+            <span><strong>${property.bedrooms}</strong> Beds</span>
+            <span>&bull;</span>
+            <span><strong>${property.bathrooms}</strong> Baths</span>
+            <span>&bull;</span>
+            <span><strong>${property.buildingArea}</strong> m² Built</span>
+          </div>
 
-      popup.style.left = `${left}px`;
-      popup.style.top = `${top}px`;
-      popup.classList.remove('hidden');
+          <div class="flex items-center gap-2 mt-3">
+            <a href="property.html?id=${property.id}" class="btn-gold !py-1.5 !px-3 text-[11px] font-bold uppercase tracking-wider flex-1 text-center shadow-xs">
+              View Estate &rarr;
+            </a>
+            <button type="button" data-open-modal="viewing-calendar" class="btn-outline-navy !py-1.5 !px-2.5 text-[11px] font-semibold text-[#0F2A43] hover:text-[#C8A96A]">
+              Book Tour
+            </button>
+          </div>
+        `;
+
+        // Position popup safely within container bounds
+        const rect = pin.getBoundingClientRect();
+        const parentRect = container.getBoundingClientRect();
+        let left = rect.left - parentRect.left - 140;
+        let top = rect.top - parentRect.top - 230;
+
+        if (left < 10) left = 10;
+        if (left + 310 > parentRect.width) left = Math.max(10, parentRect.width - 320);
+        if (top < 10) top = rect.top - parentRect.top + 35;
+
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+        popup.classList.remove('hidden');
+      });
+    });
+  }
+
+  // Zone filter buttons
+  zoneButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const zone = e.currentTarget.getAttribute('data-masterplan-zone');
+      zoneButtons.forEach(b => {
+        b.classList.remove('bg-[#C8A96A]', 'text-[#0F2A43]', 'font-bold');
+        b.classList.add('bg-white/10', 'text-white/80', 'hover:bg-white/20');
+      });
+      e.currentTarget.classList.add('bg-[#C8A96A]', 'text-[#0F2A43]', 'font-bold');
+      e.currentTarget.classList.remove('bg-white/10', 'text-white/80', 'hover:bg-white/20');
+      
+      if (popup) popup.classList.add('hidden');
+      renderPins(zone);
     });
   });
+
+  // Initial render
+  renderPins('all');
 
   if (popupClose && popup) {
     popupClose.addEventListener('click', () => {
