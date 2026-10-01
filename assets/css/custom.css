@@ -1065,3 +1065,172 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
 }
 
+/* ==========================================================================
+   EXECUTIVE ADMIN CMS LUXURY DESIGN SYSTEM
+   ========================================================================== */
+
+/* Admin Mobile Sidebar Drawer (< 1024px) */
+@media (max-width: 1023.98px) {
+  #admin-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 290px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    z-index: 1050 !important;
+    background-color: #091928 !important;
+    transform: translateX(-100%) !important;
+    translate: none !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  #admin-sidebar.drawer-open {
+    transform: translateX(0) !important;
+  }
+}
+
+/* Admin Desktop Sticky Sidebar (>= 1024px) */
+@media (min-width: 1024px) {
+  #admin-sidebar {
+    position: sticky !important;
+    top: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    translate: none !important;
+    display: flex !important;
+  }
+}
+
+/* Executive Luxury Cards */
+.admin-card {
+  background: linear-gradient(145deg, rgba(15, 42, 67, 0.9) 0%, rgba(9, 25, 40, 0.95) 100%);
+  border: 1px solid rgba(200, 169, 106, 0.2);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(200, 169, 106, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #FFFFFF;
+}
+
+.admin-card-header {
+  border-bottom: 1px solid rgba(200, 169, 106, 0.15);
+  padding: 1.25rem 1.5rem;
+}
+
+/* Executive KPI Widget */
+.admin-kpi {
+  background: linear-gradient(135deg, rgba(19, 49, 78, 0.8) 0%, rgba(9, 25, 40, 0.9) 100%);
+  border: 1px solid rgba(200, 169, 106, 0.22);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-kpi:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 169, 106, 0.45);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(200, 169, 106, 0.1);
+}
+
+.admin-kpi::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #C8A96A 0%, rgba(200, 169, 106, 0.2) 100%);
+}
+
+/* Status Badges with Micro Glowing Dots */
+.admin-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid transparent;
+}
+
+.admin-badge-status .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.admin-badge-available {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.admin-badge-available .status-dot {
+  background-color: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+.admin-badge-reserved {
+  background: rgba(245, 158, 11, 0.12);
+  color: #FBBF24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.admin-badge-reserved .status-dot {
+  background-color: #F59E0B;
+  box-shadow: 0 0 8px #F59E0B;
+}
+
+.admin-badge-sold {
+  background: rgba(148, 163, 184, 0.12);
+  color: #94A3B8;
+  border-color: rgba(148, 163, 184, 0.3);
+}
+.admin-badge-sold .status-dot {
+  background-color: #64748B;
+}
+
+/* Admin Input Fields (Dark Luxury) */
+.admin-input-dark {
+  background: rgba(9, 25, 40, 0.7) !important;
+  border: 1px solid rgba(200, 169, 106, 0.25) !important;
+  color: #FFFFFF !important;
+  border-radius: 0.625rem;
+  transition: all 0.2s ease;
+}
+
+.admin-input-dark:focus {
+  outline: none !important;
+  border-color: #C8A96A !important;
+  box-shadow: 0 0 0 3px rgba(200, 169, 106, 0.15) !important;
+  background: rgba(9, 25, 40, 0.95) !important;
+}
+
+.admin-input-dark::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Custom Scrollbar for Admin Panels */
+.admin-custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.admin-custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(9, 25, 40, 0.4);
+}
+.admin-custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(200, 169, 106, 0.25);
+  border-radius: 3px;
+}
+.admin-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 169, 106, 0.5);
+}
+
+
